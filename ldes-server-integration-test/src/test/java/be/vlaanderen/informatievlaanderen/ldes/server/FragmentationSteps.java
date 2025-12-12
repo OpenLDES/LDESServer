@@ -100,7 +100,9 @@ public class FragmentationSteps extends LdesServerIntegrationTest {
                         }
                         log.atDebug().log("hasNextPage: {}", hasNextPage);
                         assertTrue(hasNextPage);
-                        logCurrentFragment();
+                        if (log.isTraceEnabled()) {
+                          logCurrentFragment();
+                        }
                     });
 
             StmtIterator stmtIterator = currentFragment.listStatements(null, RDF.type, createResource(TREE + "GreaterThanOrEqualToRelation"));
@@ -142,7 +144,9 @@ public class FragmentationSteps extends LdesServerIntegrationTest {
                         boolean hasNextPage = currentFragment.listStatements(null, RDF.type, createResource(TREE + relation)).hasNext();
                         log.atDebug().log("hasNextPage: {}", hasNextPage);
                         assertTrue(hasNextPage);
-                        logCurrentFragment();
+                        if (log.isTraceEnabled()) {
+                          logCurrentFragment();
+                        }
                     });
 
         Resource relationSubj = currentFragment.listStatements(null, RDF.type, createResource(TREE + relation))
