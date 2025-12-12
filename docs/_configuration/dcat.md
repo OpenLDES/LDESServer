@@ -19,7 +19,7 @@ structure. Aggregated DCAT metadata can serve as a manifest file as part of the 
 For more info on DCAT, visit the [DCAT publication](https://www.w3.org/TR/vocab-dcat-2/)
 
 There are DCAT templates available for two supported profiles on
-the [GitHub repository](https://github.com/Informatievlaanderen/VSDS-LDESServer4J/tree/main/templates/dcat)
+the [GitHub repository](https://github.com/OpenLDES/LDESServer/tree/main/templates/dcat)
 
 ## Validity of the configured DCAT
 
@@ -46,7 +46,7 @@ with a validation report when it's not valid.
 
 To poll this endpoint successfully, additional config is required. An example config will be provided here, but more
 info on how to configure the health endpoints can be
-found [here](https://github.com/Informatievlaanderen/VSDS-LDESServer4J#health-and-info).
+found [here](https://github.com/OpenLDES/LDESServer#health-and-info).
 
 ```yaml
 management:
