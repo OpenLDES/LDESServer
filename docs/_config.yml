@@ -10,7 +10,7 @@ callouts:
     color: yellow
 
 aux_links:
-  LDES Server Repository: https://github.com/Informatievlaanderen/VSDS-LDESServer4J
+  LDES Server Repository: https://github.com/OpenLDES/LDESServer
 
 # Google Analytics Tracking (optional)
 # Supports a CSV of tracking ID strings (eg. "UA-1234567-89,G-1AB234CDE5")
@@ -50,8 +50,8 @@ just_the_docs:
       name: Features
 
 nav_external_links:
-  - title: VSDS Technical Docs
-    url: https://informatievlaanderen.github.io/VSDS-Tech-Docs/
+  - title: OpenLDES Technical Docs
+    url: https://openldes.github.io/openldes-tech-docs/
     hide_icon: false # set to true to hide the external link icon - defaults to false
 
 enable_copy_code_button: true
@@ -59,7 +59,7 @@ enable_copy_code_button: true
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
 gh_edit_link_text: "Contribute on GitHub"
-gh_edit_repository: "https://github.com/Informatievlaanderen/VSDS-LDESServer4J" # the github URL for your repo
+gh_edit_repository: "https://github.com/OpenLDES/LDESServer" # the github URL for your repo
 gh_edit_branch: "develop" # the branch that your docs is served from
 gh_edit_source: docs # the source that your files originate from
 gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately

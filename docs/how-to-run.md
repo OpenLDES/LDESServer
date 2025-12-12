@@ -15,8 +15,8 @@ via [Docker Hub](https://hub.docker.com/r/ldes/ldes-server/):
   version: [![Docker Image Version](https://img.shields.io/docker/v/ldes/ldes-server)](https://hub.docker.com/r/ldes/ldes-server/tags)
 
 To decide which version to take, visit
-the [Release Management Advice](https://informatievlaanderen.github.io/VSDS-Tech-Docs/release/Release_Management#which-version-should-i-use)
-and visit the [LDES Server Github Release Page](https://github.com/Informatievlaanderen/VSDS-LDESServer4J/releases/) for
+the [Release Management Advice](https://openldes.github.io/openldes-tech-docs/release/Release_Management#which-version-should-i-use)
+and visit the [LDES Server Github Release Page](https://github.com/OpenLDES/LDESServer/releases) for
 an overview of all the releases.
 
 ## LDES Server Config
@@ -238,9 +238,9 @@ spring:
 > This pipeline in [LDIO] should contain an [LDES Client] to read data from the 2.x Server and an [LDIO Http Out] to send data towards the 3.x Server.
 
 
-[LDIO]: https://informatievlaanderen.github.io/VSDS-Linked-Data-Interactions/ldio
-[LDES Client]: https://informatievlaanderen.github.io/VSDS-Linked-Data-Interactions/ldio/ldio-inputs/ldio-ldes-client
-[LDIO Http Out]: https://informatievlaanderen.github.io/VSDS-Linked-Data-Interactions/ldio/ldio-outputs/ldio-http-out
+[LDIO]: https://openldes.github.io/Linked-Data-Interactions/ldio
+[LDES Client]: https://openldes.github.io/Linked-Data-Interactions/ldio/ldio-inputs/ldio-ldes-client
+[LDIO Http Out]: https://openldes.github.io/Linked-Data-Interactions/ldio/ldio-outputs/ldio-http-out
 [spring documentation]: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/support/CronExpression.html
 
 ## Credits
