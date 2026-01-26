@@ -105,7 +105,7 @@
         <awaitility.version>4.2.2</awaitility.version>
         <cucumber.version>7.23.0</cucumber.version>
         <jna-platform.version>5.18.1</jna-platform.version>
-        <assertj-core.version>3.25.3</assertj-core.version>
+        <assertj-core.version>3.27.7</assertj-core.version>
 
         <!-- VULNERABILITY -->
         <depencency-check-maven.version>10.0.4</depencency-check-maven.version>
