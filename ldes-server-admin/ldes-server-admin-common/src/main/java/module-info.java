@@ -1,26 +1,26 @@
 open module ldes.admin {
 
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.spi;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.dcat.dcatdataset.entities;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.dcat.dcatdataset.repository;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.dcat.dcatdataset.services;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.dcat.dcatserver.entities;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.dcat.dcatserver.repository;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.dcat.dcatserver.services;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.eventsource.repository;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.eventsource.services;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.eventstream.exceptions;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.eventstream.repository;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.eventstream.services;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.kafkasource;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.shacl.entities;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.shacl.repository;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.shacl.services;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.validation;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.validation.dcat;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.view.service;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.view.exception;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.admin.domain.view.repository;
+	exports org.openldes.server.admin.spi;
+	exports org.openldes.server.admin.domain.dcat.dcatdataset.entities;
+	exports org.openldes.server.admin.domain.dcat.dcatdataset.repository;
+	exports org.openldes.server.admin.domain.dcat.dcatdataset.services;
+	exports org.openldes.server.admin.domain.dcat.dcatserver.entities;
+	exports org.openldes.server.admin.domain.dcat.dcatserver.repository;
+	exports org.openldes.server.admin.domain.dcat.dcatserver.services;
+	exports org.openldes.server.admin.domain.eventsource.repository;
+	exports org.openldes.server.admin.domain.eventsource.services;
+	exports org.openldes.server.admin.domain.eventstream.exceptions;
+	exports org.openldes.server.admin.domain.eventstream.repository;
+	exports org.openldes.server.admin.domain.eventstream.services;
+	exports org.openldes.server.admin.domain.kafkasource;
+	exports org.openldes.server.admin.domain.shacl.entities;
+	exports org.openldes.server.admin.domain.shacl.repository;
+	exports org.openldes.server.admin.domain.shacl.services;
+	exports org.openldes.server.admin.domain.validation;
+	exports org.openldes.server.admin.domain.validation.dcat;
+	exports org.openldes.server.admin.domain.view.service;
+	exports org.openldes.server.admin.domain.view.exception;
+	exports org.openldes.server.admin.domain.view.repository;
 
 	// LDES dependencies
 	requires ldes.domain;

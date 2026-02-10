@@ -5,9 +5,9 @@
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Java implementation of a Linked Data Event Stream</description>
-    <url>https://github.com/Informatievlaanderen/VSDS-LDESServer4J</url>
+    <url>https://github.com/openldes/LDESServer</url>
 
-    <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+    <groupId>org.openldes</groupId>
     <artifactId>ldes-server</artifactId>
     <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -76,8 +76,8 @@
         <jakarta.persistence.version>3.1.0</jakarta.persistence.version>
         <zonky.embbeded-db.version>2.5.1</zonky.embbeded-db.version>
 
-        <!-- VSDS -->
-        <project.base.groupId>be.vlaanderen.informatievlaanderen.vsds</project.base.groupId>
+        <!-- OpenLDES -->
+        <project.base.groupId>org.openldes</project.base.groupId>
 
         <!-- SPRING BOOT -->
         <spring-boot.version>3.1.5</spring-boot.version>
@@ -126,8 +126,8 @@
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}${basedir}/../target/site/jacoco/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.organization>informatievlaanderen</sonar.organization>
-        <sonar.projectKey>Informatievlaanderen_VSDS-LDESServer4J-${project.groupId}:${project.artifactId}
+        <sonar.organization>openldes</sonar.organization>
+        <sonar.projectKey>OpenLDES_LDESServer-${project.groupId}:${project.artifactId}
         </sonar.projectKey>
 
         <!-- HASHING -->
@@ -139,7 +139,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- VSDS -->
+            <!-- OpenLDES -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>ldes-server-application</artifactId>
@@ -151,7 +151,7 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+                <groupId>org.openldes</groupId>
                 <artifactId>ldes-server-maintenance-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -445,8 +445,8 @@
                 <configuration>
                     <reduceEdges>true</reduceEdges>
                     <scope>compile</scope>
-                    <includes>be.vlaanderen.informatievlaanderen.vsds*</includes>
-                    <excludes>be.vlaanderen.informatievlaanderen.vsds:*domain*</excludes>
+                    <includes>org.openldes*</includes>
+                    <excludes>org.openldes:*domain*</excludes>
                     <graphFormat>dot</graphFormat>
                 </configuration>
             </plugin>
@@ -629,7 +629,7 @@
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
-        <url>git@github.com:Informatievlaanderen/VSDS-LDESServer4J.git</url>
+        <url>git@github.com:openldes/LDESServer.git</url>
         <tag>HEAD</tag>
     </scm>
 </project>

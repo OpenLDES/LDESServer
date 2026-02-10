@@ -1,0 +1,56 @@
+package org.openldes.server.retention.repositories.retentionpolicies;
+
+import org.openldes.server.domain.events.admin.DeletionPolicyChangedEvent;
+import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
+import org.openldes.server.retention.entities.EventSourceRetentionPolicyProvider;
+import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyFactory;
+import org.apache.jena.rdf.model.Model;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+import java.util.*;
+
+@Component
+public class EventSourceRetentionPolicyCollection implements RetentionPolicyCollection<EventSourceRetentionPolicyProvider> {
+	private final RetentionPolicyFactory retentionPolicyFactory;
+	private final Set<EventSourceRetentionPolicyProvider> retentionPolicies;
+
+	public EventSourceRetentionPolicyCollection(RetentionPolicyFactory retentionPolicyFactory) {
+		this.retentionPolicyFactory = retentionPolicyFactory;
+		retentionPolicies = new HashSet<>();
+	}
+
+	@Override
+	public Set<EventSourceRetentionPolicyProvider> getRetentionPolicies() {
+		return Set.copyOf(retentionPolicies);
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return retentionPolicies.isEmpty();
+	}
+
+	@EventListener
+	public void handleDeletionPolicyChangedEvent(DeletionPolicyChangedEvent event) {
+		removeFromCollection(event.collectionName());
+		addToCollection(event.collectionName(), event.retentionPolicies());
+	}
+
+	@EventListener
+	public void handleEventStreamDeletedEvent(EventStreamDeletedEvent event) {
+		removeFromCollection(event.collectionName());
+	}
+
+	private void removeFromCollection(String collectionName) {
+		retentionPolicies.removeIf(policy -> policy.collectionName().equals(collectionName));
+	}
+
+	private void addToCollection(String collectionName, List<Model> retentionPolicyModels) {
+		if (!retentionPolicyModels.isEmpty()) {
+			retentionPolicyFactory
+					.extractRetentionPolicy(retentionPolicyModels)
+					.map(retentionPolicy -> new EventSourceRetentionPolicyProvider(collectionName, retentionPolicy))
+					.ifPresent(retentionPolicies::add);
+		}
+	}
+}

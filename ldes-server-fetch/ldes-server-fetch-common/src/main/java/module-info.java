@@ -1,9 +1,9 @@
 module ldes.fetch.domain {
 
-    exports be.vlaanderen.informatievlaanderen.ldes.server.fetching.services;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.fetching.repository;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.fetching.entities;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.fetching.valueobjects;
+    exports org.openldes.server.fetching.services;
+    exports org.openldes.server.fetching.repository;
+    exports org.openldes.server.fetching.entities;
+	exports org.openldes.server.fetching.valueobjects;
 
 	requires ldes.domain;
 

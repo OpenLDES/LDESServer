@@ -3,10 +3,9 @@
 The Linked Data Event Stream (LDES) server is a configurable component that can be used to ingest, store, transform
 and (re-)publish an [LDES](https://semiceu.github.io/LinkedDataEventStreams/).
 The LDES server was built in the context of
-the [VSDS project](https://vlaamseoverheid.atlassian.net/wiki/spaces/VSDSSTART/overview) in order to easily exchange
-open data.
+the [OpenLDES project](https://openldes.org) in order to easily exchange open data.
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Informatievlaanderen_VSDS-LDESServer4J&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Informatievlaanderen_VSDS-LDESServer4J)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=OpenLDES_LDESServer&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=OpenLDES_LDESServer)
 
 ## Table Of Contents
 
@@ -72,7 +71,7 @@ But when used separately, it needs to be loaded in manually.
 
 ## How To Run
 
-To run the LDES server, we refer to the versioned documentation available [here](https://informatievlaanderen.github.io/VSDS-LDESServer4J/).
+To run the LDES server, we refer to the versioned documentation available [here](https://openldes.github.io/LDESServer/).
 
 ### Maven
 
@@ -354,16 +353,16 @@ You'll need to set the `GIT_CONFIG_USERNAME` and `GIT_CONFIG_EMAIL` variables an
 
 ### Variables
 
-| Variable name           | Description                                                                                            | Example                                |
-|-------------------------|--------------------------------------------------------------------------------------------------------|----------------------------------------|
-| ANALYSE_PACKAGE         | Choose if you want to execute the Sonar scan and publish the reports to Sonar cloud                    | false                                  |
-| DEPLOY_DOCUMENTATION    | Choose if you want to create and deploy the documentation to Github pages                              | false                                  |
-| DEPLOY_PACKAGE_TO_OSSRH | Choose if you want to deploy the Maven package to Maven Central                                        | false                                  |
-| DOCKER_NAMESPACE        | The namespace where the Docker image should be published under (in Docker hub)                         | ldes                                   |
-| GIT_CONFIG_EMAIL        | The Git email address that is used for committing the Github pages and create new releases             | vsds-ci@users.noreply.github.com       |
-| GIT_CONFIG_USERNAME     | The Git username that is used for committing the Github pages and create new releases                  | VSDS CI Pipeline                       |
-| SONAR_ORGANIZATION      | The organisation of the Sonar project                                                                  | informatievlaanderen                   |
-| SONAR_PROJECT_KEY       | The project key of the Sonar project                                                                   | Informatievlaanderen_VSDS-LDESServer4J |
-| JAVA_VERSION            | The Java version to use to build the project in the Github actions                                     | 21                                     |
-| JAVA_DISTRIBUTION       | The Java distribution to use to build the project in the Github actions (temurin, zulu, corretto, ...) | zulu                                   |
+| Variable name           | Description                                                                                            | Example                              |
+|-------------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------|
+| ANALYSE_PACKAGE         | Choose if you want to execute the Sonar scan and publish the reports to Sonar cloud                    | false                                |
+| DEPLOY_DOCUMENTATION    | Choose if you want to create and deploy the documentation to Github pages                              | false                                |
+| DEPLOY_PACKAGE_TO_OSSRH | Choose if you want to deploy the Maven package to Maven Central                                        | false                                |
+| DOCKER_NAMESPACE        | The namespace where the Docker image should be published under (in Docker hub)                         | ldes                                 |
+| GIT_CONFIG_EMAIL        | The Git email address that is used for committing the Github pages and create new releases             | openldes-ci@users.noreply.github.com |
+| GIT_CONFIG_USERNAME     | The Git username that is used for committing the Github pages and create new releases                  | OpenLDES CI Pipeline                 |
+| SONAR_ORGANIZATION      | The organisation of the Sonar project                                                                  | openldes                             |
+| SONAR_PROJECT_KEY       | The project key of the Sonar project                                                                   | OpenLDES_LDESServer                  |
+| JAVA_VERSION            | The Java version to use to build the project in the Github actions                                     | 21                                   |
+| JAVA_DISTRIBUTION       | The Java distribution to use to build the project in the Github actions (temurin, zulu, corretto, ...) | zulu                                 |
 

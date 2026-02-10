@@ -98,7 +98,7 @@ If not, a 500 response code will be returned with the following response body:
     "dcat": {
       "status": "INVALID",
       "details": {
-        "error": "be.vlaanderen.informatievlaanderen.ldes.server.domain.exceptions.ShaclValidationException: Shacl validation failed: \n\nnull"
+        "error": "org.openldes.server.domain.exceptions.ShaclValidationException: Shacl validation failed: \n\nnull"
       }
     }
   }

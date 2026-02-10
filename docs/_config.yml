@@ -51,7 +51,7 @@ just_the_docs:
 
 nav_external_links:
   - title: OpenLDES Technical Docs
-    url: https://openldes.github.io/openldes-tech-docs/
+    url: https://openldes.org
     hide_icon: false # set to true to hide the external link icon - defaults to false
 
 enable_copy_code_button: true

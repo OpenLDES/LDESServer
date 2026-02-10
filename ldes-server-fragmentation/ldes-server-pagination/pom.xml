@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>ldes-server-fragmentation</artifactId>
-        <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+        <groupId>org.openldes</groupId>
         <version>4.0.0-SNAPSHOT</version>
     </parent>
 
@@ -25,9 +25,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
-        <!-- VSDS -->
+        <!-- OpenLDES -->
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>ldes-server-fragmentation-common</artifactId>
             <version>${project.version}</version>
         </dependency>
