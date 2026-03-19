@@ -1,0 +1,42 @@
+package org.openldes.server.retention.batch.retentiontasklet;
+
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.maintenance.repository.PageMemberRepository;
+import org.openldes.server.retention.repositories.MemberPropertiesRepository;
+import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
+import org.openldes.server.retention.services.retentionpolicy.definition.timeandversionbased.TimeAndVersionBasedRetentionPolicy;
+import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
+import org.openldes.server.retention.services.retentionpolicy.definition.versionbased.VersionBasedRetentionPolicy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class ViewRetentionTask extends RetentionTask {
+	private static final Logger log = LoggerFactory.getLogger(ViewRetentionTask.class);
+	private final MemberPropertiesRepository memberPropertiesRepository;
+	private final PageMemberRepository pageMemberRepository;
+
+	public ViewRetentionTask(MemberPropertiesRepository memberPropertiesRepository, PageMemberRepository pageMemberRepository) {
+		this.memberPropertiesRepository = memberPropertiesRepository;
+		this.pageMemberRepository = pageMemberRepository;
+	}
+
+	@Override
+	protected void removeMembersThatMatchRetentionPolicies(String name, RetentionPolicy retentionPolicy) {
+		final ViewName viewName = ViewName.fromString(name);
+		log.atDebug().log("Start retention for view: {}", name);
+		List<Long> expiredMemberIds = switch (retentionPolicy.getType()) {
+			case TIME_BASED -> memberPropertiesRepository.findExpiredMembers(viewName,
+					(TimeBasedRetentionPolicy) retentionPolicy);
+			case VERSION_BASED -> memberPropertiesRepository.findExpiredMembers(viewName,
+					(VersionBasedRetentionPolicy) retentionPolicy);
+			case TIME_AND_VERSION_BASED -> memberPropertiesRepository.findExpiredMembers(viewName,
+					(TimeAndVersionBasedRetentionPolicy) retentionPolicy);
+		};
+		pageMemberRepository.deleteByViewNameAndMembersIds(viewName, expiredMemberIds);
+		log.atDebug().log("Finished retention for view: {}", viewName.asString());
+	}
+}

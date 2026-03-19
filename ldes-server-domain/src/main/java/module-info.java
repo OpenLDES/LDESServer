@@ -1,18 +1,18 @@
 open module ldes.domain {
 
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.converter;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.exceptions;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.constants;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.model;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.rest;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.encodig;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.versioning;
+    exports org.openldes.server.domain.converter;
+    exports org.openldes.server.domain.exceptions;
+    exports org.openldes.server.domain.constants;
+    exports org.openldes.server.domain.model;
+    exports org.openldes.server.domain.rest;
+    exports org.openldes.server.domain.encodig;
+    exports org.openldes.server.domain.versioning;
 
     // Events
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.events.retention;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.events.admin;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.domain.services;
-    exports be.vlaanderen.informatievlaanderen.ldes.server.domain.collections;
+    exports org.openldes.server.domain.events.retention;
+    exports org.openldes.server.domain.events.admin;
+	exports org.openldes.server.domain.services;
+    exports org.openldes.server.domain.collections;
 
     requires spring.web;
     requires spring.context;

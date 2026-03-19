@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+        <groupId>org.openldes</groupId>
         <artifactId>ldes-server</artifactId>
         <version>4.0.0-SNAPSHOT</version>
     </parent>

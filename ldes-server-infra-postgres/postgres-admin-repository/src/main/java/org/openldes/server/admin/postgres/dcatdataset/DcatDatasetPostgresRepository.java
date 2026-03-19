@@ -1,0 +1,56 @@
+package org.openldes.server.admin.postgres.dcatdataset;
+
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
+import org.openldes.server.admin.domain.dcat.dcatdataset.repository.DcatDatasetRepository;
+import org.openldes.server.admin.postgres.dcatdataset.entity.DcatDatasetEntity;
+import org.openldes.server.admin.postgres.dcatdataset.mapper.DcatDatasetMapper;
+import org.openldes.server.admin.postgres.dcatdataset.repository.DcatDatasetEntityRepository;
+import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public class DcatDatasetPostgresRepository implements DcatDatasetRepository {
+    private final DcatDatasetEntityRepository dcatDatasetEntityRepository;
+    private final EventStreamEntityRepository eventStreamEntityRepository;
+
+    public DcatDatasetPostgresRepository(DcatDatasetEntityRepository dcatDatasetEntityRepository, EventStreamEntityRepository eventStreamEntityRepository) {
+        this.dcatDatasetEntityRepository = dcatDatasetEntityRepository;
+        this.eventStreamEntityRepository = eventStreamEntityRepository;
+    }
+
+    @Override
+    public Optional<DcatDataset> retrieveDataset(String collectionName) {
+        return dcatDatasetEntityRepository.findByCollectionName(collectionName).map(DcatDatasetMapper::fromEntity);
+    }
+
+    @Override
+    @Transactional
+    public void saveDataset(DcatDataset dataset) {
+        dcatDatasetEntityRepository.findByCollectionName(dataset.getCollectionName())
+                .or(() -> eventStreamEntityRepository.findByName(dataset.getCollectionName()).map(DcatDatasetEntity::new))
+                .ifPresent(dcatDatasetEntity -> {
+                    dcatDatasetEntity.setModel(dataset.getModel());
+                    dcatDatasetEntityRepository.save(dcatDatasetEntity);
+                });
+    }
+
+    @Override
+    @Transactional
+    public void deleteDataset(String collectionName) {
+        dcatDatasetEntityRepository.deleteByCollectionName(collectionName);
+    }
+
+    @Override
+    public List<DcatDataset> findAll() {
+        return dcatDatasetEntityRepository.findAll().stream().map(DcatDatasetMapper::fromEntity).toList();
+    }
+
+    @Override
+    public boolean exitsByCollectionName(String collectionName) {
+        return dcatDatasetEntityRepository.existsByCollectionName(collectionName);
+    }
+}

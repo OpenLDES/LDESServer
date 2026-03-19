@@ -7,15 +7,15 @@ nav_order: 1
 # How to run
 
 We advise running the LDES Server as a Docker Image which we provide
-via [Docker Hub](https://hub.docker.com/r/ldes/ldes-server/):
+via [Docker Hub](https://hub.docker.com/r/openldes/ldes-server/):
 
 * Latest Official
-  version: [![Docker Image Version](https://img.shields.io/docker/v/ldes/ldes-server/latest)](https://hub.docker.com/r/ldes/ldes-server/tags)
+  version: [![Docker Image Version](https://img.shields.io/docker/v/openldes/ldes-server/latest)](https://hub.docker.com/r/openldes/ldes-server/tags)
 * Latest Alpha
-  version: [![Docker Image Version](https://img.shields.io/docker/v/ldes/ldes-server)](https://hub.docker.com/r/ldes/ldes-server/tags)
+  version: [![Docker Image Version](https://img.shields.io/docker/v/openldes/ldes-server)](https://hub.docker.com/r/openldes/ldes-server/tags)
 
 To decide which version to take, visit
-the [Release Management Advice](https://openldes.github.io/openldes-tech-docs/release/Release_Management#which-version-should-i-use)
+the [Release Management Advice](https://openldes.org/pipeline/release#which-version-should-i-use)
 and visit the [LDES Server Github Release Page](https://github.com/OpenLDES/LDESServer/releases) for
 an overview of all the releases.
 
@@ -187,7 +187,7 @@ Here is an explanation provided for all the possibilities on how to tweak and co
 services:
   ldes-server:
     container_name: basic_ldes-server
-    image: ldes/ldes-server
+    image: openldes/ldes-server
     environment:
       - SPRING_CONFIG_LOCATION=/config/
     volumes:
@@ -214,34 +214,7 @@ networks:
     name: quick_start_network
 ````
 
-## Migration to 3.0
 
-Since the Mongodb implementation got replaced with a PostgreSQL one, a migration path has been provided.
-This migration path is only needed for those who wish to move their 2.x LDES servers to the latest version.
-
-To enable this, please first take in the 3.0.0 release and add the following properties to your config:
-
-````yaml
-ldes-server:
-  migrate-mongo: true
-spring:
-  data:
-    mongodb:
-      uri: # connection string pointing to mongodb instance
-  batch:
-    jdbc:
-      initialize-schema: always
-````
-
-> **_ALTERNATIVE MIGRATION:_**  Besides the provided migration solution, It is also possible to set up your new 3.x Server 
-> next to your 2.x Server and then use and LDES workbench to send over the data from the 2.x Server to the 3.x Server.
-> This pipeline in [LDIO] should contain an [LDES Client] to read data from the 2.x Server and an [LDIO Http Out] to send data towards the 3.x Server.
-
-
-[LDIO]: https://openldes.github.io/Linked-Data-Interactions/ldio
-[LDES Client]: https://openldes.github.io/Linked-Data-Interactions/ldio/ldio-inputs/ldio-ldes-client
-[LDIO Http Out]: https://openldes.github.io/Linked-Data-Interactions/ldio/ldio-outputs/ldio-http-out
-[spring documentation]: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/support/CronExpression.html
 
 ## Credits
 shout-out to ej-technologies for providing us with a license for their [java profiler]( https://www.ej-technologies.com/products/jprofiler/overview.html)!

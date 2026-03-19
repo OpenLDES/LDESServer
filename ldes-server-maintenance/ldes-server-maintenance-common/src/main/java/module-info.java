@@ -3,7 +3,7 @@ open module ldes.server.maintenance.common {
 	requires spring.batch.core;
 	requires ldes.domain;
 	requires spring.beans;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.maintenance.services;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.maintenance.valueobjects;
-	exports be.vlaanderen.informatievlaanderen.ldes.server.maintenance.repository;
+	exports org.openldes.server.maintenance.services;
+	exports org.openldes.server.maintenance.valueobjects;
+	exports org.openldes.server.maintenance.repository;
 }

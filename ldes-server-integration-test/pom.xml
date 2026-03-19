@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+        <groupId>org.openldes</groupId>
         <artifactId>ldes-server</artifactId>
         <version>4.0.0-SNAPSHOT</version>
     </parent>
@@ -18,80 +18,80 @@
     </properties>
 
     <dependencies>
-        <!-- VSDS -->
+        <!-- OpenLDES -->
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>postgres-liquibase</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>postgres-pagination-repository</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>postgres-fetch-repository</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>postgres-ingest-repository</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>postgres-maintenance-repository</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>ldes-server-fragmentation-geospatial</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>ldes-server-fragmentation-timebased-hierarchical</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>ldes-server-fragmentation-reference</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>ldes-server-ingest-rest</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>ldes-server-admin-rest</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>ldes-server-fetch-rest</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>be.vlaanderen.informatievlaanderen.vsds</groupId>
+            <groupId>org.openldes</groupId>
             <artifactId>ldes-server-ingest-kafka</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>

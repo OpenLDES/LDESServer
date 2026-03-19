@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 env:
-  BASE_URL: "/VSDS-LDESServer4J"
+  BASE_URL: "/LDESServer"
   TITLE: "Linked Data Event Stream Server"
   GIT_CONFIG_USERNAME: ${{ vars.GIT_CONFIG_USERNAME }}
   GIT_CONFIG_EMAIL: ${{ vars.GIT_CONFIG_EMAIL }}

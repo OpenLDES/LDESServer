@@ -1,0 +1,73 @@
+package org.openldes.server.admin.domain.view.service;
+
+import org.openldes.server.admin.domain.view.repository.DcatViewRepository;
+import org.openldes.server.domain.events.admin.DcatViewDeletedEvent;
+import org.openldes.server.domain.events.admin.DcatViewSavedEvent;
+import org.openldes.server.domain.exceptions.MissingResourceException;
+import org.openldes.server.domain.model.DcatView;
+import org.openldes.server.domain.model.ViewName;
+import org.apache.jena.rdf.model.Model;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class DcatViewServiceImpl implements DcatViewService {
+
+	private final DcatViewRepository dcatViewRepository;
+	private final ApplicationEventPublisher eventPublisher;
+
+	public DcatViewServiceImpl(DcatViewRepository dcatViewRepository, ApplicationEventPublisher eventPublisher) {
+		this.dcatViewRepository = dcatViewRepository;
+		this.eventPublisher = eventPublisher;
+	}
+
+	@Override
+	public void create(ViewName viewName, Model dcat) {
+		DcatView dcatView = DcatView.from(viewName, dcat);
+		dcatViewRepository.save(dcatView);
+		eventPublisher.publishEvent(new DcatViewSavedEvent(dcatView));
+	}
+
+	@Override
+	public Optional<DcatView> findByViewName(ViewName viewName) {
+		return dcatViewRepository.findByViewName(viewName);
+	}
+
+	@Override
+	public void update(ViewName viewName, Model dcat) {
+		if (dcatViewRepository.findByViewName(viewName).isEmpty()) {
+			throw new MissingResourceException("dcat-data-service", viewName.asString());
+		}
+
+		DcatView dcatView = DcatView.from(viewName, dcat);
+		dcatViewRepository.save(dcatView);
+		eventPublisher.publishEvent(new DcatViewSavedEvent(dcatView));
+	}
+
+	@Override
+	public void delete(ViewName viewName) {
+		dcatViewRepository.delete(viewName);
+		eventPublisher.publishEvent(new DcatViewDeletedEvent(viewName));
+	}
+
+	@Override
+	public List<DcatView> findAll() {
+		return dcatViewRepository.findAll();
+	}
+
+	/**
+	 * Initializes the dcatViews.
+	 * The ApplicationReadyEvent is used instead of earlier spring lifecycle events
+	 * to give db migrations time before this init.
+	 */
+	@EventListener(ApplicationReadyEvent.class)
+	public void initViews() {
+		findAll().forEach(dcatView -> eventPublisher.publishEvent(new DcatViewSavedEvent(dcatView)));
+	}
+
+}
