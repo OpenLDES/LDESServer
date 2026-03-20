@@ -35,15 +35,15 @@
     "relUrl": "/how-to-run.html"
   },"5": {
     "doc": "Home",
-    "title": "Linked Data Event Stream Server",
+    "title": "Open Linked Data Event Stream Server",
     "content": " ",
-    "url": "/LDESServer/4.0.0-SNAPSHOT/#linked-data-event-stream-server",
+    "url": "/LDESServer/4.0.0-SNAPSHOT/#open-linked-data-event-stream-server",
     
-    "relUrl": "/#linked-data-event-stream-server"
+    "relUrl": "/#open-linked-data-event-stream-server"
   },"6": {
     "doc": "Home",
     "title": "Introduction",
-    "content": "The Linked Data Event Stream (LDES) server is a configurable component that can be used to ingest, store, transform and (re-)publish an LDES. The LDES server was built in the context of the OpenLDES project in order to easily exchange data. The server can be configured to meet the organisation’s specific needs. Functionalities include * *retention policy, **fragmentation, deletion and pagination for managing and processing large amounts of data more efficiently and ensuring the efficient use of storage. ",
+    "content": "The Open Linked Data Event Stream (LDES) server is a configurable component that can be used to ingest, store, transform and (re-)publish an LDES. The server can be configured to meet the organisation’s specific needs. Functionalities include retention policy, fragmentation, deletion and pagination for managing and processing large amounts of data more efficiently and ensuring the efficient use of storage. ",
     "url": "/LDESServer/4.0.0-SNAPSHOT/#introduction",
     
     "relUrl": "/#introduction"
@@ -92,14 +92,14 @@
   },"13": {
     "doc": "Configuring a new Event Stream",
     "title": "Configuring a SHACL Shape",
-    "content": "SHACL (Shapes Constraint Language) is a standard for validating RDF data and ensuring that it conforms to a particular structure or shape. In the context of the Linked Data Event Stream (LDES), SHACL shapes are used to provide a machine-readable description of the expected structure of members in the stream. By incorporating SHACL shapes, LDES provides a powerful tool for ensuring data quality and consistency, making it a reliable and trustworthy source of data for various applications. By defining a SHACL shape for the LDES, data producers can ensure that the members they add to the LDES adhere to the required structure, while data consumers can use the shape to validate and reason about the data they receive. Defining a shape can be done through the /admin/api/v1/eventstreams/{collectionName}/shape endpoint. For more info, visit the Swagger API documentation. Example . @prefix sh: &lt;http://www.w3.org/ns/shacl#&gt; . @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; . [] a sh:NodeShape; sh:targetClass &lt;https://w3id.org/ldes#EventStream&gt; ; sh:closed true; sh:ignoredProperties (rdf:type) ; sh:property [ sh:class sh:NodeShape; sh:description \"The schema all elements of the eventstream must conform to.\"@en; sh:maxCount 1; sh:minCount 1; sh:name \"shape\"@en; sh:path &lt;https://w3id.org/tree#shape&gt; ], [ sh:nodeKind sh:IRI ; sh:description \"The object property of the members that idicates how members relate to each other from the time perspective.\"@en; sh:maxCount 1; sh:name \"timestampPath\"@en; sh:path &lt;https://w3id.org/ldes#timestampPath&gt; ], [ sh:nodeKind sh:IRI ; sh:description \"The object property that indicates the object identifier in a version object.\"@en; sh:maxCount 1; sh:name \"versionOfPath\"@en; sh:path &lt;https://w3id.org/ldes#versionOfPath&gt; ] . ",
+    "content": "SHACL (Shapes Constraint Language) is a standard for validating RDF data and ensuring that it conforms to a particular structure or shape. In the context of the Open Linked Data Event Stream (LDES), SHACL shapes are used to provide a machine-readable description of the expected structure of members in the stream. By incorporating SHACL shapes, LDES provides a powerful tool for ensuring data quality and consistency, making it a reliable and trustworthy source of data for various applications. By defining a SHACL shape for the LDES, data producers can ensure that the members they add to the LDES adhere to the required structure, while data consumers can use the shape to validate and reason about the data they receive. Defining a shape can be done through the /admin/api/v1/eventstreams/{collectionName}/shape endpoint. For more info, visit the Swagger API documentation. Example . @prefix sh: &lt;http://www.w3.org/ns/shacl#&gt; . @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; . [] a sh:NodeShape; sh:targetClass &lt;https://w3id.org/ldes#EventStream&gt; ; sh:closed true; sh:ignoredProperties (rdf:type) ; sh:property [ sh:class sh:NodeShape; sh:description \"The schema all elements of the eventstream must conform to.\"@en; sh:maxCount 1; sh:minCount 1; sh:name \"shape\"@en; sh:path &lt;https://w3id.org/tree#shape&gt; ], [ sh:nodeKind sh:IRI ; sh:description \"The object property of the members that idicates how members relate to each other from the time perspective.\"@en; sh:maxCount 1; sh:name \"timestampPath\"@en; sh:path &lt;https://w3id.org/ldes#timestampPath&gt; ], [ sh:nodeKind sh:IRI ; sh:description \"The object property that indicates the object identifier in a version object.\"@en; sh:maxCount 1; sh:name \"versionOfPath\"@en; sh:path &lt;https://w3id.org/ldes#versionOfPath&gt; ] . ",
     "url": "/LDESServer/4.0.0-SNAPSHOT/configuration/event-stream#configuring-a-shacl-shape",
     
     "relUrl": "/configuration/event-stream#configuring-a-shacl-shape"
   },"14": {
     "doc": "Configuring a new Event Stream",
     "title": "Configuring member deletion on an Event Stream",
-    "content": "To determine which members should be permanently deleted from the Event Stream, it is necessary to set one or more retention policies on the event source of the Event Stream. Definition of event source: . In Linked Data Event Streams, the ldes:EventSource class is designed to be the source for all derived views. The Linked Data Event Streams specification can also further elaborate on the ViewDescription by for example describing a retention policy on top of it. By default, no retention policy is set on the event source meaning that no data is removed from the Event Stream. Even when all views are deleted, the members will not be deleted from the Event Stream. When a retention policy is set on the event source of an Event Stream, every member that is not part of any view and which falls outside of the retention policy will be removed from the Event Stream. More information on which retention policies can be used can be found here. The event source is automatically created when creating an Event Stream but does not contain a retention policy by default. To add retention policies to the event source, the admin API can be used. More info on this can be found here. It is only possible to add or edit retention policies of an event source, other properties cannot be changed. Before introduction of the event source in the LDES Server, members were directly deleted when they weren’t part of any view anymore. With the event source, it is possible to delete all views of an Event Stream without losing members so that you can create new views without having to ingest data again. If members need to be deleted directly from the Event Stream when they aren’t part of any view, a timebased retention policy of a few seconds can be set on the event source of the Event Stream. Example: . @prefix ldes: &lt;https://w3id.org/ldes#&gt; . @prefix server: &lt;http://localhost:8080/&gt; . @prefix genericES: &lt;http://localhost:8080/generic-eventstream/&gt; . server:generic-eventstream a ldes:EventStream ; ldes:eventSource genericES:eventSource . genericES:eventSource a ldes:EventSource ; ldes:retentionPolicy [ a ldes:LatestVersionSubset ; ldes:amount 0 ; ] . ",
+    "content": "To determine which members should be permanently deleted from the Event Stream, it is necessary to set one or more retention policies on the event source of the Event Stream. Definition of event source: . In Open Linked Data Event Streams, the ldes:EventSource class is designed to be the source for all derived views. The Open Linked Data Event Streams specification can also further elaborate on the ViewDescription by for example describing a retention policy on top of it. By default, no retention policy is set on the event source meaning that no data is removed from the Event Stream. Even when all views are deleted, the members will not be deleted from the Event Stream. When a retention policy is set on the event source of an Event Stream, every member that is not part of any view and which falls outside of the retention policy will be removed from the Event Stream. More information on which retention policies can be used can be found here. The event source is automatically created when creating an Event Stream but does not contain a retention policy by default. To add retention policies to the event source, the admin API can be used. More info on this can be found here. It is only possible to add or edit retention policies of an event source, other properties cannot be changed. Before introduction of the event source in the LDES Server, members were directly deleted when they weren’t part of any view anymore. With the event source, it is possible to delete all views of an Event Stream without losing members so that you can create new views without having to ingest data again. If members need to be deleted directly from the Event Stream when they aren’t part of any view, a timebased retention policy of a few seconds can be set on the event source of the Event Stream. Example: . @prefix ldes: &lt;https://w3id.org/ldes#&gt; . @prefix server: &lt;http://localhost:8080/&gt; . @prefix genericES: &lt;http://localhost:8080/generic-eventstream/&gt; . server:generic-eventstream a ldes:EventStream ; ldes:eventSource genericES:eventSource . genericES:eventSource a ldes:EventSource ; ldes:retentionPolicy [ a ldes:LatestVersionSubset ; ldes:amount 0 ; ] . ",
     "url": "/LDESServer/4.0.0-SNAPSHOT/configuration/event-stream#configuring-member-deletion-on-an-event-stream",
     
     "relUrl": "/configuration/event-stream#configuring-member-deletion-on-an-event-stream"
@@ -141,7 +141,7 @@
   },"20": {
     "doc": "Fragmentations",
     "title": "LDES Fragmentations",
-    "content": "To reduce the volume of data that consumers need to replicate or to speed up certain queries, the LDES server can be configured to create several fragmentations. Fragmentations are similar to indexes in databases but then published on the Web. The RDF predicate on which the fragmentation must be applied is defined through configuration. The fragmenting of a Linked Data Event Stream (LDES) is a crucial technique for managing and processing large amounts of data more efficiently. ",
+    "content": "To reduce the volume of data that consumers need to replicate or to speed up certain queries, the LDES server can be configured to create several fragmentations. Fragmentations are similar to indexes in databases but then published on the Web. The RDF predicate on which the fragmentation must be applied is defined through configuration. The fragmenting of an Open Linked Data Event Stream (LDES) is a crucial technique for managing and processing large amounts of data more efficiently. ",
     "url": "/LDESServer/4.0.0-SNAPSHOT/configuration/fragmentations/index#ldes-fragmentations",
     
     "relUrl": "/configuration/fragmentations/index#ldes-fragmentations"
@@ -419,37 +419,37 @@
     
     "relUrl": "/ingest/kafka#getting-started"
   },"60": {
-    "doc": "Read Linked Data Event Streams With HTTP",
-    "title": "Read Linked Data Event Streams With HTTP",
-    "content": "Although the Linked Data Event Streams are advised to read with an LDES Client, an Event Stream can also be retrieved via HTTP. When manually retrieving an LDES, we can make a distinction into 3 categories: . ",
+    "doc": "Read Open Linked Data Event Streams With HTTP",
+    "title": "Read Open Linked Data Event Streams With HTTP",
+    "content": "Although the Open Linked Data Event Streams are advised to read with an LDES Client, an Event Stream can also be retrieved via HTTP. When manually retrieving an LDES, we can make a distinction into 3 categories: . ",
     "url": "/LDESServer/4.0.0-SNAPSHOT/fetch/http",
     
     "relUrl": "/fetch/http"
   },"61": {
-    "doc": "Read Linked Data Event Streams With HTTP",
+    "doc": "Read Open Linked Data Event Streams With HTTP",
     "title": "Retrieving an Event Stream",
     "content": "By browsing to an Event Stream following the pattern {hostname}/{event stream}, you are able to read the shape of the Event Stream, its views (along with its configured fragmentations) and configured DCAT information. ",
     "url": "/LDESServer/4.0.0-SNAPSHOT/fetch/http#retrieving-an-event-stream",
     
     "relUrl": "/fetch/http#retrieving-an-event-stream"
   },"62": {
-    "doc": "Read Linked Data Event Streams With HTTP",
+    "doc": "Read Open Linked Data Event Streams With HTTP",
     "title": "Retrieving a View",
     "content": "By following the previously mentioned views or by following the pattern {hostname}/{event stream}/{view}, the view page will be shown. This contains information about how many members are in this Event Stream, the configured DCAT information and the tree:Relation that points to the root fragment. ",
     "url": "/LDESServer/4.0.0-SNAPSHOT/fetch/http#retrieving-a-view",
     
     "relUrl": "/fetch/http#retrieving-a-view"
   },"63": {
-    "doc": "Read Linked Data Event Streams With HTTP",
+    "doc": "Read Open Linked Data Event Streams With HTTP",
     "title": "Retrieving a fragment",
     "content": "Finally, by following the root fragment from a view or by following the pattern {hostname}/{event stream}/{view}?{fragmentation specific parameters}, the fragment page will be shown. Depending on whether any fragmentations are defined, this either contains a partitioned fragment page or one or multipletree:Relation that point to partitioned fragment pages. These partitioned fragments contain the actual members. Retrieving a fragment in a streaming way . When retrieving a fragment, it is possible to receive the fragment page in a streaming way by specifying the accept type as text/event-stream. The fragment will then always be converted to the application/rdf+protobuf format. Because server-side events are used we encode the data to base64. When retrieving a fragment in this way, not all the data will be received at once. | First the statements relating to the fragment itself and its relations to other fragments will be send. This event will have the name: metadata. | Then all members will be send one by one. These events will have the name: member. | . Every piece of the fragment data is wrapped in the data part of a Server-side event. This method is useful when retrieving large fragments because you do not have to wait until every member is fetched and the entire fragment is constructed to start processing the data. When consuming a fragment in this way, it is important to recognise that an error can still occur after receiving an 200 OK response from the server. When such an error occurs, the error message will be send in a Server-side event named error. ",
     "url": "/LDESServer/4.0.0-SNAPSHOT/fetch/http#retrieving-a-fragment",
     
     "relUrl": "/fetch/http#retrieving-a-fragment"
   },"64": {
-    "doc": "Read Linked Data Event Streams with the LDES Client",
-    "title": "Read Linked Data Event Streams with the LDES Client",
-    "content": "As a Linked Data Event Stream is mainly built to be read by machines, the LDES Client can take on a LDES endpoint. The LDES Client will replicate the Event Stream and then synchronise with it to listen for new updates. To use this component, please refer to the LDIO LDES Client Documentation . ",
+    "doc": "Read Open Linked Data Event Streams with the LDES Client",
+    "title": "Read Open Linked Data Event Streams with the LDES Client",
+    "content": "As an Open Linked Data Event Stream is mainly built to be read by machines, the LDES Client can take on a LDES endpoint. The LDES Client will replicate the Event Stream and then synchronise with it to listen for new updates. To use this component, please refer to the LDIO LDES Client Documentation . ",
     "url": "/LDESServer/4.0.0-SNAPSHOT/fetch/ldes-client",
     
     "relUrl": "/fetch/ldes-client"
