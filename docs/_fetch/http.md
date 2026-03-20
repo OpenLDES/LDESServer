@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Read Linked Data Event Streams With HTTP
+title: Read Open Linked Data Event Streams With HTTP
 nav_order: 1
 ---
 
-# Read Linked Data Event Streams With HTTP
+# Read Open Linked Data Event Streams With HTTP
 
-Although the Linked Data Event Streams are advised to read with an [LDES Client](./ldes-client),
+Although the Open Linked Data Event Streams are advised to read with an [LDES Client](./ldes-client),
 an Event Stream can also be retrieved via HTTP.
 
 When manually retrieving an LDES, we can make a distinction into 3 categories:

@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Read Linked Data Event Streams with the LDES Client
+title: Read Open Linked Data Event Streams with the LDES Client
 nav_order: 0
 ---
 
-# Read Linked Data Event Streams with the LDES Client
+# Read Open Linked Data Event Streams with the LDES Client
 
-As a Linked Data Event Stream is mainly built to be read by machines, the LDES Client can take on a LDES endpoint.
+As an Open Linked Data Event Stream is mainly built to be read by machines, the LDES Client can take on a LDES endpoint.
 The LDES Client will replicate the Event Stream and then synchronise with it to listen for
 new updates.
 

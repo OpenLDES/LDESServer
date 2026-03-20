@@ -1,6 +1,6 @@
 # LDES Server
 
-The Linked Data Event Stream (LDES) server is a configurable component that can be used to ingest, store, transform
+The Open Linked Data Event Stream (LDES) server is a configurable component that can be used to ingest, store, transform
 and (re-)publish an [LDES](https://semiceu.github.io/LinkedDataEventStreams/).
 The LDES server was built in the context of
 the [OpenLDES project](https://openldes.org) in order to easily exchange open data.
