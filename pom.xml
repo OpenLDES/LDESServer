@@ -9,7 +9,7 @@
 
     <groupId>org.openldes</groupId>
     <artifactId>ldes-server</artifactId>
-    <version>4.0.0</version>
+    <version>4.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
