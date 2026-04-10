@@ -72,7 +72,7 @@ To configure an Event Stream that ingests members from a Kafka topic, please vis
 
 [SHACL (Shapes Constraint Language)](https://www.w3.org./TR/shacl/) is a standard for validating RDF data and ensuring
 that it conforms to a particular structure or shape.
-In the context of the Linked Data Event Stream (LDES), SHACL shapes are used to provide
+In the context of the Open Linked Data Event Stream (LDES), SHACL shapes are used to provide
 a machine-readable description of the expected structure of members in the stream.
 
 By incorporating SHACL shapes, LDES provides a powerful tool for ensuring data quality
@@ -124,8 +124,8 @@ To determine which members should be permanently deleted from the Event Stream, 
 retention policies on the event source of the Event Stream.
 Definition of event source:
 
-> In Linked Data Event Streams, the ldes:EventSource class is designed to be the source for all derived views. The
-> Linked Data Event Streams specification can also further elaborate on the ViewDescription by for example describing a
+> In Open Linked Data Event Streams, the ldes:EventSource class is designed to be the source for all derived views. The
+> Open Linked Data Event Streams specification can also further elaborate on the ViewDescription by for example describing a
 > retention policy on top of it.
 
 By default, no retention policy is set on the event source meaning that no data is removed from the Event Stream. Even

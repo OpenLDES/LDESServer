@@ -173,7 +173,7 @@
 <https://private-api.gipod.beta-vlaanderen.be/api/v1/ldes/mobility-hindrances/shape>
   a dc:Standard ;
   dc:title "Shape GIPOD Hindernissen - Publieke Informatie"@nl ;
-  dc:description "Een shape wordt opgelegd aan alle elementen van de LDES. Voorbeelden van zo'n shape zijn SHACL en ShEx. De shape moet cohorent zijn doorheen heel de Linked Data Event Stream."@nl .
+  dc:description "Een shape wordt opgelegd aan alle elementen van de LDES. Voorbeelden van zo'n shape zijn SHACL en ShEx. De shape moet cohorent zijn doorheen heel de Open Linked Data Event Stream."@nl .
 
 <https://data.vlaanderen.be/doc/licentie/modellicentie-gratis-hergebruik/v1.0>
   a dc:LicenseDocument ;

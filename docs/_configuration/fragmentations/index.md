@@ -15,7 +15,7 @@ The RDF predicate on which the fragmentation must be applied is defined through 
 
 ![](../../assets/images/fragmentation.png)
 
-The fragmenting of a Linked Data Event Stream (LDES) is a crucial technique for managing and processing large amounts of data more efficiently.
+The fragmenting of an Open Linked Data Event Stream (LDES) is a crucial technique for managing and processing large amounts of data more efficiently.
 
 ## Partitioning
 
