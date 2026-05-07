@@ -39,6 +39,9 @@ public class RdfModelConverter {
         if (MediaType.ALL.equals(contentType) || MediaType.TEXT_HTML.equals(contentType)) {
             return TURTLE;
         }
+        if (MediaType.TEXT_PLAIN.equalsTypeAndSubtype(contentType)) {
+            return Lang.NTRIPLES;
+        }
         return ofNullable(nameToLang(contentType.getType() + "/" + contentType.getSubtype()))
                 .orElseGet(() -> ofNullable(nameToLang(contentType.getSubtype()))
                         .orElseThrow(() -> new RdfFormatException(contentType.toString(), rdfFormatContext)));
