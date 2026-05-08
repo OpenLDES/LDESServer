@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 
 env:
+  GHCR_REGISTRY: ghcr.io
   SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
   SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
   ANALYSE_PACKAGE: ${{ vars.ANALYSE_PACKAGE }}
@@ -67,8 +68,26 @@ jobs:
         with:
           name: artifacts
           path: .github
+      - name: Define docker variables
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression="project.version" -q -DforceStdout)
+          echo "IMAGE_TAG=${{ VERSION }}-$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+          echo "IMAGE=${{ env.GHCR_REGISTRY }}/${{ github.repository }}" >> $GITHUB_ENV
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
           context: .github
           push: false
+          tags: '${{ env.GHCR_REGISTRY }}/${{ github.repository }}:${{ env.IMAGE_TAG }}'
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: '${{ env.GHCR_REGISTRY }}/${{ github.repository }}:${{ env.IMAGE_TAG }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v4
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
