@@ -70,7 +70,7 @@ jobs:
           path: .github
       - name: Define docker variables
         run: |
-          VERSION=$(mvn help:evaluate -Dexpression="project.version" -q -DforceStdout)
+          export VERSION=$(mvn help:evaluate -Dexpression="project.version" -q -DforceStdout)
           echo "IMAGE_TAG=${{ VERSION }}-$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
           echo "IMAGE=${{ env.GHCR_REGISTRY }}/${{ github.repository }}" >> $GITHUB_ENV
       - name: Build and push Docker image
