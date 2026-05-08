@@ -1,13 +1,9 @@
 package org.openldes.server.admin.spi;
 
-import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
-import org.openldes.server.domain.converter.PrefixAdderImpl;
-import org.openldes.server.domain.model.FragmentationConfig;
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.domain.model.ViewSpecification;
-import org.openldes.server.domain.rest.HostNamePrefixConstructor;
-import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
-import org.openldes.server.domain.rest.UriPrefixConstructor;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import java.util.Map;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
@@ -20,11 +16,14 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.List;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
+import org.openldes.server.domain.converter.PrefixAdderImpl;
+import org.openldes.server.domain.model.FragmentationConfig;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.model.ViewSpecification;
+import org.openldes.server.domain.rest.HostNamePrefixConstructor;
+import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
+import org.openldes.server.domain.rest.UriPrefixConstructor;
 
 class EventStreamWriterTest {
 	private static final String TIMESTAMP_PATH = "http://purl.org/dc/terms/created";

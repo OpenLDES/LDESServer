@@ -1,13 +1,12 @@
 package org.openldes.server.ingest.rest.validators.memberingestvalidator;
 
-import org.openldes.server.domain.events.admin.EventStreamClosedEvent;
-import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
-import org.openldes.server.domain.exceptions.ShaclValidationException;
-import org.openldes.server.domain.model.EventStream;
-import org.openldes.server.domain.model.VersionCreationProperties;
-import org.openldes.server.ingest.validators.ingestreportvalidator.BlankNodesValidator;
-import org.openldes.server.ingest.validators.ingestreportvalidator.PathsValidator;
-import org.openldes.server.ingest.validators.memberingestvalidator.MemberIngestValidator;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.List;
+import java.util.stream.Stream;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
@@ -20,14 +19,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.openldes.server.domain.events.admin.EventStreamClosedEvent;
+import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
+import org.openldes.server.domain.model.EventStream;
+import org.openldes.server.domain.model.VersionCreationProperties;
+import org.openldes.server.ingest.validators.ingestreportvalidator.BlankNodesValidator;
+import org.openldes.server.ingest.validators.ingestreportvalidator.PathsValidator;
+import org.openldes.server.ingest.validators.memberingestvalidator.MemberIngestValidator;
 
 class MemberIngestValidatorTest {
     private static final String TIMESTAMP_PATH = "http://purl.org/dc/terms/created";

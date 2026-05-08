@@ -1,13 +1,13 @@
 package org.openldes.server.ingest.validation.defaultimpl.modelingestvalidator;
 
-import org.openldes.server.domain.exceptions.ShaclValidationException;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFParser;
 import org.apache.jena.shacl.Shapes;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
 
 class ShaclModelValidatorTest {
 

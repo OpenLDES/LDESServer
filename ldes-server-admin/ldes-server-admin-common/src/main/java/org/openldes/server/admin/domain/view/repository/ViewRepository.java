@@ -1,10 +1,9 @@
 package org.openldes.server.admin.domain.view.repository;
 
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.domain.model.ViewSpecification;
-
 import java.util.List;
 import java.util.Optional;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.model.ViewSpecification;
 
 public interface ViewRepository {
 	List<ViewSpecification> retrieveAllViews();

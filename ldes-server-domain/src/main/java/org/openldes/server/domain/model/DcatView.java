@@ -1,15 +1,23 @@
 package org.openldes.server.domain.model;
 
-import org.apache.jena.rdf.model.*;
-import org.apache.jena.vocabulary.RDF;
+import static org.apache.commons.lang3.Validate.notNull;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import static org.apache.jena.util.ResourceUtils.renameResource;
+import static org.openldes.server.domain.constants.RdfConstants.DC_TERMS_IDENTIFIER;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_LITERAL;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
 
 import java.util.List;
 import java.util.Objects;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.apache.commons.lang3.Validate.notNull;
-import static org.apache.jena.rdf.model.ResourceFactory.*;
-import static org.apache.jena.util.ResourceUtils.renameResource;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.vocabulary.RDF;
 
 public class DcatView {
 
@@ -32,7 +40,7 @@ public class DcatView {
 	}
 
 	public static DcatView from(ViewName viewName, Model dcat) {
-		return new DcatView(notNull(viewName), notNull(dcat));
+		return new DcatView(notNull(viewName, "viewName cannot be null"), notNull(dcat, "dcat model cannot be null"));
 	}
 
 	public ViewName getViewName() {

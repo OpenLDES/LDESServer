@@ -1,14 +1,13 @@
 package org.openldes.server.retention.services.retentionpolicy.definition.timeandversionbased;
 
+import static org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyConstants.TIME_BASED_RETENTION_POLICY;
+import static org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyConstants.VERSION_BASED_RETENTION_POLICY;
+
+import java.time.Duration;
 import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
 import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicyType;
 import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
 import org.openldes.server.retention.services.retentionpolicy.definition.versionbased.VersionBasedRetentionPolicy;
-
-import java.time.Duration;
-
-import static org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyConstants.TIME_BASED_RETENTION_POLICY;
-import static org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyConstants.VERSION_BASED_RETENTION_POLICY;
 
 public record TimeAndVersionBasedRetentionPolicy(Duration duration,
                                                  int numberOfMembersToKeep) implements RetentionPolicy {

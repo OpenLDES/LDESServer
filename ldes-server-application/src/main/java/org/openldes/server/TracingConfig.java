@@ -1,19 +1,18 @@
 package org.openldes.server;
 
+import static java.util.stream.Collectors.toSet;
+
 import io.micrometer.tracing.otel.bridge.CompositeSpanExporter;
 import io.opentelemetry.exporter.zipkin.ZipkinSpanExporter;
 import io.opentelemetry.sdk.common.CompletableResultCode;
 import io.opentelemetry.sdk.trace.data.SpanData;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
-import static java.util.stream.Collectors.toSet;
 
 @Configuration
 public class TracingConfig implements BeanPostProcessor {

@@ -1,5 +1,46 @@
 package org.openldes.server.rest.treenode;
 
+import static org.apache.jena.riot.WebContent.contentTypeTurtle;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.openldes.server.domain.constants.RdfConstants.GENERATED_AT_TIME;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_NODE_RESOURCE;
+import static org.openldes.server.domain.constants.ServerConfig.HOST_NAME_KEY;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFParser;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.openldes.server.domain.converter.PrefixAdder;
 import org.openldes.server.domain.converter.PrefixAdderImpl;
 import org.openldes.server.domain.converter.RdfModelConverter;
@@ -11,6 +52,7 @@ import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.rest.HostNamePrefixConstructor;
 import org.openldes.server.domain.rest.HostNamePrefixConstructorConfig;
 import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
+import org.openldes.server.domain.versioning.VersionHeaderFilterConfig;
 import org.openldes.server.fetching.entities.Member;
 import org.openldes.server.fetching.entities.TreeNode;
 import org.openldes.server.fetching.services.StreamingTreeNodeFactory;
@@ -23,54 +65,27 @@ import org.openldes.server.rest.caching.EtagCachingStrategy;
 import org.openldes.server.rest.config.RestConfig;
 import org.openldes.server.rest.exceptionhandling.RestResponseEntityExceptionHandler;
 import org.openldes.server.rest.treenode.config.TreeViewWebConfig;
-import org.openldes.server.rest.treenode.services.*;
-import org.openldes.server.domain.versioning.VersionHeaderFilterConfig;
-import org.apache.jena.rdf.model.*;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFParser;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.ArgumentsProvider;
-import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.openldes.server.rest.treenode.services.TreeNodeConverter;
+import org.openldes.server.rest.treenode.services.TreeNodeConverterImpl;
+import org.openldes.server.rest.treenode.services.TreeNodeStatementCreator;
+import org.openldes.server.rest.treenode.services.TreeNodeStatementCreatorImpl;
+import org.openldes.server.rest.treenode.services.TreeNodeStreamConverter;
+import org.openldes.server.rest.treenode.services.TreeNodeStreamConverterImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.openldes.server.domain.constants.ServerConfig.HOST_NAME_KEY;
-import static org.apache.jena.riot.WebContent.contentTypeTurtle;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
 @ActiveProfiles({"test", "rest"})
@@ -92,9 +107,9 @@ class TreeNodeControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	@MockBean
+	@MockitoBean
 	private TreeNodeFetcher treeNodeFetcher;
-	@MockBean
+	@MockitoBean
 	private StreamingTreeNodeFactory streamingTreeNodeFactory;
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;

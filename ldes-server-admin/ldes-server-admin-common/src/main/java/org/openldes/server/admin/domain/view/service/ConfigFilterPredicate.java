@@ -1,8 +1,7 @@
 package org.openldes.server.admin.domain.view.service;
 
-import org.apache.jena.rdf.model.Statement;
-
 import java.util.function.Predicate;
+import org.apache.jena.rdf.model.Statement;
 
 public class ConfigFilterPredicate implements Predicate<Statement> {
 

@@ -1,7 +1,6 @@
 package org.openldes.server.domain.converter;
 
-import org.apache.jena.datatypes.xsd.XSDDateTime;
-import org.apache.jena.rdf.model.*;
+import static org.apache.jena.rdf.model.ResourceFactory.createTypedLiteral;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -10,8 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
-
-import static org.apache.jena.rdf.model.ResourceFactory.createTypedLiteral;
+import org.apache.jena.datatypes.xsd.XSDDateTime;
+import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
 
 public class VersionObjectModelBuilder {
     private String memberSubject;

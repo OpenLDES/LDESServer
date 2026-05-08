@@ -1,9 +1,13 @@
 package org.openldes.server.admin.postgres.dcatserver;
 
-import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
-import org.openldes.server.admin.domain.dcat.dcatserver.repository.DcatServerRepository;
-import org.openldes.server.admin.postgres.dcatserver.entity.DcatCatalogEntity;
-import org.openldes.server.admin.postgres.dcatserver.repository.DcatCatalogEntityRepository;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -11,15 +15,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
+import org.openldes.server.admin.domain.dcat.dcatserver.repository.DcatServerRepository;
+import org.openldes.server.admin.postgres.dcatserver.entity.DcatCatalogEntity;
+import org.openldes.server.admin.postgres.dcatserver.repository.DcatCatalogEntityRepository;
 
 @ExtendWith(MockitoExtension.class)
 class DcatServerPostgresRepositoryTest {

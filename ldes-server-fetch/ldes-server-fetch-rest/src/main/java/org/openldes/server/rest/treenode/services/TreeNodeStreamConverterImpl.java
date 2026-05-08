@@ -1,17 +1,19 @@
 package org.openldes.server.rest.treenode.services;
 
-import org.openldes.server.fetching.entities.Member;
-import org.openldes.server.fetching.entities.TreeNode;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Statement;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.openldes.server.domain.constants.ServerConfig.HOST_NAME_KEY;
 import static org.apache.jena.rdf.model.ModelFactory.createDefaultModel;
 import static org.apache.jena.rdf.model.ResourceFactory.createResource;
 import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_MEMBER;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_NODE_RESOURCE;
+import static org.openldes.server.domain.constants.ServerConfig.HOST_NAME_KEY;
+
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Statement;
+import org.openldes.server.fetching.entities.Member;
+import org.openldes.server.fetching.entities.TreeNode;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 @Component
 public class TreeNodeStreamConverterImpl implements TreeNodeStreamConverter {

@@ -1,12 +1,12 @@
 package org.openldes.server.fragmentisers.reference.relations;
 
+import static org.openldes.server.domain.constants.RdfConstants.TREE;
+
+import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.exceptions.MissingFragmentValueException;
 import org.openldes.server.fragmentation.relations.RelationsAttributer;
 import org.openldes.server.fragmentation.valueobjects.TreeRelation;
-import org.apache.jena.datatypes.xsd.XSDDatatype;
-
-import static org.openldes.server.domain.constants.RdfConstants.TREE;
 
 public class ReferenceFragmentRelationsAttributer implements RelationsAttributer {
 

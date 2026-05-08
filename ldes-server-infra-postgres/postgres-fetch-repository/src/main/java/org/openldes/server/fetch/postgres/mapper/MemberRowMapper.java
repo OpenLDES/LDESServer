@@ -1,15 +1,14 @@
 package org.openldes.server.fetch.postgres.mapper;
 
-import org.openldes.server.fetching.entities.Member;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.RDFParser;
-import org.springframework.jdbc.core.RowMapper;
+import static org.openldes.server.domain.constants.ServerConstants.SERIALISATION_LANG;
 
 import java.io.ByteArrayInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import static org.openldes.server.domain.constants.ServerConstants.SERIALISATION_LANG;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.RDFParser;
+import org.openldes.server.fetching.entities.Member;
+import org.springframework.jdbc.core.RowMapper;
 
 public class MemberRowMapper implements RowMapper<Member> {
 

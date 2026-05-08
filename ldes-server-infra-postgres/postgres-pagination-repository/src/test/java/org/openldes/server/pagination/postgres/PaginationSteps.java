@@ -1,18 +1,17 @@
 package org.openldes.server.pagination.postgres;
 
-import org.openldes.server.fragmentation.postgres.entity.BucketEntity;
-import org.openldes.server.pagination.entities.Page;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.LongStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.openldes.server.fragmentation.postgres.entity.BucketEntity;
+import org.openldes.server.pagination.entities.Page;
 
 public class PaginationSteps extends PostgresPaginationIntegrationTest {
 	private List<Long> memberIds;

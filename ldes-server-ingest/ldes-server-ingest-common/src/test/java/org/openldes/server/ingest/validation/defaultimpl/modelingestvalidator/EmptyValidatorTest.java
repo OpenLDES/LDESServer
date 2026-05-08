@@ -1,9 +1,9 @@
 package org.openldes.server.ingest.validation.defaultimpl.modelingestvalidator;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import org.apache.jena.rdf.model.ModelFactory;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class EmptyValidatorTest {
 

@@ -1,20 +1,21 @@
 package org.openldes.server.compaction.batch;
 
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import io.micrometer.observation.ObservationRegistry;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
 import org.openldes.server.compaction.application.services.PageDeletionTimeSetter;
 import org.openldes.server.compaction.domain.entities.CompactedFragmentCreator;
 import org.openldes.server.compaction.domain.entities.CompactionCandidate;
 import org.openldes.server.compaction.domain.repository.CompactionPageRelationRepository;
 import org.openldes.server.maintenance.repository.PageMemberRepository;
-import io.micrometer.observation.ObservationRegistry;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static org.mockito.Mockito.*;
 
 class CompactionWriterTest {
 	private CompactionPageRelationRepository pageRelationRepository;

@@ -1,10 +1,16 @@
 package org.openldes.server.admin.postgres.dcatdataset;
 
-import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
-import org.openldes.server.admin.postgres.dcatdataset.entity.DcatDatasetEntity;
-import org.openldes.server.admin.postgres.dcatdataset.repository.DcatDatasetEntityRepository;
-import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
-import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,15 +23,11 @@ import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
+import org.openldes.server.admin.postgres.dcatdataset.entity.DcatDatasetEntity;
+import org.openldes.server.admin.postgres.dcatdataset.repository.DcatDatasetEntityRepository;
+import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
+import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
 
 @ExtendWith(MockitoExtension.class)
 class DcatDatasetPostgresRepositoryTest {

@@ -1,30 +1,39 @@
 package org.openldes.server.admin.rest.controllers;
 
-import org.openldes.server.admin.rest.IsIsomorphic;
-import org.openldes.server.admin.rest.config.SpringIntegrationTest;
-import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
-import org.openldes.server.domain.model.*;
+import static org.mockito.Mockito.atMostOnce;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.commons.io.FileUtils;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFDataMgr;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.util.ResourceUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.apache.commons.io.FileUtils;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
+import org.openldes.server.admin.rest.IsIsomorphic;
+import org.openldes.server.admin.rest.config.SpringIntegrationTest;
+import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
+import org.openldes.server.domain.model.EventStream;
+import org.openldes.server.domain.model.FragmentationConfig;
+import org.openldes.server.domain.model.VersionCreationProperties;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.model.ViewSpecification;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.util.ResourceUtils;
 
 public class AdminViewsRestControllerSteps extends SpringIntegrationTest {
 

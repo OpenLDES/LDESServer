@@ -1,30 +1,31 @@
 package org.openldes.server.admin.rest.controllers;
 
-import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
-import org.openldes.server.admin.rest.config.SpringIntegrationTest;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFParser;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.util.ResourceUtils;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFParser;
+import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
+import org.openldes.server.admin.rest.config.SpringIntegrationTest;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.util.ResourceUtils;
 
 public class DcatServerRestControllerSteps extends SpringIntegrationTest {
 	private final String uuid = UUID.randomUUID().toString();

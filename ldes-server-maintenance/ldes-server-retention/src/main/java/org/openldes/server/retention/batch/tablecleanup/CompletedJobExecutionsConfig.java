@@ -1,5 +1,10 @@
 package org.openldes.server.retention.batch.tablecleanup;
 
+import static org.springframework.batch.item.database.Order.ASCENDING;
+
+import java.util.List;
+import java.util.Map;
+import javax.sql.DataSource;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -12,12 +17,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import javax.sql.DataSource;
-import java.util.List;
-import java.util.Map;
-
-import static org.springframework.batch.item.database.Order.ASCENDING;
 
 @Configuration
 public class CompletedJobExecutionsConfig {

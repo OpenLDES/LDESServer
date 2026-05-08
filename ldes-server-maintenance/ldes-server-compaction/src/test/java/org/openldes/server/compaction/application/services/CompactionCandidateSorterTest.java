@@ -1,13 +1,12 @@
 package org.openldes.server.compaction.application.services;
 
-import org.openldes.server.compaction.domain.entities.CompactionCandidate;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.compaction.domain.entities.CompactionCandidate;
 
 class CompactionCandidateSorterTest {
 

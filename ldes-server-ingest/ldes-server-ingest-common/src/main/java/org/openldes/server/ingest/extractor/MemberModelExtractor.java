@@ -1,12 +1,15 @@
 package org.openldes.server.ingest.extractor;
 
-import org.openldes.server.ingest.valueobjects.MemberModel;
-import org.apache.jena.rdf.model.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.openldes.server.ingest.valueobjects.MemberModel;
 
 public class MemberModelExtractor {
     private static class ModelInfo {

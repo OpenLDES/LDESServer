@@ -1,10 +1,12 @@
 package org.openldes.server.admin.domain.shacl.services;
 
-import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
-import org.openldes.server.admin.domain.shacl.repository.ShaclShapeRepository;
-import org.openldes.server.domain.events.admin.ShaclChangedEvent;
-import org.openldes.server.domain.events.admin.ShaclDeletedEvent;
-import org.openldes.server.domain.exceptions.MissingResourceException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFDataMgr;
@@ -17,15 +19,12 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
+import org.openldes.server.admin.domain.shacl.repository.ShaclShapeRepository;
+import org.openldes.server.domain.events.admin.ShaclChangedEvent;
+import org.openldes.server.domain.events.admin.ShaclDeletedEvent;
+import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.springframework.context.ApplicationEventPublisher;
-
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class ShaclShapeServiceImplTest {

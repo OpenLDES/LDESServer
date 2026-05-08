@@ -1,23 +1,26 @@
 package org.openldes.server.fragmentation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
 import org.openldes.server.domain.model.ConfigProperties;
 import org.openldes.server.domain.model.FragmentationConfig;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.openldes.server.fragmentation.factory.FragmentationStrategyCreatorImpl;
 import org.openldes.server.fragmentation.factory.RootBucketCreator;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
-import org.mockito.Mockito;
 import org.springframework.context.ApplicationContext;
-
-import java.util.List;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 class FragmentationStrategyCreatorImplTest {
 	private static final Map<String, String> TIMEBASED_PROPERTIES = Map.of("timebasedProperty", "time");

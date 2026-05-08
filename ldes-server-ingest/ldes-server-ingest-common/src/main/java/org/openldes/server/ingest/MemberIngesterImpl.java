@@ -1,5 +1,10 @@
 package org.openldes.server.ingest;
 
+import static org.openldes.server.ingest.constants.IngestConstants.DUPLICATE_MEMBERS_DETECTED;
+import static org.openldes.server.ingest.constants.IngestConstants.MEMBER_WITH_ID_INGESTED;
+
+import java.util.List;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.ingest.collection.MemberExtractorCollection;
 import org.openldes.server.ingest.entities.IngestedMember;
@@ -7,15 +12,9 @@ import org.openldes.server.ingest.extractor.MemberExtractor;
 import org.openldes.server.ingest.metrics.IngestionMetricsService;
 import org.openldes.server.ingest.repositories.MemberRepository;
 import org.openldes.server.ingest.validation.MemberIngestValidator;
-import org.apache.jena.rdf.model.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-import static org.openldes.server.ingest.constants.IngestConstants.DUPLICATE_MEMBERS_DETECTED;
-import static org.openldes.server.ingest.constants.IngestConstants.MEMBER_WITH_ID_INGESTED;
 
 @Service
 public class MemberIngesterImpl implements MemberIngester {

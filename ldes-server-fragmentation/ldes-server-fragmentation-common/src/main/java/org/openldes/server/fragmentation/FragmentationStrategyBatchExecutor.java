@@ -1,14 +1,13 @@
 package org.openldes.server.fragmentation;
 
+import static io.micrometer.observation.Observation.createNotStarted;
+
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
+import java.util.Objects;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.entities.FragmentationMember;
-import io.micrometer.observation.Observation;
-import io.micrometer.observation.ObservationRegistry;
-
-import java.util.Objects;
-
-import static io.micrometer.observation.Observation.createNotStarted;
 
 public class FragmentationStrategyBatchExecutor {
 

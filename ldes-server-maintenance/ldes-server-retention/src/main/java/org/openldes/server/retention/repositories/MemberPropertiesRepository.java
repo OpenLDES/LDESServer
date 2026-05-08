@@ -1,13 +1,12 @@
 package org.openldes.server.retention.repositories;
 
+import java.util.List;
+import java.util.stream.Stream;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.retention.entities.MemberProperties;
 import org.openldes.server.retention.services.retentionpolicy.definition.timeandversionbased.TimeAndVersionBasedRetentionPolicy;
 import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
 import org.openldes.server.retention.services.retentionpolicy.definition.versionbased.VersionBasedRetentionPolicy;
-
-import java.util.List;
-import java.util.stream.Stream;
 
 public interface MemberPropertiesRepository {
 

@@ -1,5 +1,7 @@
 package org.openldes.server.pagination.postgres;
 
+import io.cucumber.spring.CucumberContextConfiguration;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
 import org.openldes.server.admin.postgres.view.repository.ViewEntityRepository;
 import org.openldes.server.fragmentation.postgres.repository.BucketEntityRepository;
@@ -9,8 +11,6 @@ import org.openldes.server.pagination.postgres.repository.PageMemberEntityReposi
 import org.openldes.server.pagination.postgres.repository.PageRelationEntityRepository;
 import org.openldes.server.pagination.repositories.PageMemberRepository;
 import org.openldes.server.pagination.repositories.PageRepository;
-import io.cucumber.spring.CucumberContextConfiguration;
-import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

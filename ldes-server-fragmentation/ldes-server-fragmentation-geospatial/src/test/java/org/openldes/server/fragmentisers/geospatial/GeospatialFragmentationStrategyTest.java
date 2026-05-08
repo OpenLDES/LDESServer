@@ -1,5 +1,21 @@
 package org.openldes.server.fragmentisers.geospatial;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE_ROOT;
+
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
+import java.util.Set;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.FragmentationStrategy;
 import org.openldes.server.fragmentation.entities.Bucket;
@@ -8,18 +24,6 @@ import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
 import org.openldes.server.fragmentisers.geospatial.bucketising.GeospatialBucketiser;
 import org.openldes.server.fragmentisers.geospatial.fragments.GeospatialBucketCreator;
-import io.micrometer.observation.Observation;
-import io.micrometer.observation.ObservationRegistry;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.Set;
-
-import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
-import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE;
-import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE_ROOT;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
 class GeospatialFragmentationStrategyTest {
 

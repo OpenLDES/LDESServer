@@ -2,12 +2,11 @@ package org.openldes.server.admin.postgres;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFParser;
 import org.apache.jena.riot.RDFWriter;
-
-import java.util.List;
 
 @Converter
 public class ModelListConverter implements AttributeConverter<List<Model>, String> {

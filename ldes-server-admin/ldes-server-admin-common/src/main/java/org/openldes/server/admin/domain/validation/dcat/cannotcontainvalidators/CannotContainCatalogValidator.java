@@ -1,10 +1,10 @@
 package org.openldes.server.admin.domain.validation.dcat.cannotcontainvalidators;
 
-import org.openldes.server.admin.domain.validation.dcat.DcatNodeValidator;
+import static org.openldes.server.admin.domain.validation.dcat.DcatValidator.DCAT_CATALOG;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.vocabulary.RDF;
-
-import static org.openldes.server.admin.domain.validation.dcat.DcatValidator.DCAT_CATALOG;
+import org.openldes.server.admin.domain.validation.dcat.DcatNodeValidator;
 
 public class CannotContainCatalogValidator implements DcatNodeValidator {
 	@Override

@@ -1,9 +1,8 @@
 package org.openldes.server.retention.entities;
 
+import java.util.Objects;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
-
-import java.util.Objects;
 
 public record ViewRetentionPolicyProvider(ViewName viewName, RetentionPolicy retentionPolicy) implements RetentionPolicyProvider {
 

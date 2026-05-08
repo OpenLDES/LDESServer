@@ -1,12 +1,11 @@
 package org.openldes.server.compaction.application.services;
 
-import org.openldes.server.compaction.domain.repository.CompactionPageRepository;
-import org.openldes.server.domain.constants.ServerConfig;
-import org.springframework.stereotype.Component;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.openldes.server.compaction.domain.repository.CompactionPageRepository;
+import org.openldes.server.domain.constants.ServerConfig;
+import org.springframework.stereotype.Component;
 
 @Component
 public class PageDeletionTimeSetter {

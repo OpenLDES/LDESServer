@@ -1,12 +1,11 @@
 package org.openldes.server.retention.services.retentionpolicy.creation.timebased;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.Duration;
 import java.time.Period;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class DurationParserTest {
 

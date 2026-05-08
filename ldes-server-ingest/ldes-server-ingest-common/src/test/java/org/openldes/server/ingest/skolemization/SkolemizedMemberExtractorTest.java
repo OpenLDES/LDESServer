@@ -1,7 +1,11 @@
 package org.openldes.server.ingest.skolemization;
 
-import org.openldes.server.ingest.entities.IngestedMember;
-import org.openldes.server.ingest.extractor.MemberExtractor;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.UUID;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFParser;
 import org.assertj.core.api.InstanceOfAssertFactory;
@@ -10,13 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import org.openldes.server.ingest.entities.IngestedMember;
+import org.openldes.server.ingest.extractor.MemberExtractor;
 
 @ExtendWith(MockitoExtension.class)
 class SkolemizedMemberExtractorTest {

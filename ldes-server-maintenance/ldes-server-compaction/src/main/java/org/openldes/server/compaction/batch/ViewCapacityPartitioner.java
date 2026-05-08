@@ -1,12 +1,11 @@
 package org.openldes.server.compaction.batch;
 
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.openldes.server.compaction.domain.repository.ViewCollection;
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 public class ViewCapacityPartitioner implements Partitioner {

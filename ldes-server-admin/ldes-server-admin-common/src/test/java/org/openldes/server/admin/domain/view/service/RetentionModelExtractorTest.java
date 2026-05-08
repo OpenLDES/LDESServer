@@ -1,6 +1,11 @@
 package org.openldes.server.admin.domain.view.service;
 
-import org.openldes.server.admin.spi.RetentionModelExtractor;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -8,13 +13,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.openldes.server.admin.spi.RetentionModelExtractor;
 
 class RetentionModelExtractorTest {
 	private final RetentionModelExtractor retentionModelExtractor = new RetentionModelExtractor();

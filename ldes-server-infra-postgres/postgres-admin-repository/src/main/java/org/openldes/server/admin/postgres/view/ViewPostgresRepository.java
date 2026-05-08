@@ -1,6 +1,8 @@
 package org.openldes.server.admin.postgres.view;
 
 
+import java.util.List;
+import java.util.Optional;
 import org.openldes.server.admin.domain.view.repository.ViewRepository;
 import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
 import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
@@ -12,9 +14,6 @@ import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class ViewPostgresRepository implements ViewRepository {

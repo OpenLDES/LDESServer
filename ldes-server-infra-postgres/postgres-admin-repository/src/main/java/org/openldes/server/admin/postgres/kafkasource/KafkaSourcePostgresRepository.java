@@ -1,12 +1,11 @@
 package org.openldes.server.admin.postgres.kafkasource;
 
+import java.util.List;
 import org.openldes.server.admin.domain.kafkasource.KafkaSourceRepository;
 import org.openldes.server.admin.postgres.kafkasource.entity.KafkaSourceEntity;
 import org.openldes.server.admin.postgres.kafkasource.repository.KafkaSourceEntityRepository;
 import org.openldes.server.domain.model.KafkaSourceProperties;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class KafkaSourcePostgresRepository implements KafkaSourceRepository {

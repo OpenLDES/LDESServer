@@ -1,8 +1,7 @@
 package org.openldes.server.pagination.postgres.projection;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import java.time.LocalDateTime;
+import org.springframework.beans.factory.annotation.Value;
 
 public interface TreeNodeProjection {
 	long getId();

@@ -1,17 +1,8 @@
 package org.openldes.server.domain.viewcreation.valueobjects;
 
-import org.openldes.server.domain.model.FragmentationConfig;
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.domain.model.ViewSpecification;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFParserBuilder;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.ArgumentsProvider;
-import org.junit.jupiter.params.provider.ArgumentsSource;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.openldes.server.domain.viewcreation.valueobjects.ViewSpecificationTest.ViewSpecificationArgumentsProvider.readModelFromFile;
 
 import java.net.URI;
 import java.nio.file.Files;
@@ -21,10 +12,18 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static org.openldes.server.domain.viewcreation.valueobjects.ViewSpecificationTest.ViewSpecificationArgumentsProvider.readModelFromFile;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFParserBuilder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.openldes.server.domain.model.FragmentationConfig;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.model.ViewSpecification;
 
 class ViewSpecificationTest {
 

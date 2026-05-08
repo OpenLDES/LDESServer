@@ -1,8 +1,7 @@
 package org.openldes.server.retention.entities;
 
-import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
-
 import java.util.Objects;
+import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
 
 public record EventSourceRetentionPolicyProvider(String collectionName,
                                                  RetentionPolicy retentionPolicy) implements RetentionPolicyProvider {

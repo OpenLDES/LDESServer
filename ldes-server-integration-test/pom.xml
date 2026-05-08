@@ -100,7 +100,6 @@
         <dependency>
             <groupId>io.zonky.test</groupId>
             <artifactId>embedded-database-spring-test</artifactId>
-            <version>${zonky.embbeded-db.version}</version>
             <scope>test</scope>
         </dependency>
 

@@ -1,9 +1,8 @@
 package org.openldes.server.fetching.services.versioncreation;
 
-import org.openldes.server.domain.converter.VersionObjectModelBuilder;
-import org.apache.jena.rdf.model.Model;
-
 import java.time.LocalDateTime;
+import org.apache.jena.rdf.model.Model;
+import org.openldes.server.domain.converter.VersionObjectModelBuilder;
 
 public class VersionObjectCreatorImpl implements VersionObjectCreator {
     private final String versionOfPath;

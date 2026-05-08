@@ -1,5 +1,22 @@
 package org.openldes.server.fragmentation.postgres.batch;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.assertArg;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
+import org.assertj.core.api.InstanceOfAssertFactories;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.entities.BucketisedMember;
@@ -8,24 +25,9 @@ import org.openldes.server.fragmentation.postgres.batch.delegates.TestBucketSupp
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
 import org.openldes.server.fragmentation.valueobjects.BucketRelation;
 import org.openldes.server.fragmentation.valueobjects.TreeRelation;
-import org.assertj.core.api.InstanceOfAssertFactories;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.assertArg;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BucketisationItemWriterTest {

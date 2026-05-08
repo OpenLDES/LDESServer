@@ -1,8 +1,8 @@
 package org.openldes.server.pagination.entities;
 
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 class PageTest {
 	private static final String TILE = "tile=15/142/122";

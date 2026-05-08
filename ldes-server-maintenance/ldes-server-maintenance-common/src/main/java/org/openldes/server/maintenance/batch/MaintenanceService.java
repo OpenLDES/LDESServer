@@ -1,5 +1,9 @@
 package org.openldes.server.maintenance.batch;
 
+import static org.openldes.server.domain.constants.ServerConfig.MAINTENANCE_CRON_KEY;
+import static org.openldes.server.maintenance.batch.MaintenanceFlows.MAINTENANCE_JOB;
+
+import java.time.LocalDateTime;
 import org.openldes.server.maintenance.exceptions.MaintenanceJobException;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionException;
@@ -10,11 +14,6 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-
-import static org.openldes.server.domain.constants.ServerConfig.MAINTENANCE_CRON_KEY;
-import static org.openldes.server.maintenance.batch.MaintenanceFlows.MAINTENANCE_JOB;
 
 @Service
 @EnableScheduling

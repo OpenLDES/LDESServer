@@ -1,15 +1,14 @@
 package org.openldes.server.fragmentation.batch;
 
+import static org.openldes.server.fragmentation.batch.FragmentationJobDefinitions.FRAGMENTATION_JOB;
+
+import java.time.LocalDateTime;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
-
-import static org.openldes.server.fragmentation.batch.FragmentationJobDefinitions.FRAGMENTATION_JOB;
 
 @Component
 public class OldJobsAbandoner implements CommandLineRunner {

@@ -1,14 +1,13 @@
 package org.openldes.server.admin.domain.validation;
 
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.domain.exceptions.ShaclValidationException;
+import java.util.Objects;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.shacl.Shapes;
 import org.apache.jena.shacl.ValidationReport;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
 
 public class ShaclValidator implements ModelValidator {
 	protected final String shapesFileUri;

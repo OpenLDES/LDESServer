@@ -1,10 +1,14 @@
 package org.openldes.server.admin.spi;
 
-import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
-import org.openldes.server.admin.domain.eventstream.exceptions.InvalidSkolemisationDomainException;
-import org.openldes.server.domain.constants.RdfConstants;
-import org.openldes.server.domain.model.EventStream;
-import org.openldes.server.domain.model.KafkaSourceProperties;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import java.util.stream.Stream;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -12,16 +16,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
-import static org.apache.jena.rdf.model.ResourceFactory.createResource;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
+import org.openldes.server.admin.domain.eventstream.exceptions.InvalidSkolemisationDomainException;
+import org.openldes.server.domain.constants.RdfConstants;
+import org.openldes.server.domain.model.EventStream;
+import org.openldes.server.domain.model.KafkaSourceProperties;
 
 class EventStreamTOTest {
 	private static final String COLLECTION = "collection";

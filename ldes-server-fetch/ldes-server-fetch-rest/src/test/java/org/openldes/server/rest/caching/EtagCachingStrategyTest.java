@@ -1,20 +1,19 @@
 package org.openldes.server.rest.caching;
 
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.fetching.entities.Member;
-import org.openldes.server.fetching.entities.TreeNode;
-import org.openldes.server.fetching.valueobjects.LdesFragmentIdentifier;
-import org.openldes.server.fetching.valueobjects.TreeRelation;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.fetching.entities.Member;
+import org.openldes.server.fetching.entities.TreeNode;
+import org.openldes.server.fetching.valueobjects.LdesFragmentIdentifier;
+import org.openldes.server.fetching.valueobjects.TreeRelation;
 
 class EtagCachingStrategyTest {
 	private static final LdesFragmentIdentifier node2 = new LdesFragmentIdentifier(

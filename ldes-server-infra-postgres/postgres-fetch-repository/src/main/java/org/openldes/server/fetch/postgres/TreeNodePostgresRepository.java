@@ -1,5 +1,9 @@
 package org.openldes.server.fetch.postgres;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.openldes.server.domain.model.EventStream;
@@ -14,11 +18,6 @@ import org.openldes.server.fetching.services.versioncreation.VersionObjectCreato
 import org.openldes.server.fetching.valueobjects.LdesFragmentIdentifier;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Repository
 public class TreeNodePostgresRepository implements TreeNodeRepository {

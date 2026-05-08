@@ -1,15 +1,14 @@
 package org.openldes.server.ingest.extractor;
 
-import org.openldes.server.domain.converter.LocalDateTimeConverter;
-import org.openldes.server.ingest.entities.IngestedMember;
-import org.openldes.server.ingest.exceptions.MemberSubjectNotFoundException;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.ResourceFactory;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.openldes.server.domain.converter.LocalDateTimeConverter;
+import org.openldes.server.ingest.entities.IngestedMember;
+import org.openldes.server.ingest.exceptions.MemberSubjectNotFoundException;
 
 public class VersionObjectMemberExtractor implements MemberExtractor {
     private final LocalDateTimeConverter localDateTimeConverter = new LocalDateTimeConverter();

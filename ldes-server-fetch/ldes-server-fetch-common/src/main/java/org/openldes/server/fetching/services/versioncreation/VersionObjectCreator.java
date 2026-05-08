@@ -1,8 +1,7 @@
 package org.openldes.server.fetching.services.versioncreation;
 
-import org.apache.jena.rdf.model.Model;
-
 import java.time.LocalDateTime;
+import org.apache.jena.rdf.model.Model;
 
 @FunctionalInterface
 public interface VersionObjectCreator {

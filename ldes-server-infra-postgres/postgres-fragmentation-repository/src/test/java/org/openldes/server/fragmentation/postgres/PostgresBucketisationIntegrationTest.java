@@ -1,28 +1,28 @@
 package org.openldes.server.fragmentation.postgres;
 
+import static org.mockito.Mockito.mock;
+
+import io.cucumber.spring.CucumberContextConfiguration;
+import io.micrometer.observation.ObservationRegistry;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.openldes.server.domain.services.FragmentationMetricsRepository;
 import org.openldes.server.fragmentation.FragmentationJobScheduler;
 import org.openldes.server.fragmentation.metrics.FragmentationMetricsService;
 import org.openldes.server.fragmentation.postgres.batch.delegates.BucketisedMemberItemWriterConfig;
 import org.openldes.server.ingest.postgres.repository.MemberEntityRepository;
-import io.cucumber.spring.CucumberContextConfiguration;
-import io.micrometer.observation.ObservationRegistry;
-import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-
-import static org.mockito.Mockito.mock;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @CucumberContextConfiguration
 @EnableAutoConfiguration(exclude = FragmentationJobScheduler.class)
@@ -43,7 +43,7 @@ import static org.mockito.Mockito.mock;
 @Import({PostgresBucketisationIntegrationTest.EventStreamControllerTestConfiguration.class, BuildProperties.class})
 @SuppressWarnings("java:S2187")
 public class PostgresBucketisationIntegrationTest {
-	@MockBean
+	@MockitoBean
 	public MemberEntityRepository memberEntityRepository;
 
 	@TestConfiguration

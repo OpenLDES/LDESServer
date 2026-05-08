@@ -1,18 +1,17 @@
 package org.openldes.server.retention.services.retentionpolicy.execution;
 
-import org.openldes.server.retention.entities.MemberProperties;
-import org.openldes.server.retention.repositories.MemberPropertiesRepository;
+import static org.mockito.Mockito.inOrder;
+
+import java.time.LocalDateTime;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static org.mockito.Mockito.inOrder;
+import org.openldes.server.retention.entities.MemberProperties;
+import org.openldes.server.retention.repositories.MemberPropertiesRepository;
 
 @ExtendWith(MockitoExtension.class)
 class MemberRemoverImplTest {

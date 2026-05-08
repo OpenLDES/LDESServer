@@ -1,8 +1,6 @@
 package org.openldes.server.fragmentation.postgres.batch.chunk;
 
 import com.google.common.collect.Streams;
-import org.springframework.batch.item.Chunk;
-
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
@@ -11,6 +9,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
+import org.springframework.batch.item.Chunk;
 
 public class ChunkCollector<T> implements Collector<T, Chunk<T>, Chunk<T>> {
 	@Override

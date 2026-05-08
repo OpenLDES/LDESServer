@@ -1,10 +1,15 @@
 package org.openldes.server.admin.postgres.shaclshape;
 
-import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
-import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
-import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
-import org.openldes.server.admin.postgres.shaclshape.entity.ShaclShapeEntity;
-import org.openldes.server.admin.postgres.shaclshape.repository.ShaclShapeEntityRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFParser;
@@ -14,13 +19,11 @@ import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
+import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
+import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
+import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
+import org.openldes.server.admin.postgres.shaclshape.entity.ShaclShapeEntity;
+import org.openldes.server.admin.postgres.shaclshape.repository.ShaclShapeEntityRepository;
 
 @ExtendWith(MockitoExtension.class)
 class ShaclShapePostgresRepositoryTest {

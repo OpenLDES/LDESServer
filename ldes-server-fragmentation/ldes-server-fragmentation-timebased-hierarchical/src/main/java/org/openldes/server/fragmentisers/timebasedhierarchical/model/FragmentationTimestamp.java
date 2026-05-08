@@ -1,10 +1,9 @@
 package org.openldes.server.fragmentisers.timebasedhierarchical.model;
 
-import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
-
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Objects;
+import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
 
 public class FragmentationTimestamp {
 	private final LocalDateTime time;

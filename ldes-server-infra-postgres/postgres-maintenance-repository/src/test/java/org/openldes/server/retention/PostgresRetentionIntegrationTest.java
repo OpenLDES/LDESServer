@@ -1,8 +1,8 @@
 package org.openldes.server.retention;
 
-import org.openldes.server.maintenance.postgres.MemberPropertiesPostgresRepository;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
+import org.openldes.server.maintenance.postgres.MemberPropertiesPostgresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

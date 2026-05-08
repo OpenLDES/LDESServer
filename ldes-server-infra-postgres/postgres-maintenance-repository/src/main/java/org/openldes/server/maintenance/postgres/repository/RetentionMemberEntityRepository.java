@@ -1,13 +1,12 @@
 package org.openldes.server.maintenance.postgres.repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Stream;
 import org.openldes.server.maintenance.postgres.entity.RetentionMemberEntity;
 import org.openldes.server.maintenance.postgres.projection.RetentionMemberProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Stream;
 
 public interface RetentionMemberEntityRepository extends JpaRepository<RetentionMemberEntity, String> {
 

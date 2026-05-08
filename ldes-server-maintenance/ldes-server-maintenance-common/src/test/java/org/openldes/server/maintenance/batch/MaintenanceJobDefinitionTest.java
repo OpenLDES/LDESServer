@@ -1,9 +1,21 @@
 package org.openldes.server.maintenance.batch;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.batch.core.*;
+import org.springframework.batch.core.ExitStatus;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.FlowJobBuilder;
 import org.springframework.batch.core.job.flow.FlowExecutionStatus;
 import org.springframework.batch.core.job.flow.JobExecutionDecider;
@@ -17,17 +29,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBatchTest
@@ -39,20 +46,20 @@ class MaintenanceJobDefinitionTest {
 	private JobLauncherTestUtils jobLauncherTestUtils;
 	@Autowired
 	private FlowJobBuilder maintenanceJobBuilder;
-	@SpyBean(name = "viewRetentionStep")
+	@MockitoSpyBean(name = "viewRetentionStep")
 	private Step viewRetentionStep;
-	@SpyBean(name = "compactionStep")
+	@MockitoSpyBean(name = "compactionStep")
 	private Step compactionStep;
-	@SpyBean(name = "deletionStep")
+	@MockitoSpyBean(name = "deletionStep")
 	private Step deletionStep;
-	@SpyBean(name = "eventSourceRetentionStep")
+	@MockitoSpyBean(name = "eventSourceRetentionStep")
 	private Step eventSourceRetentionStep;
-	@SpyBean(name = "completedJobExecutionsStep")
+	@MockitoSpyBean(name = "completedJobExecutionsStep")
 	private Step completedJobExecutionsStep;
 
-	@MockBean(name = "viewRetentionExecutionDecider")
+	@MockitoBean(name = "viewRetentionExecutionDecider")
 	private JobExecutionDecider viewRetentionExecutionDecider;
-	@MockBean(name = "eventSourceRetentionExecutionDecider")
+	@MockitoBean(name = "eventSourceRetentionExecutionDecider")
 	private JobExecutionDecider eventSourceRetentionExecutionDecider;
 
 	@BeforeEach

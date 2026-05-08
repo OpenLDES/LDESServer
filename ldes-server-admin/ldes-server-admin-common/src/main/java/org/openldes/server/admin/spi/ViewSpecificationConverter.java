@@ -1,20 +1,34 @@
 package org.openldes.server.admin.spi;
 
+import static org.apache.jena.rdf.model.ResourceFactory.createPlainLiteral;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import static org.apache.jena.rdf.model.ResourceFactory.createTypedLiteral;
+import static org.openldes.server.domain.constants.RdfConstants.FRAGMENTATION_OBJECT;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.RETENTION_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_NODE_RESOURCE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_PAGESIZE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_VIEW_DESCRIPTION;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_VIEW_DESCRIPTION_RESOURCE;
+import static org.openldes.server.domain.model.DcatView.VIEW_DESCRIPTION_SUFFIX;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFList;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.vocabulary.RDF;
 import org.openldes.server.admin.domain.view.exception.ModelToViewConverterException;
 import org.openldes.server.domain.model.FragmentationConfig;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.openldes.server.domain.rest.UriPrefixConstructor;
-import org.apache.jena.rdf.model.*;
-import org.apache.jena.vocabulary.RDF;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.openldes.server.domain.model.DcatView.VIEW_DESCRIPTION_SUFFIX;
-import static org.apache.jena.rdf.model.ResourceFactory.*;
 
 @Component
 public class ViewSpecificationConverter {

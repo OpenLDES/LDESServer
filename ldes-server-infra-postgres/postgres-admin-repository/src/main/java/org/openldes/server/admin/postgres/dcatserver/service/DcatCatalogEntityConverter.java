@@ -1,13 +1,13 @@
 package org.openldes.server.admin.postgres.dcatserver.service;
 
-import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
-import org.openldes.server.admin.postgres.dcatserver.entity.DcatCatalogEntity;
+import static org.openldes.server.admin.postgres.PostgresAdminConstants.SERIALISATION_LANG;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFParserBuilder;
 import org.apache.jena.riot.RDFWriter;
+import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
+import org.openldes.server.admin.postgres.dcatserver.entity.DcatCatalogEntity;
 import org.springframework.stereotype.Component;
-
-import static org.openldes.server.admin.postgres.PostgresAdminConstants.SERIALISATION_LANG;
 
 @Component
 public class DcatCatalogEntityConverter {

@@ -1,10 +1,9 @@
 package org.openldes.server.admin.domain.eventstream.repository;
 
-import org.openldes.server.admin.spi.EventStreamTO;
-import org.openldes.server.domain.model.EventStream;
-
 import java.util.List;
 import java.util.Optional;
+import org.openldes.server.admin.spi.EventStreamTO;
+import org.openldes.server.domain.model.EventStream;
 
 public interface EventStreamRepository {
 	List<EventStream> retrieveAllEventStreams();

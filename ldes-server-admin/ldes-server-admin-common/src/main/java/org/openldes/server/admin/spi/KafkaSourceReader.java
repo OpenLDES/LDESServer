@@ -1,14 +1,13 @@
 package org.openldes.server.admin.spi;
 
-import org.openldes.server.domain.model.KafkaSourceProperties;
-import org.apache.jena.rdf.model.Model;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.stereotype.Component;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.openldes.server.domain.constants.RdfConstants.LDES;
 
 import java.util.NoSuchElementException;
-
-import static org.openldes.server.domain.constants.RdfConstants.LDES;
-import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import org.apache.jena.rdf.model.Model;
+import org.openldes.server.domain.model.KafkaSourceProperties;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.stereotype.Component;
 
 @Component
 public class KafkaSourceReader {

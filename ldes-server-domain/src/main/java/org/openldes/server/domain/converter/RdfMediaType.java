@@ -1,16 +1,15 @@
 package org.openldes.server.domain.converter;
 
-import org.springframework.http.MediaType;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static org.apache.jena.riot.WebContent.contentTypeJSONLD;
 import static org.apache.jena.riot.WebContent.contentTypeNQuads;
 import static org.apache.jena.riot.WebContent.contentTypeNTriples;
 import static org.apache.jena.riot.WebContent.contentTypeRDFProto;
 import static org.apache.jena.riot.WebContent.contentTypeRDFXML;
 import static org.apache.jena.riot.WebContent.contentTypeTurtle;
+
+import java.util.Arrays;
+import java.util.List;
+import org.springframework.http.MediaType;
 
 public enum RdfMediaType {
     TEXT_TURTLE(MediaType.valueOf(contentTypeTurtle)),

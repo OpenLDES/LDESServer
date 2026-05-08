@@ -1,5 +1,13 @@
 package org.openldes.server.ingest.validators.memberingestvalidator;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.shacl.ValidationReport;
 import org.openldes.server.domain.converter.RdfModelConverter;
 import org.openldes.server.domain.events.admin.EventStreamClosedEvent;
 import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
@@ -9,13 +17,8 @@ import org.openldes.server.domain.model.EventStream;
 import org.openldes.server.ingest.validators.IngestValidator;
 import org.openldes.server.ingest.validators.ingestreportvalidator.IngestReportValidator;
 import org.openldes.server.ingest.validators.ingestreportvalidator.ShaclReportManager;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.shacl.ValidationReport;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.util.*;
 
 @Component
 public class MemberIngestValidator implements IngestValidator {

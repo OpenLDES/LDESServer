@@ -1,19 +1,18 @@
 package org.openldes.server.admin.domain.view.service;
 
+import java.util.List;
+import java.util.Optional;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.admin.domain.view.repository.DcatViewRepository;
 import org.openldes.server.domain.events.admin.DcatViewDeletedEvent;
 import org.openldes.server.domain.events.admin.DcatViewSavedEvent;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.DcatView;
 import org.openldes.server.domain.model.ViewName;
-import org.apache.jena.rdf.model.Model;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DcatViewServiceImpl implements DcatViewService {

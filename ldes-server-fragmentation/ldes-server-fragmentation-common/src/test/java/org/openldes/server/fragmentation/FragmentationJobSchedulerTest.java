@@ -1,8 +1,20 @@
 package org.openldes.server.fragmentation;
 
-import org.openldes.server.fragmentation.entities.UnprocessedView;
-import org.openldes.server.fragmentation.repository.UnprocessedViewRepository;
-import org.openldes.server.fragmentation.valueobjects.ContinueFragmentationTriggerEvent;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+import static org.openldes.server.fragmentation.FragmentationJobScheduler.COLLECTION_ID;
+import static org.openldes.server.fragmentation.FragmentationJobScheduler.COLLECTION_NAME;
+import static org.openldes.server.fragmentation.FragmentationJobScheduler.VIEW_ID;
+import static org.openldes.server.fragmentation.FragmentationJobScheduler.VIEW_NAME;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,20 +22,19 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.batch.core.*;
+import org.openldes.server.fragmentation.entities.UnprocessedView;
+import org.openldes.server.fragmentation.repository.UnprocessedViewRepository;
+import org.openldes.server.fragmentation.valueobjects.ContinueFragmentationTriggerEvent;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobExecutionException;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.builder.SimpleJobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-
-import static org.openldes.server.fragmentation.FragmentationJobScheduler.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class FragmentationJobSchedulerTest {

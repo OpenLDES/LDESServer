@@ -1,5 +1,8 @@
 package org.openldes.server.ingest.postgres;
 
+import java.util.List;
+import java.util.stream.Stream;
+import javax.sql.DataSource;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.ingest.entities.IngestedMember;
 import org.openldes.server.ingest.postgres.mapper.MemberEntityMapper;
@@ -11,10 +14,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.sql.DataSource;
-import java.util.List;
-import java.util.stream.Stream;
 
 @Repository
 public class MemberPostgresRepository implements MemberRepository {

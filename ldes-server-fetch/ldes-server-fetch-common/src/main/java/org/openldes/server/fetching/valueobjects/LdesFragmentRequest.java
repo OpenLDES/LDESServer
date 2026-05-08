@@ -1,9 +1,8 @@
 package org.openldes.server.fetching.valueobjects;
 
-import org.openldes.server.domain.model.ViewName;
-
 import java.util.List;
 import java.util.Objects;
+import org.openldes.server.domain.model.ViewName;
 
 public record LdesFragmentRequest(ViewName viewName, List<FragmentPair> fragmentPairs) {
 

@@ -1,5 +1,9 @@
 package org.openldes.server.admin.rest.controllers;
 
+import static org.apache.jena.riot.WebContent.contentTypeJSONLD;
+import static org.apache.jena.riot.WebContent.contentTypeNQuads;
+import static org.apache.jena.riot.WebContent.contentTypeTurtle;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -9,8 +13,6 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.jena.rdf.model.Model;
-
-import static org.apache.jena.riot.WebContent.*;
 
 @Tag(name = "Shapes")
 @SuppressWarnings("java:S2479") // whitespace needed for examples

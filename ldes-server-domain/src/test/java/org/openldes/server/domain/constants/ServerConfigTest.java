@@ -1,8 +1,8 @@
 package org.openldes.server.domain.constants;
 
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 class ServerConfigTest {
 	@Test

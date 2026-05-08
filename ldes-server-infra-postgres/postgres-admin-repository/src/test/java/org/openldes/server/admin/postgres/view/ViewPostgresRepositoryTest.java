@@ -1,5 +1,20 @@
 package org.openldes.server.admin.postgres.view;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
 import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
 import org.openldes.server.admin.postgres.view.entity.ViewEntity;
@@ -7,19 +22,6 @@ import org.openldes.server.admin.postgres.view.repository.ViewEntityRepository;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ViewPostgresRepositoryTest {

@@ -1,14 +1,18 @@
 package org.openldes.server.admin.postgres.dcatserver.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
 import org.openldes.server.admin.postgres.dcatserver.entity.DcatCatalogEntity;
 import org.openldes.server.domain.constants.RdfConstants;
-import org.apache.jena.rdf.model.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DcatCatalogEntityConverterTest {
 	private static final String ID = "id";

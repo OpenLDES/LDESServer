@@ -1,27 +1,30 @@
 package org.openldes.server.admin.domain.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Captor;
+import org.mockito.InOrder;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.openldes.server.admin.domain.eventsource.repository.EventSourceRepository;
 import org.openldes.server.admin.domain.eventsource.services.EventSourceService;
 import org.openldes.server.admin.domain.eventsource.services.EventSourceServiceImpl;
 import org.openldes.server.domain.events.admin.DeletionPolicyChangedEvent;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.EventSource;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.ApplicationEventPublisher;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class EventSourceServiceImplTest {

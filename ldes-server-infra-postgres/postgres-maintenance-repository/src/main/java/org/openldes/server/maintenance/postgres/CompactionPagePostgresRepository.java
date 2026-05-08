@@ -1,5 +1,7 @@
 package org.openldes.server.maintenance.postgres;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import org.openldes.server.compaction.domain.entities.CompactionCandidate;
 import org.openldes.server.compaction.domain.repository.CompactionPageRepository;
 import org.openldes.server.domain.model.ViewName;
@@ -7,9 +9,6 @@ import org.openldes.server.maintenance.postgres.mapper.CompactionCandidateMapper
 import org.openldes.server.maintenance.postgres.repository.CompactionPageEntityRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Repository
 public class CompactionPagePostgresRepository implements CompactionPageRepository {

@@ -1,11 +1,10 @@
 package org.openldes.server.fetching.entities;
 
-import org.openldes.server.fetching.valueobjects.TreeRelation;
-import org.jetbrains.annotations.Nullable;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import org.jetbrains.annotations.Nullable;
+import org.openldes.server.fetching.valueobjects.TreeRelation;
 
 public class TreeNode {
 	private final String fragmentId;

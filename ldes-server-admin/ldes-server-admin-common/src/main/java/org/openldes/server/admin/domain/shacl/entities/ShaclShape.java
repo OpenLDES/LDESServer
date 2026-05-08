@@ -1,8 +1,7 @@
 package org.openldes.server.admin.domain.shacl.entities;
 
-import org.apache.jena.rdf.model.Model;
-
 import java.util.Objects;
+import org.apache.jena.rdf.model.Model;
 
 public class ShaclShape {
 	private final String collection;

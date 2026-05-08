@@ -1,11 +1,10 @@
 package org.openldes.server.admin.postgres.shaclshape.repository;
 
+import java.util.Optional;
 import org.openldes.server.admin.postgres.shaclshape.entity.ShaclShapeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.Optional;
 
 public interface ShaclShapeEntityRepository extends JpaRepository<ShaclShapeEntity, Integer> {
     @Query("SELECT s FROM ShaclShapeEntity s WHERE s.eventStream.name = :collectionName")

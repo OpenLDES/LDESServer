@@ -1,15 +1,14 @@
 package org.openldes.server.fragmentation.valueobjects;
 
-import org.openldes.server.fragmentation.exceptions.BucketDescriptorParseException;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.fragmentation.exceptions.BucketDescriptorParseException;
 
 class BucketDescriptorTest {
 	final String descriptorPairKey1 = "key1";

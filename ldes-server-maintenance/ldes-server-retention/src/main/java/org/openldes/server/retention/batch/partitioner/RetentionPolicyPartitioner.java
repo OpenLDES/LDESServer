@@ -1,12 +1,11 @@
 package org.openldes.server.retention.batch.partitioner;
 
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.openldes.server.retention.entities.RetentionPolicyProvider;
 import org.openldes.server.retention.repositories.retentionpolicies.RetentionPolicyCollection;
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;
-
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class RetentionPolicyPartitioner implements Partitioner {
 	private final RetentionPolicyCollection<? extends RetentionPolicyProvider> retentionPolicyCollection;

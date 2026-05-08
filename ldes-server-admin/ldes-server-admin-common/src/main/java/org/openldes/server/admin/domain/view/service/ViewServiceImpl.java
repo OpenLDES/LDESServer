@@ -1,7 +1,15 @@
 package org.openldes.server.admin.domain.view.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import org.openldes.server.admin.domain.view.repository.ViewRepository;
-import org.openldes.server.domain.events.admin.*;
+import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
+import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
+import org.openldes.server.domain.events.admin.ViewAddedEvent;
+import org.openldes.server.domain.events.admin.ViewDeletedEvent;
+import org.openldes.server.domain.events.admin.ViewInitializationEvent;
 import org.openldes.server.domain.exceptions.ExistingResourceException;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.EventStream;
@@ -13,11 +21,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 @Service
 public class ViewServiceImpl implements ViewService {

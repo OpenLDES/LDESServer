@@ -1,8 +1,7 @@
 package org.openldes.server.admin.postgres.view.entity;
 
-import org.openldes.server.domain.model.FragmentationConfig;
-
 import java.util.Map;
+import org.openldes.server.domain.model.FragmentationConfig;
 
 public class FragmentationConfigEntity {
     private String name;

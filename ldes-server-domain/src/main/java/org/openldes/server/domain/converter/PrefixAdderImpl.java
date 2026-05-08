@@ -1,10 +1,9 @@
 package org.openldes.server.domain.converter;
 
-import org.openldes.server.domain.collections.Prefixes;
-import org.apache.jena.rdf.model.Model;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
+import org.apache.jena.rdf.model.Model;
+import org.openldes.server.domain.collections.Prefixes;
+import org.springframework.stereotype.Component;
 
 @Component
 public class PrefixAdderImpl implements PrefixAdder {

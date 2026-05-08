@@ -1,13 +1,12 @@
 package org.openldes.server.compaction.domain.repository;
 
-import org.openldes.server.compaction.domain.entities.ViewCapacity;
-import org.openldes.server.domain.model.ViewName;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.compaction.domain.entities.ViewCapacity;
+import org.openldes.server.domain.model.ViewName;
 
 class ViewCollectionImplTest {
     private static final String COLLECTION = "collection";

@@ -1,24 +1,24 @@
 package org.openldes.server.admin.rest.controllers;
 
-import org.openldes.server.admin.domain.dcat.dcatserver.services.DcatServerService;
-import org.openldes.server.domain.exceptions.ShaclValidationException;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.apache.jena.rdf.model.ModelFactory;
 import org.junit.jupiter.api.Test;
+import org.openldes.server.admin.domain.dcat.dcatserver.services.DcatServerService;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Status;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @EnableAutoConfiguration
 @SpringBootTest
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("health-test")
 @ContextConfiguration(classes = {DcatHealthIndicator.class})
 class DcatHealthIndicatorTest {
-	@MockBean
+	@MockitoBean
 	private DcatServerService dcatServerService;
 
 	@Autowired

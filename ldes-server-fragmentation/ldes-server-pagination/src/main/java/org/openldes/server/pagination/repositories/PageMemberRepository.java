@@ -1,8 +1,7 @@
 package org.openldes.server.pagination.repositories;
 
-import org.openldes.server.pagination.entities.Page;
-
 import java.util.List;
+import org.openldes.server.pagination.entities.Page;
 
 public interface PageMemberRepository {
 	/**

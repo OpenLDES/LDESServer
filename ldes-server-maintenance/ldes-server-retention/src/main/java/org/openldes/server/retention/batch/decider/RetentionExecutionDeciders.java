@@ -1,10 +1,9 @@
 package org.openldes.server.retention.batch.decider;
 
+import java.util.List;
 import org.openldes.server.maintenance.services.RetentionPolicyEmptinessChecker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
 
 @Configuration
 public class RetentionExecutionDeciders {

@@ -1,5 +1,13 @@
 package org.openldes.server.rest.treenode.services;
 
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.apache.jena.rdf.model.ResourceFactory.createTypedLiteral;
+import static org.assertj.core.api.Assertions.allOf;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_VALUE;
+
+import java.util.List;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
@@ -8,13 +16,6 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.vocabulary.RDF;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.TREE_VALUE;
-import static org.apache.jena.rdf.model.ResourceFactory.*;
-import static org.assertj.core.api.Assertions.allOf;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class TreeRelationResponseTest {
 

@@ -1,11 +1,15 @@
 package org.openldes.server.admin.domain.dcat.dcatdataset.entities;
 
-import org.openldes.server.domain.constants.RdfConstants;
-import org.apache.jena.rdf.model.*;
-import org.apache.jena.util.ResourceUtils;
-
 import java.util.List;
 import java.util.Objects;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.util.ResourceUtils;
+import org.openldes.server.domain.constants.RdfConstants;
 
 public class DcatDataset {
 	public static final String DCAT_PREFIX = "http://www.w3.org/ns/dcat#";

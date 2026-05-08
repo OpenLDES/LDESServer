@@ -1,12 +1,11 @@
 package org.openldes.server.fetch.postgres;
 
+import java.util.stream.Stream;
 import org.openldes.server.fetch.postgres.mapper.MemberRowMapper;
 import org.openldes.server.fetching.entities.Member;
 import org.openldes.server.fetching.repository.TreeMemberRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Stream;
 
 @Component
 public class TreeMemberPostgresRepository implements TreeMemberRepository {

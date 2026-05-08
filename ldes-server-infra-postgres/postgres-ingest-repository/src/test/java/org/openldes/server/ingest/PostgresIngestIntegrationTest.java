@@ -1,23 +1,23 @@
 package org.openldes.server.ingest;
 
+import io.cucumber.spring.CucumberContextConfiguration;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.openldes.server.admin.domain.eventstream.repository.EventStreamRepository;
 import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
 import org.openldes.server.ingest.metrics.IngestionMetricsService;
 import org.openldes.server.ingest.postgres.MemberPostgresRepository;
 import org.openldes.server.ingest.postgres.repository.MemberEntityRepository;
-import io.cucumber.spring.CucumberContextConfiguration;
-import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.jdbc.Sql;
 
 @CucumberContextConfiguration
@@ -41,6 +41,6 @@ public class PostgresIngestIntegrationTest {
 	MemberPostgresRepository memberRepository;
 	@Autowired
 	EventStreamRepository eventStreamRepository;
-	@MockBean
+	@MockitoBean
 	IngestionMetricsService metricsService;
 }

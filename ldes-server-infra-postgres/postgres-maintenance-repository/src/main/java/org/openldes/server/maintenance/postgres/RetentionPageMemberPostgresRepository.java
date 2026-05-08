@@ -1,13 +1,12 @@
 package org.openldes.server.maintenance.postgres;
 
+import java.util.List;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.maintenance.postgres.repository.RetentionPageMemberEntityRepository;
 import org.openldes.server.maintenance.repository.PageMemberRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Component
 public class RetentionPageMemberPostgresRepository implements PageMemberRepository {

@@ -1,5 +1,7 @@
 package org.openldes.server.fragmentation.postgres.batch.delegates;
 
+import java.util.Map;
+import java.util.Objects;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
@@ -7,9 +9,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
-import java.util.Objects;
 
 @Component
 public class BucketItemWriter implements ItemWriter<Bucket> {

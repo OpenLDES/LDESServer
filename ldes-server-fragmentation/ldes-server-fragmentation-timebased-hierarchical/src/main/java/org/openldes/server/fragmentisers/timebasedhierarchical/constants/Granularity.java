@@ -1,10 +1,9 @@
 package org.openldes.server.fragmentisers.timebasedhierarchical.constants;
 
-import org.openldes.server.fragmentisers.timebasedhierarchical.exceptions.FragmentiserConfigException;
-
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.stream.Stream;
+import org.openldes.server.fragmentisers.timebasedhierarchical.exceptions.FragmentiserConfigException;
 
 public enum Granularity {
 

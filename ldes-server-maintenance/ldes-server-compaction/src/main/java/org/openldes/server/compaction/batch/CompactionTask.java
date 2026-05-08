@@ -1,5 +1,6 @@
 package org.openldes.server.compaction.batch;
 
+import java.util.List;
 import org.openldes.server.compaction.application.services.CompactionCandidateSorter;
 import org.openldes.server.compaction.domain.entities.CompactionCandidate;
 import org.openldes.server.compaction.domain.repository.CompactionPageRepository;
@@ -10,8 +11,6 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class CompactionTask implements Tasklet {

@@ -1,5 +1,10 @@
 package org.openldes.server.fragmentisers.timebasedhierarchical;
 
+import static org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedProperties.FRAGMENTATION_PATH;
+import static org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedProperties.FRAGMENTATION_SUBJECT_FILTER;
+import static org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedProperties.MAX_GRANULARITY;
+
+import io.micrometer.observation.ObservationRegistry;
 import org.openldes.server.domain.model.ConfigProperties;
 import org.openldes.server.fragmentation.FragmentationStrategy;
 import org.openldes.server.fragmentation.FragmentationStrategyWrapper;
@@ -8,10 +13,7 @@ import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granula
 import org.openldes.server.fragmentisers.timebasedhierarchical.services.TimeBasedBucketCreator;
 import org.openldes.server.fragmentisers.timebasedhierarchical.services.TimeBasedBucketFinder;
 import org.openldes.server.fragmentisers.timebasedhierarchical.services.TimeBasedRelationsAttributer;
-import io.micrometer.observation.ObservationRegistry;
 import org.springframework.context.ApplicationContext;
-
-import static org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedProperties.*;
 
 public class HierarchicalTimeBasedFragmentationStrategyWrapper implements FragmentationStrategyWrapper {
 

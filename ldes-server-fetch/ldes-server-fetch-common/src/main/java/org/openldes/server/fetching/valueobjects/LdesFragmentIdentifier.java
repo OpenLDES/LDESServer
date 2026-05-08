@@ -1,16 +1,15 @@
 package org.openldes.server.fetching.valueobjects;
 
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.fetching.exceptions.LdesFragmentIdentifierParseException;
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import static java.net.URLEncoder.encode;
-import static java.nio.charset.StandardCharsets.UTF_8;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.fetching.exceptions.LdesFragmentIdentifierParseException;
 
 public class LdesFragmentIdentifier {
 

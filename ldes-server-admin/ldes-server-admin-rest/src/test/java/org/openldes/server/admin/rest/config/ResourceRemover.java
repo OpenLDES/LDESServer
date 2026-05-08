@@ -1,13 +1,12 @@
 package org.openldes.server.admin.rest.config;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class ResourceRemover {
