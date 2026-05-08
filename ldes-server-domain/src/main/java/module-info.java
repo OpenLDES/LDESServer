@@ -25,7 +25,6 @@ open module ldes.domain {
     requires org.apache.commons.lang3;
     requires org.apache.jena.shacl;
     requires org.slf4j;
-    requires simpleclient;
     requires micrometer.core;
     requires org.apache.tomcat.embed.core;
     requires titanium.json.ld;

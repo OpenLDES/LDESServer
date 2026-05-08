@@ -3,6 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.14</version>
+        <relativePath/>
+    </parent>
+
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Java implementation of an Open Linked Data Event Stream</description>
     <url>https://github.com/openldes/LDESServer</url>
@@ -54,72 +61,65 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <maven.compiler.release>21</maven.compiler.release>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
-        <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
-        <maven-deploy-plugin.version>3.1.3</maven-deploy-plugin.version>
-        <maven-install-plugin.version>3.1.3</maven-install-plugin.version>
-        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
-        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
-        <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-gpg-plugin.version>3.2.1</maven-gpg-plugin.version>
-        <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-        <springdoc-openapi.version>2.4.0</springdoc-openapi.version>
-        <swagger-annotations.version>2.2.26</swagger-annotations.version>
-        <pyroscope.version>0.15.2</pyroscope.version>
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
+        <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
+        <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+        <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+        <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
+        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.5.5</maven-failsafe-plugin.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
+        <springdoc-openapi.version>3.0.3</springdoc-openapi.version>
+        <swagger-annotations.version>2.2.49</swagger-annotations.version>
+        <pyroscope.version>2.5.2</pyroscope.version>
         <unittestskip>false</unittestskip>
         <integrationtestskip>false</integrationtestskip>
         <skipdeploy>false</skipdeploy>
         <sis-embedded-db.version>1.4</sis-embedded-db.version>
-        <jakarta.persistence.version>3.1.0</jakarta.persistence.version>
         <zonky.embbeded-db.version>2.5.1</zonky.embbeded-db.version>
 
         <!-- OpenLDES -->
         <project.base.groupId>org.openldes</project.base.groupId>
 
         <!-- SPRING BOOT -->
-        <spring-boot.version>3.1.5</spring-boot.version>
+        <spring-boot.version>3.5.14</spring-boot.version>
 
         <!-- SPRING DATA -->
-        <spring-data.version>3.4.0</spring-data.version>
-
-        <!-- SPRING -->
-        <spring.version>6.0.13</spring.version>
-        <spring.kafka.version>3.1.2</spring.kafka.version>
+<!--        <spring-data.version>3.4.0</spring-data.version>-->
 
         <!-- JSON & RDF -->
-        <apache-jena.version>5.1.0</apache-jena.version>
+        <apache-jena.version>6.0.0</apache-jena.version>
         <json-simple.version>1.1.1</json-simple.version>
-        <google-guava.version>33.3.1-jre</google-guava.version>
+        <google-guava.version>33.5.0-jre</google-guava.version>
 
         <!-- TESTING -->
-        <junit.version>4.13.2</junit.version>
         <junit-platform-suite.version>1.10.2</junit-platform-suite.version>
-        <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
         <jupiter.version>5.10.2</jupiter.version>
-        <mockito.version>5.14.2</mockito.version>
-        <byte-buddy.version>1.15.10</byte-buddy.version>
-        <wiremock-jre8.version>2.35.2</wiremock-jre8.version>
-        <awaitility.version>4.2.2</awaitility.version>
+        <mockito.version>5.23.0</mockito.version>
+        <byte-buddy.version>1.18.8</byte-buddy.version>
+        <wiremock-jre8.version>3.0.1</wiremock-jre8.version>
+        <awaitility.version>4.3.0</awaitility.version>
         <cucumber.version>7.23.0</cucumber.version>
         <jna-platform.version>5.18.1</jna-platform.version>
-        <assertj-core.version>3.25.3</assertj-core.version>
+        <assertj-core.version>3.27.7</assertj-core.version>
 
         <!-- VULNERABILITY -->
-        <depencency-check-maven.version>10.0.4</depencency-check-maven.version>
+        <depencency-check-maven.version>12.2.2</depencency-check-maven.version>
 
         <!-- Monitoring and Logging -->
-        <spring.aop.version>3.2.3</spring.aop.version>
-        <spring-boot.actuator.version>3.2.3</spring-boot.actuator.version>
-        <micrometer-prometheus.version>1.12.4</micrometer-prometheus.version>
-        <micrometer-tracing.version>1.2.4</micrometer-tracing.version>
+        <spring.aop.version>3.5.14</spring.aop.version>
+        <spring-boot.actuator.version>3.5.14</spring-boot.actuator.version>
+        <micrometer-prometheus.version>1.16.5</micrometer-prometheus.version>
+        <micrometer-tracing.version>1.6.5</micrometer-tracing.version>
         <zipkin-reporter.version>3.3.0</zipkin-reporter.version>
-        <loki.version>1.5.1</loki.version>
+        <loki.version>2.0.3</loki.version>
 
         <!-- JACOCO -->
-        <jacoco.version>0.8.11</jacoco.version>
+        <jacoco.version>0.8.14</jacoco.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.language>java</sonar.language>
@@ -131,10 +131,11 @@
         </sonar.projectKey>
 
         <!-- HASHING -->
-        <commons-codec.version>1.16.1</commons-codec.version>
+        <commons-codec.version>1.19.0</commons-codec.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
 
         <!-- NULL ANNOTATIONS -->
-        <jetbrains-annotations.version>24.1.0</jetbrains-annotations.version>
+        <jetbrains-annotations.version>26.1.0</jetbrains-annotations.version>
     </properties>
 
     <dependencyManagement>
@@ -159,7 +160,7 @@
             <!-- SPRING BOOT -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
+                <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -228,6 +229,11 @@
                 <version>${wiremock-jre8.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.github.tomakehurst</groupId>
+                <artifactId>wiremock-jre8-standalone</artifactId>
+                <version>${wiremock-jre8.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
                 <version>${byte-buddy.version}</version>
@@ -263,12 +269,29 @@
                 <version>${assertj-core.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>1.18.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>kafka</artifactId>
+                <version>1.18.3</version>
+                <scope>test</scope>
+            </dependency>
 
             <!-- HASHING -->
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>${commons-codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
             </dependency>
 
             <!-- Monitoring and Logging -->
@@ -310,6 +333,11 @@
                 <artifactId>annotations</artifactId>
                 <version>${jetbrains-annotations.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google-guava.version}</version>
+            </dependency>
 
             <!-- INSTRUMENTATION -->
             <dependency>
@@ -344,7 +372,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>${maven-surefire-plugin.version}</version>
+                    <version>${maven-failsafe-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

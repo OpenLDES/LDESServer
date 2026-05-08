@@ -5,12 +5,7 @@ import org.openldes.server.domain.model.FragmentationConfig;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.openldes.server.domain.rest.UriPrefixConstructor;
-import org.apache.jena.graph.GraphMemFactory;
-import org.apache.jena.graph.Node;
-import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.rdf.model.*;
-import org.apache.jena.rdf.model.impl.ModelCom;
-import org.apache.jena.rdf.model.impl.ResourceImpl;
 import org.apache.jena.vocabulary.RDF;
 import org.springframework.stereotype.Component;
 
@@ -116,9 +111,9 @@ public class ViewSpecificationConverter {
 	private List<Statement> fragmentationStatementsFromList(Resource viewName,
 															List<FragmentationConfig> fragmentationList) {
 		List<Statement> statements = new ArrayList<>();
-		List<ResourceImpl> fragmentationResources = fragmentationList.stream().map(fragmentation -> {
-			Node blankNode = NodeFactory.createBlankNode();
-			ResourceImpl resource = new ResourceImpl(blankNode, new ModelCom(GraphMemFactory.createGraphMem()));
+		List<Resource> fragmentationResources = fragmentationList.stream().map(fragmentation -> {
+			Model resourceModel = ModelFactory.createDefaultModel();
+			Resource resource = resourceModel.createResource();
 			resource.addProperty(RDF_SYNTAX_TYPE, createResource(TREE + fragmentation.getName()));
 			fragmentation.getConfig().forEach(
 					(key, value) -> resource.addProperty(createProperty(TREE + key), createPlainLiteral(value)));

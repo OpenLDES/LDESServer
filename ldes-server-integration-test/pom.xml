@@ -11,12 +11,6 @@
 
     <artifactId>ldes-server-integration-test</artifactId>
 
-    <properties>
-        <kafka.version>1.18.3</kafka.version>
-        <kafka-clients.version>3.7.1</kafka-clients.version>
-        <testcontainers.version>1.18.3</testcontainers.version>
-    </properties>
-
     <dependencies>
         <!-- OpenLDES -->
         <dependency>
@@ -153,20 +147,17 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>${testcontainers.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>kafka</artifactId>
-            <version>${kafka.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
-            <version>${kafka-clients.version}</version>
             <scope>test</scope>
         </dependency>
 
