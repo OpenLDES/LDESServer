@@ -1,16 +1,15 @@
 package org.openldes.server.fragmentation.entities;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
 import org.openldes.server.fragmentation.valueobjects.TreeRelation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class BucketTest {
 	private static final String COLLECTION = "mobility-hindrances";

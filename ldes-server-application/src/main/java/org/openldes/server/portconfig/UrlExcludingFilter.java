@@ -2,10 +2,9 @@ package org.openldes.server.portconfig;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 public abstract class UrlExcludingFilter extends OncePerRequestFilter {
     protected List<String> excludedUrls;

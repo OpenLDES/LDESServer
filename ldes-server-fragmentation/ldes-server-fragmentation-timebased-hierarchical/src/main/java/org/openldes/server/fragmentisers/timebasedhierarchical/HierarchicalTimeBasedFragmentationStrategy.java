@@ -1,5 +1,14 @@
 package org.openldes.server.fragmentisers.timebasedhierarchical;
 
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
+import java.time.LocalDateTime;
+import java.util.Optional;
+import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
 import org.openldes.server.domain.converter.LocalDateTimeConverter;
 import org.openldes.server.fragmentation.FragmentationStrategy;
 import org.openldes.server.fragmentation.FragmentationStrategyDecorator;
@@ -9,14 +18,8 @@ import org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedC
 import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
 import org.openldes.server.fragmentisers.timebasedhierarchical.model.FragmentationTimestamp;
 import org.openldes.server.fragmentisers.timebasedhierarchical.services.TimeBasedBucketFinder;
-import io.micrometer.observation.Observation;
-import io.micrometer.observation.ObservationRegistry;
-import org.apache.jena.rdf.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 public class HierarchicalTimeBasedFragmentationStrategy extends FragmentationStrategyDecorator {
 

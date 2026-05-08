@@ -1,5 +1,10 @@
 package org.openldes.server.domain.converter;
 
+import static org.openldes.server.domain.exceptions.RdfFormatException.RdfFormatContext.REST_ADMIN;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
@@ -10,12 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-
-import static org.openldes.server.domain.exceptions.RdfFormatException.RdfFormatContext.REST_ADMIN;
 
 public class HttpModelConverter implements HttpMessageConverter<Model> {
 

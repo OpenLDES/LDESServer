@@ -1,12 +1,11 @@
 package org.openldes.server.pagination.valueobjects.pagenumber;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class NumericPageNumberTest {
 	private static final int PAGE_NUMBER_VALUE = 3;

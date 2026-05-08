@@ -5,6 +5,7 @@
         <groupId>org.openldes</groupId>
         <version>4.1.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ldes-server-fragmentation-geospatial</artifactId>
@@ -39,13 +40,16 @@
         <dependency>
             <groupId>org.apache.sis.non-free</groupId>
             <artifactId>sis-epsg</artifactId>
-            <version>1.4</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.sis.non-free</groupId>
             <artifactId>sis-embedded-data</artifactId>
-            <version>${sis-embedded-db.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
             <scope>runtime</scope>
         </dependency>
 

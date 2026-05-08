@@ -1,17 +1,16 @@
 package org.openldes.server.compaction.domain.entities;
 
+import java.sql.PreparedStatement;
+import java.util.Collection;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.openldes.server.domain.constants.RdfConstants;
 import org.openldes.server.domain.exceptions.PageListSortException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
-
-import java.sql.PreparedStatement;
-import java.util.Collection;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
 public class CompactedFragmentCreator {

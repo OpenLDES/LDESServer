@@ -1,8 +1,8 @@
 package org.openldes.server.domain.exceptions;
 
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 class MissingResourceExceptionTest {
 	@Test

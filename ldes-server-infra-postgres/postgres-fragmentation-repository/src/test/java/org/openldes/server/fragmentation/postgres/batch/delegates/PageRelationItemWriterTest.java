@@ -1,5 +1,8 @@
 package org.openldes.server.fragmentation.postgres.batch.delegates;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.postgres.PostgresBucketisationIntegrationTest;
 import org.openldes.server.fragmentation.postgres.batch.chunk.ChunkCollector;
@@ -7,14 +10,11 @@ import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
 import org.openldes.server.fragmentation.valueobjects.BucketRelation;
 import org.openldes.server.fragmentation.valueobjects.TreeRelation;
-import org.junit.jupiter.api.Test;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class PageRelationItemWriterTest extends PostgresBucketisationIntegrationTest {
 	private static final ViewName VIEW_NAME = new ViewName("mobility-hindrances", "by-hour");

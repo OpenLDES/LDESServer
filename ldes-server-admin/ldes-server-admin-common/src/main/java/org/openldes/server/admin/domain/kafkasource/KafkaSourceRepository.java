@@ -1,8 +1,7 @@
 package org.openldes.server.admin.domain.kafkasource;
 
-import org.openldes.server.domain.model.KafkaSourceProperties;
-
 import java.util.List;
+import org.openldes.server.domain.model.KafkaSourceProperties;
 
 public interface KafkaSourceRepository {
 	void save(KafkaSourceProperties kafkaSource, Integer eventStreamId);

@@ -1,10 +1,9 @@
 package org.openldes.server.fragmentation.postgres.mapper;
 
-import org.openldes.server.fragmentation.entities.UnprocessedView;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.openldes.server.fragmentation.entities.UnprocessedView;
+import org.springframework.jdbc.core.RowMapper;
 
 public class UnprocessedViewRowMapper implements RowMapper<UnprocessedView> {
 	@Override

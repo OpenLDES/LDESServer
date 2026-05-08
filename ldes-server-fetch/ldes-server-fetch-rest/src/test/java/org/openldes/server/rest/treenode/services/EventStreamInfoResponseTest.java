@@ -1,16 +1,22 @@
 package org.openldes.server.rest.treenode.services;
 
-import org.apache.jena.rdf.model.*;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_EVENT_STREAM_URI;
+import static org.openldes.server.domain.constants.RdfConstants.NODE_SHAPE_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_SHAPE;
+
+import java.util.List;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.NodeIterator;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.apache.jena.vocabulary.RDF;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.apache.jena.rdf.model.ResourceFactory.createResource;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class EventStreamInfoResponseTest {
 

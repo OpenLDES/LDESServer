@@ -1,15 +1,14 @@
 package org.openldes.server.fragmentation.valueobjects;
 
-import org.openldes.server.fragmentation.exceptions.BucketDescriptorParseException;
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static java.net.URLEncoder.encode;
-import static java.nio.charset.StandardCharsets.UTF_8;
+import org.openldes.server.fragmentation.exceptions.BucketDescriptorParseException;
 
 public class BucketDescriptor {
 	private final List<BucketDescriptorPair> descriptorPairs;

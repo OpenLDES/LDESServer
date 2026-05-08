@@ -1,16 +1,15 @@
 package org.openldes.server.rest.caching;
 
+import static org.apache.commons.codec.digest.DigestUtils.sha256Hex;
+import static org.openldes.server.domain.constants.ServerConfig.HOST_NAME_KEY;
+
+import java.util.stream.Collectors;
 import org.openldes.server.fetching.entities.Member;
 import org.openldes.server.fetching.entities.TreeNode;
 import org.openldes.server.fetching.valueobjects.LdesFragmentIdentifier;
 import org.openldes.server.fetching.valueobjects.TreeRelation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
-
-import static org.openldes.server.domain.constants.ServerConfig.HOST_NAME_KEY;
-import static org.apache.commons.codec.digest.DigestUtils.sha256Hex;
 
 @Component
 public class EtagCachingStrategy implements CachingStrategy {

@@ -1,9 +1,8 @@
 package org.openldes.server.fragmentation.valueobjects;
 
+import java.time.LocalDateTime;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
-
-import java.time.LocalDateTime;
 
 public class ContinueFragmentationTriggerEvent {
 	final JobParameters originalJobParameters;

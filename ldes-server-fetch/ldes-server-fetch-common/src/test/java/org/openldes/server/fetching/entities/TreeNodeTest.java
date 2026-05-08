@@ -1,5 +1,8 @@
 package org.openldes.server.fetching.entities;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -7,10 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Stream;
 
 class TreeNodeTest {
 	private static final String ID = "FRAGMENT_ID";

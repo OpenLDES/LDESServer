@@ -1,9 +1,10 @@
 package org.openldes.server.retention.services.retentionpolicy.creation.timebased;
 
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyCreator;
-import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
-import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.openldes.server.domain.constants.RdfConstants.TREE;
+
+import java.time.Duration;
+import java.util.List;
 import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.datatypes.xsd.XSDDuration;
 import org.apache.jena.rdf.model.Model;
@@ -11,12 +12,10 @@ import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.impl.LiteralImpl;
 import org.apache.jena.riot.Lang;
-
-import java.time.Duration;
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.TREE;
-import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyCreator;
+import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
+import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
 
 public class TimeBasedRetentionPolicyCreator implements RetentionPolicyCreator {
 	public static final Property TREE_VALUE = createProperty(TREE, "value");

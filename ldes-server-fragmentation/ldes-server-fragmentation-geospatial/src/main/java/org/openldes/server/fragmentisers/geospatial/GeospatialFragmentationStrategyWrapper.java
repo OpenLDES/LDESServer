@@ -1,5 +1,10 @@
 package org.openldes.server.fragmentisers.geospatial;
 
+import static org.openldes.server.fragmentisers.geospatial.config.GeospatialProperties.FRAGMENTATION_PROPERTY;
+import static org.openldes.server.fragmentisers.geospatial.config.GeospatialProperties.FRAGMENTER_SUBJECT_FILTER;
+import static org.openldes.server.fragmentisers.geospatial.config.GeospatialProperties.MAX_ZOOM;
+
+import io.micrometer.observation.ObservationRegistry;
 import org.openldes.server.domain.model.ConfigProperties;
 import org.openldes.server.fragmentation.FragmentationStrategy;
 import org.openldes.server.fragmentation.FragmentationStrategyWrapper;
@@ -7,10 +12,7 @@ import org.openldes.server.fragmentisers.geospatial.bucketising.GeospatialBucket
 import org.openldes.server.fragmentisers.geospatial.config.GeospatialConfig;
 import org.openldes.server.fragmentisers.geospatial.connected.relations.TileBucketRelationsAttributer;
 import org.openldes.server.fragmentisers.geospatial.fragments.GeospatialBucketCreator;
-import io.micrometer.observation.ObservationRegistry;
 import org.springframework.context.ApplicationContext;
-
-import static org.openldes.server.fragmentisers.geospatial.config.GeospatialProperties.*;
 
 public class GeospatialFragmentationStrategyWrapper implements FragmentationStrategyWrapper {
 

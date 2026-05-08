@@ -1,5 +1,7 @@
 package org.openldes.server.resultactionsextensions;
 
+import static org.openldes.server.domain.constants.RdfConstants.TREE_MEMBER;
+
 import org.apache.jena.rdf.model.Model;
 import org.mockito.ArgumentMatcher;
 import org.slf4j.Logger;
@@ -7,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.util.AssertionErrors;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
-
-import static org.openldes.server.domain.constants.RdfConstants.TREE_MEMBER;
 
 public class MemberCounter implements ResultMatcher, ArgumentMatcher<Model> {
     private static final Logger log = LoggerFactory.getLogger(MemberCounter.class);

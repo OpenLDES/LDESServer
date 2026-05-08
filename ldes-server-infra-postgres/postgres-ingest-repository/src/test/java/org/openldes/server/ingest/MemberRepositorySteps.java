@@ -1,21 +1,24 @@
 package org.openldes.server.ingest;
 
-import org.openldes.server.ingest.entities.IngestedMember;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.AssertFactory;
 import org.assertj.core.api.InstanceOfAssertFactory;
-
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.openldes.server.ingest.entities.IngestedMember;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class MemberRepositorySteps extends PostgresIngestIntegrationTest {

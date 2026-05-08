@@ -1,8 +1,7 @@
 package org.openldes.server.admin.spi;
 
-import org.apache.jena.rdf.model.Model;
-
 import java.util.List;
+import org.apache.jena.rdf.model.Model;
 
 public interface EventStreamServiceSpi {
 	List<EventStreamTO> retrieveAllEventStreams();

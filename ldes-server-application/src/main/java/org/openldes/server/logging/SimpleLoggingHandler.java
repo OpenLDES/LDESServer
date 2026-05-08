@@ -3,13 +3,12 @@ package org.openldes.server.logging;
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationHandler;
 import io.micrometer.observation.aop.ObservedAspect;
+import java.util.Objects;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
 
 @Component
 public class SimpleLoggingHandler implements ObservationHandler<ObservedAspect.ObservedAspectContext> {

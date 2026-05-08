@@ -1,12 +1,12 @@
 package org.openldes.server.ingest.validation.defaultimpl.modelingestvalidator;
 
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.domain.exceptions.ShaclValidationException;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.shacl.ShaclValidator;
 import org.apache.jena.shacl.Shapes;
 import org.apache.jena.shacl.ValidationReport;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
 
 public class ShaclModelValidator implements ModelIngestValidator {
 

@@ -1,5 +1,7 @@
 package org.openldes.server.fragmentation.postgres.batch;
 
+import java.util.Comparator;
+import java.util.Optional;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.entities.BucketisedMember;
 import org.openldes.server.fragmentation.postgres.batch.chunk.ChunkCollector;
@@ -10,9 +12,6 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.Comparator;
-import java.util.Optional;
 
 @Component
 @StepScope

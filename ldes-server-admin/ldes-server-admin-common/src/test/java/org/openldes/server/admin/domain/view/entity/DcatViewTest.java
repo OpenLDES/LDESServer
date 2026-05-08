@@ -1,8 +1,16 @@
 package org.openldes.server.admin.domain.view.entity;
 
-import org.openldes.server.domain.model.DcatView;
-import org.openldes.server.domain.model.ViewName;
-import org.apache.jena.rdf.model.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.stream.Stream;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.apache.jena.vocabulary.RDF;
@@ -13,12 +21,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.openldes.server.domain.model.DcatView;
+import org.openldes.server.domain.model.ViewName;
 
 class DcatViewTest {
 

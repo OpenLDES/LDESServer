@@ -1,11 +1,10 @@
 package org.openldes.server.admin.domain.view.service;
 
-import org.openldes.server.admin.domain.view.repository.DcatViewRepository;
-import org.openldes.server.domain.events.admin.DcatViewDeletedEvent;
-import org.openldes.server.domain.events.admin.DcatViewSavedEvent;
-import org.openldes.server.domain.exceptions.MissingResourceException;
-import org.openldes.server.domain.model.DcatView;
-import org.openldes.server.domain.model.ViewName;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.List;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.junit.jupiter.api.Nested;
@@ -16,13 +15,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.openldes.server.admin.domain.view.repository.DcatViewRepository;
+import org.openldes.server.domain.events.admin.DcatViewDeletedEvent;
+import org.openldes.server.domain.events.admin.DcatViewSavedEvent;
+import org.openldes.server.domain.exceptions.MissingResourceException;
+import org.openldes.server.domain.model.DcatView;
+import org.openldes.server.domain.model.ViewName;
 import org.springframework.context.ApplicationEventPublisher;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ExtendWith(MockitoExtension.class)
 class DcatViewServiceImplTest {

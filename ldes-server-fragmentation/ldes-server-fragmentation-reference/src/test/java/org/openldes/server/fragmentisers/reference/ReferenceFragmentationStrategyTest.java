@@ -1,5 +1,19 @@
 package org.openldes.server.fragmentisers.reference;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+import static org.openldes.server.fragmentisers.reference.ReferenceFragmentationStrategyWrapper.DEFAULT_FRAGMENTATION_KEY;
+import static org.openldes.server.fragmentisers.reference.fragmentation.ReferenceBucketCreator.FRAGMENT_KEY_REFERENCE_ROOT;
+
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
+import java.util.Set;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.FragmentationStrategy;
 import org.openldes.server.fragmentation.entities.Bucket;
@@ -8,18 +22,6 @@ import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
 import org.openldes.server.fragmentisers.reference.bucketising.ReferenceBucketiser;
 import org.openldes.server.fragmentisers.reference.fragmentation.ReferenceBucketCreator;
-import io.micrometer.observation.Observation;
-import io.micrometer.observation.ObservationRegistry;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.Set;
-
-import static org.openldes.server.fragmentisers.reference.ReferenceFragmentationStrategyWrapper.DEFAULT_FRAGMENTATION_KEY;
-import static org.openldes.server.fragmentisers.reference.fragmentation.ReferenceBucketCreator.FRAGMENT_KEY_REFERENCE_ROOT;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
 
 class ReferenceFragmentationStrategyTest {
 

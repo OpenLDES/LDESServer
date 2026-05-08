@@ -1,20 +1,30 @@
 package org.openldes.server.rest.eventstream;
 
-import org.openldes.server.admin.spi.*;
-import org.openldes.server.domain.constants.RdfConstants;
-import org.openldes.server.domain.converter.HttpModelConverter;
-import org.openldes.server.domain.converter.PrefixAdderImpl;
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.domain.exceptions.ShaclValidationException;
-import org.openldes.server.domain.rest.HostNamePrefixConstructorConfig;
-import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
-import org.openldes.server.rest.caching.CachingStrategy;
-import org.openldes.server.rest.caching.EtagCachingStrategy;
-import org.openldes.server.rest.config.RestConfig;
-import org.openldes.server.rest.eventstream.converters.EventStreamResponseHttpConverter;
-import org.openldes.server.rest.exceptionhandling.RestResponseEntityExceptionHandler;
-import org.openldes.server.domain.versioning.VersionHeaderFilterConfig;
-import org.apache.jena.rdf.model.*;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_EVENT_STREAM_URI;
+import static org.openldes.server.domain.constants.ServerConfig.HOST_NAME_KEY;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,39 +36,42 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.openldes.server.admin.spi.EventStreamReader;
+import org.openldes.server.admin.spi.EventStreamServiceSpi;
+import org.openldes.server.admin.spi.EventStreamTO;
+import org.openldes.server.admin.spi.EventStreamWriter;
+import org.openldes.server.admin.spi.FragmentationConfigExtractor;
+import org.openldes.server.admin.spi.KafkaSourceReader;
+import org.openldes.server.admin.spi.RetentionModelExtractor;
+import org.openldes.server.admin.spi.ViewSpecificationConverter;
+import org.openldes.server.domain.constants.RdfConstants;
+import org.openldes.server.domain.converter.HttpModelConverter;
+import org.openldes.server.domain.converter.PrefixAdderImpl;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
+import org.openldes.server.domain.rest.HostNamePrefixConstructorConfig;
+import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
+import org.openldes.server.domain.versioning.VersionHeaderFilterConfig;
+import org.openldes.server.rest.caching.CachingStrategy;
+import org.openldes.server.rest.caching.EtagCachingStrategy;
+import org.openldes.server.rest.config.RestConfig;
+import org.openldes.server.rest.eventstream.converters.EventStreamResponseHttpConverter;
+import org.openldes.server.rest.exceptionhandling.RestResponseEntityExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
-import static org.openldes.server.domain.constants.RdfConstants.LDES_EVENT_STREAM_URI;
-import static org.openldes.server.domain.constants.ServerConfig.HOST_NAME_KEY;
-import static org.apache.jena.rdf.model.ResourceFactory.createResource;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
 @ActiveProfiles({"test", "rest"})
@@ -76,7 +89,7 @@ class EventStreamControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-	@MockBean
+	@MockitoBean
 	private EventStreamServiceSpi eventStreamService;
 	private String hostname;
 

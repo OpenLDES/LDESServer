@@ -1,10 +1,9 @@
 package org.openldes.server.retention.services.retentionpolicy.execution;
 
+import java.util.List;
 import org.openldes.server.retention.entities.MemberProperties;
 import org.openldes.server.retention.repositories.MemberPropertiesRepository;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class MemberRemoverImpl implements MemberRemover {

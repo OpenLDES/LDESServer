@@ -1,13 +1,16 @@
 package org.openldes.server.ingest.kafka;
 
+import java.util.Collection;
+import java.util.Optional;
+import java.util.UUID;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFLanguages;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.openldes.server.domain.events.admin.KafkaSourceAddedEvent;
 import org.openldes.server.ingest.MemberIngester;
 import org.openldes.server.ingest.kafka.listener.IngestListener;
 import org.openldes.server.ingest.validators.IngestValidator;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFLanguages;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.event.EventListener;
 import org.springframework.kafka.config.KafkaListenerContainerFactory;
@@ -19,10 +22,6 @@ import org.springframework.kafka.listener.MessageListenerContainer;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Collection;
-import java.util.Optional;
-import java.util.UUID;
 
 @Component
 public class KafkaListenerContainerManager {

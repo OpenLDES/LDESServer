@@ -1,5 +1,6 @@
 package org.openldes.server.admin.postgres.eventstream.mapper;
 
+import java.util.List;
 import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
 import org.openldes.server.admin.postgres.eventsource.entity.EventSourceEntity;
 import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
@@ -10,8 +11,6 @@ import org.openldes.server.admin.postgres.view.mapper.ViewSpecificationMapper;
 import org.openldes.server.admin.spi.EventStreamTO;
 import org.openldes.server.domain.model.EventStream;
 import org.openldes.server.domain.model.VersionCreationProperties;
-
-import java.util.List;
 
 public class EventStreamMapper {
     private EventStreamMapper() {

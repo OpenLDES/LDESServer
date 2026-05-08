@@ -1,19 +1,18 @@
 package org.openldes.server.fragmentation.postgres.batch.delegates;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.stream.IntStream;
+import javax.sql.DataSource;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.fragmentation.entities.BucketisedMember;
 import org.openldes.server.fragmentation.postgres.PostgresBucketisationIntegrationTest;
 import org.openldes.server.fragmentation.postgres.batch.chunk.ChunkCollector;
-import org.junit.jupiter.api.Test;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
-
-import javax.sql.DataSource;
-import java.util.stream.IntStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class BucketisedMemberWriterTest extends PostgresBucketisationIntegrationTest {
 	@Autowired

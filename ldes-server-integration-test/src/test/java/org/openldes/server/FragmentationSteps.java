@@ -1,30 +1,5 @@
 package org.openldes.server;
 
-import org.openldes.server.pagination.postgres.entity.MemberEntity;
-import org.openldes.server.resultactionsextensions.MemberCounter;
-import org.openldes.server.resultactionsextensions.ResponseToModelConverter;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
-import org.apache.jena.vocabulary.RDF;
-import org.awaitility.core.ConditionTimeoutException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.mock.web.MockHttpServletResponse;
-
-import java.io.ByteArrayOutputStream;
-import java.net.URI;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.TREE_MEMBER;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
 import static org.apache.jena.rdf.model.ResourceFactory.createResource;
@@ -35,9 +10,33 @@ import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_MEMBER;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import java.io.ByteArrayOutputStream;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.vocabulary.RDF;
+import org.awaitility.core.ConditionTimeoutException;
+import org.openldes.server.pagination.postgres.entity.MemberEntity;
+import org.openldes.server.resultactionsextensions.MemberCounter;
+import org.openldes.server.resultactionsextensions.ResponseToModelConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.mock.web.MockHttpServletResponse;
 
 public class FragmentationSteps extends LdesServerIntegrationTest {
     private static final Logger log = LoggerFactory.getLogger(FragmentationSteps.class);

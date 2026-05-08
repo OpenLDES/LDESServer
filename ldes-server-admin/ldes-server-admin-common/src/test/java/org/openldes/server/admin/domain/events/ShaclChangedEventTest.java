@@ -1,7 +1,10 @@
 package org.openldes.server.admin.domain.events;
 
-import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
-import org.openldes.server.domain.events.admin.ShaclChangedEvent;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.math.BigDecimal;
+import java.util.stream.Stream;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.ResourceFactory;
@@ -12,12 +15,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.math.BigDecimal;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
+import org.openldes.server.domain.events.admin.ShaclChangedEvent;
 
 class ShaclChangedEventTest {
 

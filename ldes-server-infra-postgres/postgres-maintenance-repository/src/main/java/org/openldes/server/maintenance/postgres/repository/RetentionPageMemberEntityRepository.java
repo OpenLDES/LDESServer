@@ -1,12 +1,11 @@
 package org.openldes.server.maintenance.postgres.repository;
 
+import java.util.List;
 import org.openldes.server.maintenance.postgres.entity.PageMemberId;
 import org.openldes.server.maintenance.postgres.entity.RetentionPageMemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 public interface RetentionPageMemberEntityRepository extends JpaRepository<RetentionPageMemberEntity, PageMemberId> {
 

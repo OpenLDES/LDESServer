@@ -1,5 +1,8 @@
 package org.openldes.server.ingest.collection;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.openldes.server.domain.model.EventStream;
@@ -7,10 +10,6 @@ import org.openldes.server.ingest.extractor.MemberExtractor;
 import org.openldes.server.ingest.extractor.MemberExtractorFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 @Component
 public class MemberExtractorCollectionImpl implements MemberExtractorCollection {

@@ -1,14 +1,22 @@
 package org.openldes.server.admin.postgres.eventstream.entity;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import java.util.List;
+import java.util.Optional;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.admin.postgres.dcatdataset.entity.DcatDatasetEntity;
 import org.openldes.server.admin.postgres.eventsource.entity.EventSourceEntity;
 import org.openldes.server.admin.postgres.shaclshape.entity.ShaclShapeEntity;
 import org.openldes.server.admin.postgres.view.entity.ViewEntity;
-import jakarta.persistence.*;
-import org.apache.jena.rdf.model.Model;
-
-import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Table(name = "collections")

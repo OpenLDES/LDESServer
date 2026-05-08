@@ -1,5 +1,8 @@
 package org.openldes.server.fragmentisers.reference;
 
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+
+import io.micrometer.observation.ObservationRegistry;
 import org.openldes.server.domain.model.ConfigProperties;
 import org.openldes.server.fragmentation.FragmentationStrategy;
 import org.openldes.server.fragmentation.FragmentationStrategyWrapper;
@@ -7,10 +10,7 @@ import org.openldes.server.fragmentisers.reference.bucketising.ReferenceBucketis
 import org.openldes.server.fragmentisers.reference.config.ReferenceConfig;
 import org.openldes.server.fragmentisers.reference.fragmentation.ReferenceBucketCreator;
 import org.openldes.server.fragmentisers.reference.relations.ReferenceFragmentRelationsAttributer;
-import io.micrometer.observation.ObservationRegistry;
 import org.springframework.context.ApplicationContext;
-
-import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
 
 public class ReferenceFragmentationStrategyWrapper implements FragmentationStrategyWrapper {
 

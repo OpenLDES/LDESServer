@@ -1,13 +1,12 @@
 package org.openldes.server.admin.domain.validation.dcat.cannotcontainvalidators;
 
-import org.openldes.server.admin.domain.validation.dcat.DcatNodeValidator;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.vocabulary.RDF;
-
-import java.util.List;
-
 import static org.openldes.server.admin.domain.validation.dcat.DcatValidator.DCAT_DATA_SERVICE;
 import static org.openldes.server.admin.domain.validation.dcat.DcatValidator.DCAT_DATA_SERVICE_PREDICATE;
+
+import java.util.List;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.vocabulary.RDF;
+import org.openldes.server.admin.domain.validation.dcat.DcatNodeValidator;
 
 public class CannotContainServiceValidator implements DcatNodeValidator {
 	private final List<CannotContainRule> rules;

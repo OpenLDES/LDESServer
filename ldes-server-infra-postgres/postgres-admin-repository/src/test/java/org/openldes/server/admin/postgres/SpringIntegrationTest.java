@@ -1,13 +1,13 @@
 package org.openldes.server.admin.postgres;
 
+import io.cucumber.spring.CucumberContextConfiguration;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.openldes.server.admin.domain.eventstream.repository.EventStreamRepository;
 import org.openldes.server.admin.domain.view.repository.DcatViewRepository;
 import org.openldes.server.admin.domain.view.repository.ViewRepository;
 import org.openldes.server.admin.postgres.dcatdataservice.repository.DcatDataServiceEntityRepository;
 import org.openldes.server.admin.postgres.dcatserver.DcatCatalogPostgresRepository;
 import org.openldes.server.admin.postgres.dcatserver.repository.DcatCatalogEntityRepository;
-import io.cucumber.spring.CucumberContextConfiguration;
-import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

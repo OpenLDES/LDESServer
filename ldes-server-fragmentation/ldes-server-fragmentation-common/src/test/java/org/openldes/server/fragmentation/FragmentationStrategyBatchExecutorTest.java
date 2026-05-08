@@ -1,8 +1,19 @@
 package org.openldes.server.fragmentation;
 
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.fragmentation.entities.FragmentationMember;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
 import io.micrometer.observation.ObservationRegistry;
+import java.util.concurrent.ExecutorService;
+import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,14 +25,8 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.concurrent.ExecutorService;
-import java.util.function.BiConsumer;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.fragmentation.entities.FragmentationMember;
 
 @ExtendWith(MockitoExtension.class)
 class FragmentationStrategyBatchExecutorTest {

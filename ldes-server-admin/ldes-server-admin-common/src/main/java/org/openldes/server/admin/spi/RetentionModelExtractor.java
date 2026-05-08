@@ -1,16 +1,15 @@
 package org.openldes.server.admin.spi;
 
-import org.openldes.server.admin.domain.view.service.ConfigFilterPredicate;
+import static org.openldes.server.domain.constants.RdfConstants.RETENTION_TYPE;
+
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Statement;
+import org.openldes.server.admin.domain.view.service.ConfigFilterPredicate;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.RETENTION_TYPE;
 
 @Component
 public class RetentionModelExtractor {

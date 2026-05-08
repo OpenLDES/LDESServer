@@ -1,11 +1,10 @@
 package org.openldes.server.admin.postgres.dcatdataset.repository;
 
+import java.util.Optional;
 import org.openldes.server.admin.postgres.dcatdataset.entity.DcatDatasetEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.Optional;
 
 public interface DcatDatasetEntityRepository extends JpaRepository<DcatDatasetEntity, Integer> {
     @Query("SELECT d FROM DcatDatasetEntity d WHERE d.eventStream.name = :collectionName")

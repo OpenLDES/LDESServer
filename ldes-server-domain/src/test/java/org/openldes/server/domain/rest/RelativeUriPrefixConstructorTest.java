@@ -1,5 +1,7 @@
 package org.openldes.server.domain.rest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,8 +9,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class RelativeUriPrefixConstructorTest {
 	private UriPrefixConstructor prefixConstructor;

@@ -1,10 +1,14 @@
 package org.openldes.server.ingest.skolemization;
 
-import org.apache.jena.rdf.model.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
 
 public class SkolemizedModel {
 	private final String skolemUriTemplate;

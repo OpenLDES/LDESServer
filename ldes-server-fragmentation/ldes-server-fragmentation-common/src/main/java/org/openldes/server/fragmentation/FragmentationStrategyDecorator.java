@@ -1,8 +1,8 @@
 package org.openldes.server.fragmentation;
 
+import io.micrometer.observation.Observation;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.entities.FragmentationMember;
-import io.micrometer.observation.Observation;
 
 public abstract class FragmentationStrategyDecorator implements FragmentationStrategy {
 	private final FragmentationStrategy fragmentationStrategy;

@@ -1,8 +1,7 @@
 package org.openldes.server.ingest.collection;
 
-import org.openldes.server.ingest.extractor.MemberExtractor;
-
 import java.util.Optional;
+import org.openldes.server.ingest.extractor.MemberExtractor;
 
 public interface MemberExtractorCollection {
    Optional<MemberExtractor> getMemberExtractor(String collection);

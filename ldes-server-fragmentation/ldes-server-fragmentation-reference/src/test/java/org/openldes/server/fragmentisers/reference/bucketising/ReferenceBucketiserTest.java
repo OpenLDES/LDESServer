@@ -1,14 +1,14 @@
 package org.openldes.server.fragmentisers.reference.bucketising;
 
-import org.openldes.server.fragmentisers.reference.config.ReferenceConfig;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
-import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.openldes.server.fragmentisers.reference.config.ReferenceConfig;
 
 class ReferenceBucketiserTest {
 

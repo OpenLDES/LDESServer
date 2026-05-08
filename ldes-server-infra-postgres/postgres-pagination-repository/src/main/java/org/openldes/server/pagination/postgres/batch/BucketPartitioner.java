@@ -1,5 +1,7 @@
 package org.openldes.server.pagination.postgres.batch;
 
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;
@@ -7,9 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 @StepScope

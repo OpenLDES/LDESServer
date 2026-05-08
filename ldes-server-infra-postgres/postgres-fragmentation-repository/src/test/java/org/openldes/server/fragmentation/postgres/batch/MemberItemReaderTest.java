@@ -1,9 +1,13 @@
 package org.openldes.server.fragmentation.postgres.batch;
 
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.fragmentation.entities.FragmentationMember;
-import org.openldes.server.fragmentation.valueobjects.EventStreamProperties;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.IntStream;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.InstanceOfAssertFactories;
@@ -12,6 +16,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.fragmentation.entities.FragmentationMember;
+import org.openldes.server.fragmentation.valueobjects.EventStreamProperties;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -28,14 +35,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.IntStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @EnableAutoConfiguration
 @SpringBootTest

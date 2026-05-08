@@ -1,5 +1,15 @@
 package org.openldes.server.ingest.entities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.openldes.server.ingest.entities.IngestedMember.TREE_MEMBER;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
@@ -13,14 +23,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
-import java.util.function.BiConsumer;
-import java.util.stream.Stream;
-
-import static org.openldes.server.ingest.entities.IngestedMember.TREE_MEMBER;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MemberTest {
 

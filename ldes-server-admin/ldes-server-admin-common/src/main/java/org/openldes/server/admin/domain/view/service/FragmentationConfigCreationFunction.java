@@ -1,18 +1,17 @@
 package org.openldes.server.admin.domain.view.service;
 
-import org.openldes.server.admin.domain.view.exception.ModelToViewConverterException;
-import org.openldes.server.domain.constants.RdfConstants;
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.domain.model.FragmentationConfig;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.riot.Lang;
-
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.riot.Lang;
+import org.openldes.server.admin.domain.view.exception.ModelToViewConverterException;
+import org.openldes.server.domain.constants.RdfConstants;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.domain.model.FragmentationConfig;
 
 public class FragmentationConfigCreationFunction implements Function<RDFNode, FragmentationConfig> {
 

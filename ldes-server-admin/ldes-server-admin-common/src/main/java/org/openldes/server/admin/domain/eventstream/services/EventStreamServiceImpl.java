@@ -1,23 +1,28 @@
 package org.openldes.server.admin.domain.eventstream.services;
 
+import java.util.List;
+import java.util.Optional;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.admin.domain.dcat.dcatserver.services.DcatServerService;
 import org.openldes.server.admin.domain.eventsource.services.EventSourceService;
 import org.openldes.server.admin.domain.eventstream.repository.EventStreamRepository;
 import org.openldes.server.admin.domain.kafkasource.KafkaSourceRepository;
 import org.openldes.server.admin.domain.view.service.ViewValidator;
 import org.openldes.server.admin.spi.EventStreamTO;
-import org.openldes.server.domain.events.admin.*;
+import org.openldes.server.domain.events.admin.DeletionPolicyChangedEvent;
+import org.openldes.server.domain.events.admin.EventStreamClosedEvent;
+import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
+import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
+import org.openldes.server.domain.events.admin.KafkaSourceAddedEvent;
+import org.openldes.server.domain.events.admin.KafkaSourceDeletedEvent;
+import org.openldes.server.domain.events.admin.ViewAddedEvent;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.EventStream;
 import org.openldes.server.domain.model.KafkaSourceProperties;
-import org.apache.jena.rdf.model.Model;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EventStreamServiceImpl implements EventStreamService {

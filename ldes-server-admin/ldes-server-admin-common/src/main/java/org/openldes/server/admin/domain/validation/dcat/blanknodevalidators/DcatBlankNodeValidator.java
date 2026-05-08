@@ -1,12 +1,11 @@
 package org.openldes.server.admin.domain.validation.dcat.blanknodevalidators;
 
-import org.openldes.server.admin.domain.validation.dcat.DcatNodeValidator;
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
-
-import java.util.List;
+import org.openldes.server.admin.domain.validation.dcat.DcatNodeValidator;
 
 public class DcatBlankNodeValidator implements DcatNodeValidator {
 	private static final String TOO_MANY_ERROR_MESSAGE = "Model must include exactly one dcat:%s. Not more, not less.";

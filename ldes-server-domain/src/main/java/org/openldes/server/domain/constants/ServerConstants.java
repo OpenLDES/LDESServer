@@ -1,8 +1,7 @@
 package org.openldes.server.domain.constants;
 
-import org.apache.jena.riot.Lang;
-
 import java.util.List;
+import org.apache.jena.riot.Lang;
 
 public class ServerConstants {
     private ServerConstants() {

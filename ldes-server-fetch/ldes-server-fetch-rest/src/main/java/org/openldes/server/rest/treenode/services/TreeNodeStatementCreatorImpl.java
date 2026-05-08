@@ -1,22 +1,32 @@
 package org.openldes.server.rest.treenode.services;
 
-import org.openldes.server.domain.events.admin.*;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import static org.openldes.server.domain.constants.RdfConstants.IS_PART_OF_PROPERTY;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_EVENT_STREAM_URI;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.openldes.server.domain.events.admin.DcatViewDeletedEvent;
+import org.openldes.server.domain.events.admin.DcatViewSavedEvent;
+import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
+import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
+import org.openldes.server.domain.events.admin.ShaclChangedEvent;
+import org.openldes.server.domain.events.admin.ShaclDeletedEvent;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.DcatView;
 import org.openldes.server.domain.model.EventStream;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fetching.entities.TreeNode;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.Statement;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.util.*;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.apache.jena.rdf.model.ResourceFactory.createResource;
-import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
 
 @Component
 public class TreeNodeStatementCreatorImpl implements TreeNodeStatementCreator {

@@ -1,10 +1,11 @@
 package org.openldes.server.ingest.rest.converters;
 
-import org.openldes.server.domain.converter.RdfMediaType;
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.domain.exceptions.RdfFormatException;
-import org.openldes.server.domain.exceptions.ShaclValidationException;
+import static java.util.Objects.requireNonNull;
+import static org.openldes.server.domain.constants.RdfConstants.SHACL_SOURCE_CONSTRAINT_COMPONENT;
+
 import io.micrometer.observation.annotation.Observed;
+import java.io.IOException;
+import java.util.List;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.rdf.model.Model;
@@ -16,6 +17,10 @@ import org.apache.jena.shacl.validation.ReportEntry;
 import org.apache.jena.shacl.validation.Severity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.openldes.server.domain.converter.RdfMediaType;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.domain.exceptions.RdfFormatException;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -23,12 +28,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.SHACL_SOURCE_CONSTRAINT_COMPONENT;
-import static java.util.Objects.requireNonNull;
 
 @Observed
 @Component

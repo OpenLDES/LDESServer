@@ -1,13 +1,12 @@
 package org.openldes.server.domain.rest;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import java.util.Arrays;
 
 @Component
 @ConditionalOnProperty(value = "ldes-server.use-relative-url", havingValue = "true")

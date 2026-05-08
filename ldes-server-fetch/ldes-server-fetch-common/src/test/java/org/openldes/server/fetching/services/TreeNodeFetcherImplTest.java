@@ -1,5 +1,15 @@
 package org.openldes.server.fetching.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.openldes.server.domain.constants.RdfConstants.GENERATED_AT_TIME;
+
+import java.util.List;
+import java.util.Optional;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fetching.entities.TreeNode;
@@ -7,17 +17,6 @@ import org.openldes.server.fetching.repository.TreeNodeRepository;
 import org.openldes.server.fetching.valueobjects.FragmentPair;
 import org.openldes.server.fetching.valueobjects.LdesFragmentIdentifier;
 import org.openldes.server.fetching.valueobjects.LdesFragmentRequest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.openldes.server.domain.constants.RdfConstants.GENERATED_AT_TIME;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class TreeNodeFetcherImplTest {
 	private static final String COLLECTION = "collectionName";

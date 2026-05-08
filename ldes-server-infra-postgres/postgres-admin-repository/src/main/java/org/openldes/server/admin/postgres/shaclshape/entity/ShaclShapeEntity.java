@@ -1,11 +1,19 @@
 package org.openldes.server.admin.postgres.shaclshape.entity;
 
-import org.openldes.server.admin.postgres.ModelConverter;
-import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import org.apache.jena.rdf.model.Model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.openldes.server.admin.postgres.ModelConverter;
+import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
 
 @Entity
 @Table(name = "shacl_shapes")

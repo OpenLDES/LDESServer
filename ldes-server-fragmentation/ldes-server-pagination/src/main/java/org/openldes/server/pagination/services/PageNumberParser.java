@@ -1,11 +1,11 @@
 package org.openldes.server.pagination.services;
 
+import static org.openldes.server.pagination.valueobjects.pagenumber.PageNumber.PAGE_NUMBER_KEY;
+
+import org.apache.commons.lang3.math.NumberUtils;
 import org.openldes.server.pagination.valueobjects.pagenumber.NumericPageNumber;
 import org.openldes.server.pagination.valueobjects.pagenumber.PageNumber;
 import org.openldes.server.pagination.valueobjects.pagenumber.UuidPageNumber;
-import org.apache.commons.lang3.math.NumberUtils;
-
-import static org.openldes.server.pagination.valueobjects.pagenumber.PageNumber.PAGE_NUMBER_KEY;
 
 public class PageNumberParser {
 	public static PageNumber parse(String pageNumberString) {

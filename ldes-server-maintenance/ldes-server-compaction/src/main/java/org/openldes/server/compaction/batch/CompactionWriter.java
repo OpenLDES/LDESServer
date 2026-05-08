@@ -1,16 +1,15 @@
 package org.openldes.server.compaction.batch;
 
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
+import java.util.List;
+import java.util.Set;
 import org.openldes.server.compaction.application.services.PageDeletionTimeSetter;
 import org.openldes.server.compaction.domain.entities.CompactedFragmentCreator;
 import org.openldes.server.compaction.domain.entities.CompactionCandidate;
 import org.openldes.server.compaction.domain.repository.CompactionPageRelationRepository;
 import org.openldes.server.maintenance.repository.PageMemberRepository;
-import io.micrometer.observation.Observation;
-import io.micrometer.observation.ObservationRegistry;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Set;
 
 @Component
 public class CompactionWriter {

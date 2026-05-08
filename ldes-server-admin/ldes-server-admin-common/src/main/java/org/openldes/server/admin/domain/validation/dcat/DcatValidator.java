@@ -1,15 +1,14 @@
 package org.openldes.server.admin.domain.validation.dcat;
 
-import org.openldes.server.admin.domain.validation.ModelValidator;
-import org.openldes.server.admin.domain.validation.dcat.blanknodevalidators.DcatBlankNodeValidator;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.jetbrains.annotations.NotNull;
+import org.openldes.server.admin.domain.validation.ModelValidator;
+import org.openldes.server.admin.domain.validation.dcat.blanknodevalidators.DcatBlankNodeValidator;
 import org.springframework.validation.Errors;
-
-import java.util.List;
-
-import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
 
 public abstract class DcatValidator implements ModelValidator {
 	public static final String DCAT = "http://www.w3.org/ns/dcat#";

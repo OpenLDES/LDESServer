@@ -1,5 +1,13 @@
 package org.openldes.server.fragmentation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+
+import io.micrometer.observation.ObservationRegistry;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.openldes.server.domain.events.admin.ViewAddedEvent;
 import org.openldes.server.domain.events.admin.ViewDeletedEvent;
@@ -7,13 +15,6 @@ import org.openldes.server.domain.events.admin.ViewInitializationEvent;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.openldes.server.fragmentation.factory.FragmentationStrategyCreator;
-import io.micrometer.observation.ObservationRegistry;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 class FragmentationStrategyBatchCollectionTest {
 

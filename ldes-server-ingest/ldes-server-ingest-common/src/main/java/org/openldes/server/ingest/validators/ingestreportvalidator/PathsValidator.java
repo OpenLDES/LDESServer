@@ -1,13 +1,16 @@
 package org.openldes.server.ingest.validators.ingestreportvalidator;
 
-import org.openldes.server.domain.model.EventStream;
+import java.util.List;
 import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
+import org.openldes.server.domain.model.EventStream;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Order(2)
 @Component

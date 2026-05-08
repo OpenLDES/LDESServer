@@ -1,22 +1,27 @@
 package org.openldes.server.admin.rest.controllers;
 
-import org.openldes.server.admin.rest.IsIsomorphic;
-import org.openldes.server.admin.rest.config.SpringIntegrationTest;
-import org.openldes.server.admin.spi.EventStreamTO;
-import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
-import org.openldes.server.domain.model.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.assertArg;
+import static org.mockito.Mockito.atMostOnce;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFDataMgr;
-import org.mockito.InOrder;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.ResultActions;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -27,13 +32,22 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
+import org.mockito.InOrder;
+import org.openldes.server.admin.rest.IsIsomorphic;
+import org.openldes.server.admin.rest.config.SpringIntegrationTest;
+import org.openldes.server.admin.spi.EventStreamTO;
+import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
+import org.openldes.server.domain.model.EventSource;
+import org.openldes.server.domain.model.EventStream;
+import org.openldes.server.domain.model.FragmentationConfig;
+import org.openldes.server.domain.model.VersionCreationProperties;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.model.ViewSpecification;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
 
 public class AdminEventStreamsRestControllerSteps extends SpringIntegrationTest {
 	private static final String COLLECTION = "name1";

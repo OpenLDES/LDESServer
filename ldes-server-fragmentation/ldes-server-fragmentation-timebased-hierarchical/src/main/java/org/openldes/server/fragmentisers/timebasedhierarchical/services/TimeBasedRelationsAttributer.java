@@ -1,12 +1,8 @@
 package org.openldes.server.fragmentisers.timebasedhierarchical.services;
 
-import org.openldes.server.fragmentation.entities.Bucket;
-import org.openldes.server.fragmentation.relations.RelationsAttributer;
-import org.openldes.server.fragmentation.valueobjects.TreeRelation;
-import org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedConfig;
-import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
-import org.openldes.server.fragmentisers.timebasedhierarchical.model.FragmentationTimestamp;
-import org.jetbrains.annotations.NotNull;
+import static org.openldes.server.fragmentisers.timebasedhierarchical.constants.TimeBasedConstants.TREE_GTE_RELATION;
+import static org.openldes.server.fragmentisers.timebasedhierarchical.constants.TimeBasedConstants.TREE_LT_RELATION;
+import static org.openldes.server.fragmentisers.timebasedhierarchical.constants.TimeBasedConstants.XSD_DATETIME;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -14,8 +10,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static org.openldes.server.fragmentisers.timebasedhierarchical.constants.TimeBasedConstants.*;
+import org.jetbrains.annotations.NotNull;
+import org.openldes.server.fragmentation.entities.Bucket;
+import org.openldes.server.fragmentation.relations.RelationsAttributer;
+import org.openldes.server.fragmentation.valueobjects.TreeRelation;
+import org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedConfig;
+import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
+import org.openldes.server.fragmentisers.timebasedhierarchical.model.FragmentationTimestamp;
 
 public class TimeBasedRelationsAttributer implements RelationsAttributer {
 

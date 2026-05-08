@@ -1,9 +1,14 @@
 package org.openldes.server.admin.spi;
 
-import org.openldes.server.domain.model.FragmentationConfig;
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.domain.model.ViewSpecification;
-import org.openldes.server.domain.rest.HostNamePrefixConstructor;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
@@ -12,17 +17,11 @@ import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.openldes.server.domain.model.FragmentationConfig;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.model.ViewSpecification;
+import org.openldes.server.domain.rest.HostNamePrefixConstructor;
 import org.springframework.util.ResourceUtils;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 class EventStreamReaderTest {
 	public static final String TIMESTAMP_PATH = "http://purl.org/dc/terms/created";

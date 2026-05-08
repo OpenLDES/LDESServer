@@ -1,7 +1,9 @@
 package org.openldes.server.admin.domain.eventstream.entities;
 
-import org.openldes.server.domain.model.EventStream;
-import org.openldes.server.domain.model.VersionCreationProperties;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -9,11 +11,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import org.openldes.server.domain.model.EventStream;
+import org.openldes.server.domain.model.VersionCreationProperties;
 
 class EventStreamTest {
 	private static final String COLLECTION = "collection_name";

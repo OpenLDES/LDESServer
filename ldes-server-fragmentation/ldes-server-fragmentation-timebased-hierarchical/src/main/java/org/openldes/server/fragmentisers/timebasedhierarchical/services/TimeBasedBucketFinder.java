@@ -1,11 +1,11 @@
 package org.openldes.server.fragmentisers.timebasedhierarchical.services;
 
+import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
+
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedConfig;
 import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
 import org.openldes.server.fragmentisers.timebasedhierarchical.model.FragmentationTimestamp;
-
-import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
 
 public class TimeBasedBucketFinder {
 	private final TimeBasedBucketCreator bucketCreator;

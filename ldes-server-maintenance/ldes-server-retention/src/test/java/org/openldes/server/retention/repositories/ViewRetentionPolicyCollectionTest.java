@@ -1,5 +1,16 @@
 package org.openldes.server.retention.repositories;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+import org.apache.jena.rdf.model.Model;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.openldes.server.domain.events.admin.ViewAddedEvent;
 import org.openldes.server.domain.events.admin.ViewDeletedEvent;
@@ -10,18 +21,6 @@ import org.openldes.server.retention.entities.ViewRetentionPolicyProvider;
 import org.openldes.server.retention.repositories.retentionpolicies.ViewRetentionPolicyCollection;
 import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyFactory;
 import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
-import org.apache.jena.rdf.model.Model;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class ViewRetentionPolicyCollectionTest {
 	private final RetentionPolicyFactory retentionPolicyFactory = mock(RetentionPolicyFactory.class);

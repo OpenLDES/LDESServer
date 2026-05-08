@@ -1,18 +1,17 @@
 package org.openldes.server.ingest.validation.defaultimpl;
 
-import org.openldes.server.domain.events.admin.ShaclChangedEvent;
-import org.openldes.server.domain.events.admin.ShaclDeletedEvent;
-import org.openldes.server.domain.exceptions.ShaclValidationException;
-import org.openldes.server.ingest.entities.IngestedMember;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.time.LocalDateTime;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.domain.events.admin.ShaclChangedEvent;
+import org.openldes.server.domain.events.admin.ShaclDeletedEvent;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
+import org.openldes.server.ingest.entities.IngestedMember;
 
 class MemberIngestValidatorImplTest {
 

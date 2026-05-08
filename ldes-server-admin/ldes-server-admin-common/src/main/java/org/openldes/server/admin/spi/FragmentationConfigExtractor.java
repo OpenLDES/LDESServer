@@ -1,20 +1,19 @@
 package org.openldes.server.admin.spi;
 
-import org.openldes.server.admin.domain.view.service.ConfigFilterPredicate;
-import org.openldes.server.admin.domain.view.service.FragmentationConfigCreationFunction;
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.domain.model.FragmentationConfig;
+import static org.openldes.server.domain.constants.RdfConstants.FRAGMENTATION_OBJECT;
+
+import java.util.List;
+import java.util.function.Function;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFList;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.riot.Lang;
+import org.openldes.server.admin.domain.view.service.ConfigFilterPredicate;
+import org.openldes.server.admin.domain.view.service.FragmentationConfigCreationFunction;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.domain.model.FragmentationConfig;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.function.Function;
-
-import static org.openldes.server.domain.constants.RdfConstants.FRAGMENTATION_OBJECT;
 
 @Component
 public class FragmentationConfigExtractor {

@@ -1,5 +1,6 @@
 package org.openldes.server.resultactionsextensions;
 
+import java.io.UnsupportedEncodingException;
 import org.apache.jena.atlas.web.ContentType;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
@@ -8,8 +9,6 @@ import org.apache.jena.riot.RDFParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mock.web.MockHttpServletResponse;
-
-import java.io.UnsupportedEncodingException;
 
 public class ResponseToModelConverter {
     private static final Logger log = LoggerFactory.getLogger(ResponseToModelConverter.class);

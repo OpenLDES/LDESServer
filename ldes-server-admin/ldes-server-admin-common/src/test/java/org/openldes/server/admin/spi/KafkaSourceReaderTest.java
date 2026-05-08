@@ -1,6 +1,10 @@
 package org.openldes.server.admin.spi;
 
-import org.openldes.server.domain.model.KafkaSourceProperties;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFDataMgr;
@@ -8,9 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openldes.server.domain.model.KafkaSourceProperties;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class KafkaSourceReaderTest {
 

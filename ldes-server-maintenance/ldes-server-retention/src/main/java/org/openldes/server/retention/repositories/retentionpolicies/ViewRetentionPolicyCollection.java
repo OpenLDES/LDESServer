@@ -1,14 +1,17 @@
 package org.openldes.server.retention.repositories.retentionpolicies;
 
-import org.openldes.server.domain.events.admin.*;
+import java.util.HashSet;
+import java.util.Set;
+import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
+import org.openldes.server.domain.events.admin.ViewAddedEvent;
+import org.openldes.server.domain.events.admin.ViewDeletedEvent;
+import org.openldes.server.domain.events.admin.ViewInitializationEvent;
+import org.openldes.server.domain.events.admin.ViewSupplier;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.openldes.server.retention.entities.ViewRetentionPolicyProvider;
 import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 public class ViewRetentionPolicyCollection implements RetentionPolicyCollection<ViewRetentionPolicyProvider> {

@@ -1,19 +1,18 @@
 package org.openldes.server.retention.services.retentionpolicy.creation.versionbased;
 
-import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
-import org.openldes.server.retention.services.retentionpolicy.definition.versionbased.VersionBasedRetentionPolicy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.net.URISyntaxException;
+import java.util.Objects;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.net.URISyntaxException;
-import java.util.Objects;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
+import org.openldes.server.retention.services.retentionpolicy.definition.versionbased.VersionBasedRetentionPolicy;
 
 @ExtendWith(MockitoExtension.class)
 class VersionBasedRetentionPolicyCreatorTest {

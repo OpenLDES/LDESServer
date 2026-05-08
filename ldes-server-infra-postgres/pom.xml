@@ -21,11 +21,6 @@
 
     <artifactId>ldes-server-infra-postgres</artifactId>
 
-
-    <properties>
-        <hibernate-extensions.version>3.9.0</hibernate-extensions.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,7 +39,6 @@
         <dependency>
             <groupId>io.hypersistence</groupId>
             <artifactId>hypersistence-utils-hibernate-63</artifactId>
-            <version>${hibernate-extensions.version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -60,7 +54,6 @@
         <dependency>
             <groupId>io.zonky.test</groupId>
             <artifactId>embedded-database-spring-test</artifactId>
-            <version>${zonky.embbeded-db.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

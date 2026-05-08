@@ -1,10 +1,9 @@
 package org.openldes.server.fragmentation.entities;
 
+import java.time.LocalDateTime;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.domain.converter.VersionObjectModelBuilder;
 import org.openldes.server.fragmentation.valueobjects.EventStreamProperties;
-import org.apache.jena.rdf.model.Model;
-
-import java.time.LocalDateTime;
 
 public final class FragmentationMember {
 	private final long memberId;

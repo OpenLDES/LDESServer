@@ -1,16 +1,15 @@
 package org.openldes.server.pagination.postgres.repository;
 
+import jakarta.persistence.Tuple;
+import java.util.List;
 import org.openldes.server.pagination.postgres.entity.PageEntity;
 import org.openldes.server.pagination.postgres.entity.PageMemberEntity;
 import org.openldes.server.pagination.postgres.entity.PageMemberId;
-import jakarta.persistence.Tuple;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 public interface PageMemberEntityRepository extends JpaRepository<PageMemberEntity, PageMemberId> {
 

@@ -1,17 +1,16 @@
 package org.openldes.server.fragmentation.postgres;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import java.util.Optional;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class BucketPostgresRepositoryTest extends PostgresBucketisationIntegrationTest {
 	private static final ViewName VIEW_NAME = new ViewName("collection", "name");

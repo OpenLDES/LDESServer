@@ -1,16 +1,15 @@
 package org.openldes.server.pagination.postgres.mapper;
 
+import static org.openldes.server.domain.constants.ServerConstants.SERIALISATION_LANG;
+
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFParser;
 import org.apache.jena.riot.RDFWriter;
 import org.springframework.stereotype.Component;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-
-import static org.openldes.server.domain.constants.ServerConstants.SERIALISATION_LANG;
 
 @Converter
 @Component("PaginationMemberModelConverter")

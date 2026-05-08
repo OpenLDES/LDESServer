@@ -1,5 +1,7 @@
 package org.openldes.server.admin.postgres.dcatdataset;
 
+import java.util.List;
+import java.util.Optional;
 import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
 import org.openldes.server.admin.domain.dcat.dcatdataset.repository.DcatDatasetRepository;
 import org.openldes.server.admin.postgres.dcatdataset.entity.DcatDatasetEntity;
@@ -8,9 +10,6 @@ import org.openldes.server.admin.postgres.dcatdataset.repository.DcatDatasetEnti
 import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class DcatDatasetPostgresRepository implements DcatDatasetRepository {

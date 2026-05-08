@@ -1,22 +1,21 @@
 package org.openldes.server.fragmentisers.geospatial.bucketising;
 
-import org.openldes.server.fragmentisers.geospatial.config.GeospatialConfig;
+import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
+import static org.openldes.server.fragmentisers.geospatial.bucketising.CoordinateToTileStringConverter.calculateTiles;
+
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.jena.geosparql.implementation.GeometryWrapper;
 import org.apache.jena.geosparql.implementation.vocabulary.SRS_URI;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
+import org.openldes.server.fragmentisers.geospatial.config.GeospatialConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
-import static org.openldes.server.fragmentisers.geospatial.bucketising.CoordinateToTileStringConverter.calculateTiles;
 
 public class GeospatialBucketiser {
 	private final GeospatialConfig geospatialConfig;

@@ -1,14 +1,14 @@
 package org.openldes.server.pagination.services;
 
-import org.openldes.server.pagination.valueobjects.pagenumber.NumericPageNumber;
-import org.openldes.server.pagination.valueobjects.pagenumber.PageNumber;
-import org.openldes.server.pagination.valueobjects.pagenumber.UuidPageNumber;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.openldes.server.pagination.valueobjects.pagenumber.NumericPageNumber;
+import org.openldes.server.pagination.valueobjects.pagenumber.PageNumber;
+import org.openldes.server.pagination.valueobjects.pagenumber.UuidPageNumber;
 
 class PageNumberParserTest {
 	@Test

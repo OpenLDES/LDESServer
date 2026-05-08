@@ -1,5 +1,13 @@
 package org.openldes.server.fragmentisers.timebasedhierarchical.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.openldes.server.fragmentisers.timebasedhierarchical.constants.TimeBasedConstants.TREE_GTE_RELATION;
+import static org.openldes.server.fragmentisers.timebasedhierarchical.constants.TimeBasedConstants.TREE_LT_RELATION;
+import static org.openldes.server.fragmentisers.timebasedhierarchical.constants.TimeBasedConstants.XSD_DATETIME;
+
+import java.time.LocalDateTime;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
@@ -7,13 +15,6 @@ import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
 import org.openldes.server.fragmentation.valueobjects.TreeRelation;
 import org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedConfig;
 import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
-import static org.openldes.server.fragmentisers.timebasedhierarchical.constants.TimeBasedConstants.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class TimeBasedRelationsAttributerTest {
 

@@ -1,8 +1,7 @@
 package org.openldes.server.retention.services.retentionpolicy.execution;
 
-import org.openldes.server.retention.entities.MemberProperties;
-
 import java.util.List;
+import org.openldes.server.retention.entities.MemberProperties;
 
 public interface MemberRemover {
 

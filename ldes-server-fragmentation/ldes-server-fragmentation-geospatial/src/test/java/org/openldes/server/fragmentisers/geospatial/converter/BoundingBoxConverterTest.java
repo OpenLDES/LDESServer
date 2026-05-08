@@ -1,11 +1,11 @@
 package org.openldes.server.fragmentisers.geospatial.converter;
 
-import org.openldes.server.fragmentisers.geospatial.connected.BoundingBox;
-import org.openldes.server.fragmentisers.geospatial.model.Tile;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.openldes.server.fragmentisers.geospatial.connected.BoundingBox;
+import org.openldes.server.fragmentisers.geospatial.model.Tile;
 
 class BoundingBoxConverterTest {
 

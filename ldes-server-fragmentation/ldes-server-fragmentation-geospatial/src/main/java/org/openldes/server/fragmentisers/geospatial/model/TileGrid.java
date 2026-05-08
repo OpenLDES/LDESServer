@@ -1,13 +1,12 @@
 package org.openldes.server.fragmentisers.geospatial.model;
 
-import org.openldes.server.fragmentisers.geospatial.connected.BoundingBox;
-import org.locationtech.jts.geom.Envelope;
-import org.locationtech.jts.geom.Geometry;
+import static org.openldes.server.fragmentisers.geospatial.converter.BoundingBoxConverter.toPolygon;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.openldes.server.fragmentisers.geospatial.converter.BoundingBoxConverter.toPolygon;
+import org.locationtech.jts.geom.Envelope;
+import org.locationtech.jts.geom.Geometry;
+import org.openldes.server.fragmentisers.geospatial.connected.BoundingBox;
 
 public class TileGrid {
     private final double topTile;

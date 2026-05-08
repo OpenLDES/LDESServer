@@ -1,20 +1,19 @@
 package org.openldes.server.compaction.batch;
 
-import org.openldes.server.compaction.domain.entities.ViewCapacity;
-import org.openldes.server.compaction.domain.repository.ViewCollection;
-import org.openldes.server.domain.model.ViewName;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+
+import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.openldes.server.compaction.domain.entities.ViewCapacity;
+import org.openldes.server.compaction.domain.repository.ViewCollection;
+import org.openldes.server.domain.model.ViewName;
 import org.springframework.batch.item.ExecutionContext;
-
-import java.util.Map;
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ViewCapacityPartitionerTest {

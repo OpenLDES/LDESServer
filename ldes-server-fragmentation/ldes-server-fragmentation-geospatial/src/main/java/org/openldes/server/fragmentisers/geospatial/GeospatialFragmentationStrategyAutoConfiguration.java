@@ -1,5 +1,7 @@
 package org.openldes.server.fragmentisers.geospatial;
 
+import static org.openldes.server.fragmentisers.geospatial.GeospatialFragmentationStrategy.GEOSPATIAL_FRAGMENTATION;
+
 import jakarta.annotation.PostConstruct;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
@@ -7,8 +9,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import static org.openldes.server.fragmentisers.geospatial.GeospatialFragmentationStrategy.GEOSPATIAL_FRAGMENTATION;
 
 @Configuration
 @EnableConfigurationProperties()

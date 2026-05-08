@@ -1,10 +1,9 @@
 package org.openldes.server.ingest.postgres.repository;
 
+import java.util.List;
 import org.openldes.server.ingest.postgres.entity.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 public interface MemberEntityRepository extends JpaRepository<MemberEntity, String> {
 

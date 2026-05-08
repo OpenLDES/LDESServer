@@ -1,5 +1,10 @@
 package org.openldes.server.fragmentation.postgres.batch;
 
+import static org.openldes.server.fragmentation.batch.BucketStepDefinitions.CHUNK_SIZE;
+
+import java.util.HashMap;
+import java.util.Map;
+import javax.sql.DataSource;
 import org.openldes.server.fragmentation.entities.FragmentationMember;
 import org.openldes.server.fragmentation.postgres.mapper.FragmentationMemberRowMapper;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -10,12 +15,6 @@ import org.springframework.batch.item.database.support.PostgresPagingQueryProvid
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.openldes.server.fragmentation.batch.BucketStepDefinitions.CHUNK_SIZE;
 
 @Configuration
 public class MemberItemReader {

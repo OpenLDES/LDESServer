@@ -1,15 +1,14 @@
 package org.openldes.server.fragmentisers.geospatial;
 
-import org.openldes.server.domain.model.ConfigProperties;
-import org.openldes.server.fragmentation.FragmentationStrategy;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-
-import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+
+import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.domain.model.ConfigProperties;
+import org.openldes.server.fragmentation.FragmentationStrategy;
+import org.springframework.context.ApplicationContext;
 
 class GeospatialFragmentationStrategyWrapperTest {
 

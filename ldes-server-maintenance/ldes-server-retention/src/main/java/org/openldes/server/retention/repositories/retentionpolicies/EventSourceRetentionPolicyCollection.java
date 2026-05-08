@@ -1,14 +1,15 @@
 package org.openldes.server.retention.repositories.retentionpolicies;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.domain.events.admin.DeletionPolicyChangedEvent;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.openldes.server.retention.entities.EventSourceRetentionPolicyProvider;
 import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyFactory;
-import org.apache.jena.rdf.model.Model;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.util.*;
 
 @Component
 public class EventSourceRetentionPolicyCollection implements RetentionPolicyCollection<EventSourceRetentionPolicyProvider> {

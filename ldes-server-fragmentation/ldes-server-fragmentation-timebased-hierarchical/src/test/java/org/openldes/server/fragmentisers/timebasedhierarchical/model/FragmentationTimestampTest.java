@@ -1,6 +1,13 @@
 package org.openldes.server.fragmentisers.timebasedhierarchical.model;
 
-import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,15 +15,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.function.BiConsumer;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
 
 class FragmentationTimestampTest {
 

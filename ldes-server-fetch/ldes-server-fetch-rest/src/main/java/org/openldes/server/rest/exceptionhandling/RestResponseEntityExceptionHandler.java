@@ -1,11 +1,11 @@
 package org.openldes.server.rest.exceptionhandling;
 
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFWriter;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.exceptions.RdfFormatException;
 import org.openldes.server.domain.exceptions.RelativeUrlException;
 import org.openldes.server.domain.exceptions.ShaclValidationException;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

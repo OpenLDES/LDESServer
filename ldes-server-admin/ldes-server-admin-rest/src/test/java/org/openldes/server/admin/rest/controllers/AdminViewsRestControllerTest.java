@@ -1,5 +1,31 @@
 package org.openldes.server.admin.rest.controllers;
 
+import static org.apache.jena.riot.WebContent.contentTypeNQuads;
+import static org.apache.jena.riot.WebContent.contentTypeTurtle;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFWriter;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.admin.domain.validation.ModelValidator;
 import org.openldes.server.admin.domain.validation.ValidatorsConfig;
 import org.openldes.server.admin.domain.view.exception.DuplicateRetentionException;
@@ -20,36 +46,14 @@ import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.openldes.server.domain.rest.HostNamePrefixConstructorConfig;
 import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFDataMgr;
-import org.apache.jena.riot.RDFWriter;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-import static org.apache.jena.riot.WebContent.contentTypeNQuads;
-import static org.apache.jena.riot.WebContent.contentTypeTurtle;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
 @ActiveProfiles({"test", "rest"})
@@ -61,9 +65,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AdminViewsRestControllerTest {
 	private static final String COLLECTION_NAME = "name1";
 	private static final String VIEW_NAME = "view1";
-	@MockBean
+	@MockitoBean
 	private ViewService viewService;
-	@SpyBean(name = "viewShaclValidator")
+	@MockitoSpyBean(name = "viewShaclValidator")
 	private ModelValidator validator;
 	@Autowired
 	private ViewSpecificationConverter converter;

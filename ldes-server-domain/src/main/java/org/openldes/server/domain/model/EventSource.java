@@ -1,9 +1,8 @@
 package org.openldes.server.domain.model;
 
-import org.apache.jena.rdf.model.Model;
-
 import java.util.List;
 import java.util.Objects;
+import org.apache.jena.rdf.model.Model;
 
 public record EventSource(String collectionName, List<Model> retentionPolicies) {
 

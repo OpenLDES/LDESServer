@@ -1,15 +1,15 @@
 package org.openldes.server.fragmentisers.reference;
 
+import static org.openldes.server.fragmentisers.reference.fragmentation.ReferenceBucketCreator.FRAGMENT_KEY_REFERENCE_ROOT;
+
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
 import org.openldes.server.fragmentation.FragmentationStrategy;
 import org.openldes.server.fragmentation.FragmentationStrategyDecorator;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.entities.FragmentationMember;
 import org.openldes.server.fragmentisers.reference.bucketising.ReferenceBucketiser;
 import org.openldes.server.fragmentisers.reference.fragmentation.ReferenceBucketCreator;
-import io.micrometer.observation.Observation;
-import io.micrometer.observation.ObservationRegistry;
-
-import static org.openldes.server.fragmentisers.reference.fragmentation.ReferenceBucketCreator.FRAGMENT_KEY_REFERENCE_ROOT;
 
 public class ReferenceFragmentationStrategy extends FragmentationStrategyDecorator {
 

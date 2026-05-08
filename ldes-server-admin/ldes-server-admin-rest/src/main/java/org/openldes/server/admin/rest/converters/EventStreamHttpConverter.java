@@ -1,15 +1,19 @@
 package org.openldes.server.admin.rest.converters;
 
-import org.openldes.server.admin.spi.EventStreamTO;
-import org.openldes.server.admin.spi.EventStreamWriter;
-import org.openldes.server.domain.converter.RdfMediaType;
-import org.openldes.server.domain.converter.RdfModelConverter;
+import static org.openldes.server.domain.exceptions.RdfFormatException.RdfFormatContext.REST_ADMIN;
+
 import io.micrometer.observation.annotation.Observed;
+import java.io.IOException;
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.openldes.server.admin.spi.EventStreamTO;
+import org.openldes.server.admin.spi.EventStreamWriter;
+import org.openldes.server.domain.converter.RdfMediaType;
+import org.openldes.server.domain.converter.RdfModelConverter;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -17,11 +21,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.List;
-
-import static org.openldes.server.domain.exceptions.RdfFormatException.RdfFormatContext.REST_ADMIN;
 
 @Observed
 @Component

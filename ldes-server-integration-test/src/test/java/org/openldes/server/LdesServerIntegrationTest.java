@@ -1,16 +1,16 @@
 package org.openldes.server;
 
+import io.cucumber.spring.CucumberContextConfiguration;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
+import jakarta.persistence.EntityManager;
+import javax.sql.DataSource;
 import org.openldes.server.fragmentation.repository.UnprocessedViewRepository;
-import org.openldes.server.maintenance.postgres.CompactionPagePostgresRepository;
 import org.openldes.server.maintenance.postgres.repository.CompactionPageEntityRepository;
 import org.openldes.server.pagination.postgres.PageRelationPostgresRepository;
 import org.openldes.server.pagination.postgres.repository.FragmentationMemberEntityRepository;
 import org.openldes.server.pagination.postgres.repository.PageEntityRepository;
 import org.openldes.server.pagination.postgres.repository.PageMemberEntityRepository;
 import org.openldes.server.pagination.postgres.repository.PageRelationEntityRepository;
-import io.cucumber.spring.CucumberContextConfiguration;
-import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
-import jakarta.persistence.EntityManager;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -31,8 +31,6 @@ import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-
-import javax.sql.DataSource;
 
 @AutoConfigureObservability
 @CucumberContextConfiguration

@@ -1,15 +1,23 @@
 package org.openldes.server.admin.postgres.view.entity;
 
-import org.openldes.server.admin.postgres.ModelListConverter;
-import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
 import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
-
-import java.util.List;
+import org.openldes.server.admin.postgres.ModelListConverter;
+import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
 
 @Entity
 @Table(name = "views", uniqueConstraints = @UniqueConstraint(columnNames = {"collection_id", "name"}))

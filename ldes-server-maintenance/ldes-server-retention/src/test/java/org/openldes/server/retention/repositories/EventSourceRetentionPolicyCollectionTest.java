@@ -1,11 +1,11 @@
 package org.openldes.server.retention.repositories;
 
-import org.openldes.server.domain.events.admin.DeletionPolicyChangedEvent;
-import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
-import org.openldes.server.retention.entities.EventSourceRetentionPolicyProvider;
-import org.openldes.server.retention.repositories.retentionpolicies.EventSourceRetentionPolicyCollection;
-import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyFactory;
-import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,13 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.time.Duration;
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import org.openldes.server.domain.events.admin.DeletionPolicyChangedEvent;
+import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
+import org.openldes.server.retention.entities.EventSourceRetentionPolicyProvider;
+import org.openldes.server.retention.repositories.retentionpolicies.EventSourceRetentionPolicyCollection;
+import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyFactory;
+import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
 
 @ExtendWith(MockitoExtension.class)
 class EventSourceRetentionPolicyCollectionTest {

@@ -1,5 +1,11 @@
 package org.openldes.server.admin.domain.dcat.dcatserver.services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Statement;
 import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
 import org.openldes.server.admin.domain.dcat.dcatdataset.services.DcatDatasetService;
 import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
@@ -11,14 +17,7 @@ import org.openldes.server.domain.exceptions.ExistingResourceException;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.DcatView;
 import org.openldes.server.domain.rest.UriPrefixConstructor;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Statement;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DcatServerServiceImpl implements DcatServerService {

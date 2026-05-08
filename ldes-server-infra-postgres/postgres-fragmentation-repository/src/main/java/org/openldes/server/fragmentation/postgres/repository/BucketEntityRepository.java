@@ -1,11 +1,10 @@
 package org.openldes.server.fragmentation.postgres.repository;
 
+import java.util.Optional;
 import org.openldes.server.fragmentation.postgres.entity.BucketEntity;
 import org.openldes.server.fragmentation.postgres.projections.BucketProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.Optional;
 
 public interface BucketEntityRepository extends JpaRepository<BucketEntity, Long> {
 	@Query("SELECT b.bucketId AS bucketId, b.bucketDescriptor AS bucketDescriptor, CONCAT(b.view.eventStream.name, '/', b.view.name) AS viewName " +

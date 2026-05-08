@@ -1,5 +1,6 @@
 package org.openldes.server.fragmentation.factory;
 
+import java.util.List;
 import org.openldes.server.domain.model.FragmentationConfig;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.openldes.server.fragmentation.FragmentationStrategy;
@@ -7,8 +8,6 @@ import org.openldes.server.fragmentation.FragmentationStrategyImpl;
 import org.openldes.server.fragmentation.FragmentationStrategyWrapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class FragmentationStrategyCreatorImpl implements FragmentationStrategyCreator {

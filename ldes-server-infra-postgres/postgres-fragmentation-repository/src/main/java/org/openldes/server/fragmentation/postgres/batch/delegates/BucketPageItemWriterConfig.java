@@ -1,14 +1,13 @@
 package org.openldes.server.fragmentation.postgres.batch.delegates;
 
+import java.util.Map;
+import javax.sql.DataSource;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-
-import javax.sql.DataSource;
-import java.util.Map;
 
 @Configuration
 public class BucketPageItemWriterConfig {

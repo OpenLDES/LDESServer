@@ -1,16 +1,26 @@
 package org.openldes.server.admin.rest.controllers;
 
+import static org.apache.jena.riot.WebContent.contentTypeJSONLD;
+import static org.apache.jena.riot.WebContent.contentTypeNQuads;
+import static org.apache.jena.riot.WebContent.contentTypeTurtle;
+
+import io.micrometer.observation.annotation.Observed;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.admin.domain.validation.dcat.DcatViewValidator;
 import org.openldes.server.admin.domain.view.service.DcatViewService;
 import org.openldes.server.domain.model.ViewName;
-import io.micrometer.observation.annotation.Observed;
-import org.apache.jena.rdf.model.Model;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-
-import static org.apache.jena.riot.WebContent.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @Observed
 @RestController

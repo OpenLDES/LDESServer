@@ -1,9 +1,8 @@
 package org.openldes.server.admin.domain.shacl.repository;
 
-import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
-
 import java.util.List;
 import java.util.Optional;
+import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
 
 public interface ShaclShapeRepository {
 	List<ShaclShape> retrieveAllShaclShapes();
