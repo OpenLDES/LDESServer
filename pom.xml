@@ -68,7 +68,7 @@
     <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
     <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
     <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
-    <springdoc-openapi.version>3.0.3</springdoc-openapi.version>
+    <springdoc-openapi.version>2.8.17</springdoc-openapi.version>
     <swagger-annotations.version>2.2.49</swagger-annotations.version>
     <pyroscope.version>2.5.2</pyroscope.version>
     <unittestskip>false</unittestskip>
