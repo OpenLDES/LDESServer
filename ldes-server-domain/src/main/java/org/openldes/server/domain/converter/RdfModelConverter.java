@@ -1,28 +1,27 @@
 package org.openldes.server.domain.converter;
 
-import org.openldes.server.domain.exceptions.RdfFormatException;
-import org.openldes.server.domain.exceptions.RelativeUrlException;
+import static java.util.Optional.ofNullable;
+import static org.apache.jena.riot.RDFLanguages.TURTLE;
+import static org.apache.jena.riot.RDFLanguages.nameToLang;
+import static org.apache.jena.riot.lang.LangJSONLD11.JSONLD_OPTIONS;
+import static org.openldes.server.domain.constants.ServerConfig.MAX_JSONLD_CACHE_CAPACITY;
+import static org.openldes.server.domain.constants.ServerConfig.USE_RELATIVE_URL_KEY;
+import static org.openldes.server.domain.constants.ServerConstants.RELATIVE_URL_INCOMPATIBLE_LANGS;
+
 import com.apicatalog.jsonld.JsonLdOptions;
 import com.apicatalog.jsonld.context.cache.LruCache;
+import java.io.StringWriter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RIOT;
 import org.apache.jena.sparql.util.Context;
 import org.apache.jena.sparql.util.ContextAccumulator;
+import org.openldes.server.domain.exceptions.RdfFormatException;
+import org.openldes.server.domain.exceptions.RelativeUrlException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-
-import java.io.StringWriter;
-
-import static org.openldes.server.domain.constants.ServerConfig.MAX_JSONLD_CACHE_CAPACITY;
-import static org.openldes.server.domain.constants.ServerConfig.USE_RELATIVE_URL_KEY;
-import static org.openldes.server.domain.constants.ServerConstants.RELATIVE_URL_INCOMPATIBLE_LANGS;
-import static java.util.Optional.ofNullable;
-import static org.apache.jena.riot.RDFLanguages.TURTLE;
-import static org.apache.jena.riot.RDFLanguages.nameToLang;
-import static org.apache.jena.riot.lang.LangJSONLD11.JSONLD_OPTIONS;
 
 @Component
 public class RdfModelConverter {
@@ -38,6 +37,9 @@ public class RdfModelConverter {
     public Lang getLangOrDefault(MediaType contentType, RdfFormatException.RdfFormatContext rdfFormatContext) {
         if (MediaType.ALL.equals(contentType) || MediaType.TEXT_HTML.equals(contentType)) {
             return TURTLE;
+        }
+        if (MediaType.TEXT_PLAIN.equalsTypeAndSubtype(contentType)) {
+            return Lang.NTRIPLES;
         }
         return ofNullable(nameToLang(contentType.getType() + "/" + contentType.getSubtype()))
                 .orElseGet(() -> ofNullable(nameToLang(contentType.getSubtype()))

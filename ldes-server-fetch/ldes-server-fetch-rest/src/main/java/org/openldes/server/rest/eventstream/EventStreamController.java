@@ -1,20 +1,27 @@
 package org.openldes.server.rest.eventstream;
 
+import static org.openldes.server.rest.eventstream.config.EventStreamWebConfig.DEFAULT_RDF_MEDIA_TYPE;
+import static org.springframework.http.HttpHeaders.ACCEPT;
+import static org.springframework.http.HttpHeaders.CACHE_CONTROL;
+import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
+import static org.springframework.http.HttpHeaders.VARY;
+
+import io.micrometer.observation.annotation.Observed;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.admin.spi.EventStreamServiceSpi;
 import org.openldes.server.admin.spi.EventStreamTO;
 import org.openldes.server.domain.converter.RdfMediaType;
 import org.openldes.server.rest.caching.CachingStrategy;
 import org.openldes.server.rest.config.RestConfig;
-import io.micrometer.observation.annotation.Observed;
-import jakarta.servlet.http.HttpServletResponse;
-import org.apache.jena.rdf.model.Model;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import static org.openldes.server.rest.eventstream.config.EventStreamWebConfig.DEFAULT_RDF_MEDIA_TYPE;
-import static org.springframework.http.HttpHeaders.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 
 @Observed
 @RestController

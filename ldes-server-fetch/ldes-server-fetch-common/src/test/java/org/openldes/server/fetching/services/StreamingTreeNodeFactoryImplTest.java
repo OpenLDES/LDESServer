@@ -1,5 +1,16 @@
 package org.openldes.server.fetching.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.openldes.server.domain.constants.RdfConstants.GENERATED_AT_TIME;
+
+import java.util.List;
+import java.util.Optional;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fetching.entities.Member;
@@ -8,18 +19,6 @@ import org.openldes.server.fetching.repository.TreeMemberRepository;
 import org.openldes.server.fetching.repository.TreeNodeRepository;
 import org.openldes.server.fetching.valueobjects.FragmentPair;
 import org.openldes.server.fetching.valueobjects.LdesFragmentIdentifier;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.openldes.server.domain.constants.RdfConstants.GENERATED_AT_TIME;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
 
 class StreamingTreeNodeFactoryImplTest {
     private static final String HOST = "http://localhost:8080";

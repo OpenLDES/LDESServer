@@ -1,10 +1,9 @@
 package org.openldes.server.admin.domain.view.repository;
 
-import org.openldes.server.domain.model.DcatView;
-import org.openldes.server.domain.model.ViewName;
-
 import java.util.List;
 import java.util.Optional;
+import org.openldes.server.domain.model.DcatView;
+import org.openldes.server.domain.model.ViewName;
 
 public interface DcatViewRepository {
 

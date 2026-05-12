@@ -1,18 +1,18 @@
 package org.openldes.server.fragmentation;
 
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.fragmentation.entities.Bucket;
-import org.openldes.server.fragmentation.entities.FragmentationMember;
-import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import io.micrometer.observation.Observation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.fragmentation.entities.Bucket;
+import org.openldes.server.fragmentation.entities.FragmentationMember;
+import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
 
 @ExtendWith(MockitoExtension.class)
 class FragmentationStrategyDecoratorTest {

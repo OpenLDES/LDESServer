@@ -1,24 +1,23 @@
 package org.openldes.server.admin.postgres.view;
 
-import org.openldes.server.admin.postgres.SpringIntegrationTest;
-import org.openldes.server.admin.spi.EventStreamTO;
-import org.openldes.server.domain.model.DcatView;
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.domain.model.ViewSpecification;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.util.List;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.openldes.server.admin.postgres.SpringIntegrationTest;
+import org.openldes.server.admin.spi.EventStreamTO;
+import org.openldes.server.domain.model.DcatView;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.model.ViewSpecification;
 
 public class DcatViewRepositorySteps extends SpringIntegrationTest {
 

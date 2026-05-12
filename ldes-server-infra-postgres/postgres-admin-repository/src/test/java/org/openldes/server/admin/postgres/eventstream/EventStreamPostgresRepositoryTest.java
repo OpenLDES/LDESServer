@@ -1,5 +1,20 @@
 package org.openldes.server.admin.postgres.eventstream;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.assertArg;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.openldes.server.admin.postgres.eventsource.entity.EventSourceEntity;
 import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
 import org.openldes.server.admin.postgres.eventstream.projection.EventStreamProperties;
@@ -11,22 +26,6 @@ import org.openldes.server.domain.model.EventStream;
 import org.openldes.server.domain.model.VersionCreationProperties;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.assertArg;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class EventStreamPostgresRepositoryTest {

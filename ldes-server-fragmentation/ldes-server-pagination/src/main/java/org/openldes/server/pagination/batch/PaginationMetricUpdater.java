@@ -1,15 +1,14 @@
 package org.openldes.server.pagination.batch;
 
+import static org.openldes.server.fragmentation.batch.BucketStepDefinitions.BUCKETISATION_STEP;
+
+import java.util.Objects;
 import org.openldes.server.fragmentation.metrics.FragmentationMetricsService;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
-
-import static org.openldes.server.fragmentation.batch.BucketStepDefinitions.BUCKETISATION_STEP;
 
 @Component
 public class PaginationMetricUpdater implements JobExecutionListener {

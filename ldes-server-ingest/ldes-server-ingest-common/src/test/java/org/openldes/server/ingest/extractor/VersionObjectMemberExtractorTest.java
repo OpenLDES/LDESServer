@@ -1,14 +1,8 @@
 package org.openldes.server.ingest.extractor;
 
-import org.openldes.server.ingest.entities.IngestedMember;
-import org.openldes.server.ingest.exceptions.MemberSubjectNotFoundException;
-import org.apache.commons.io.FileUtils;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFParser;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.util.ResourceUtils;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,8 +10,15 @@ import java.nio.charset.StandardCharsets;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.*;
+import org.apache.commons.io.FileUtils;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFParser;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.ingest.entities.IngestedMember;
+import org.openldes.server.ingest.exceptions.MemberSubjectNotFoundException;
+import org.springframework.util.ResourceUtils;
 
 class VersionObjectMemberExtractorTest {
     private static final String COLLECTION = "mobility-hindrances";

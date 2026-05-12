@@ -1,11 +1,10 @@
 package org.openldes.server.fragmentation.postgres.batch.delegates;
 
+import java.util.List;
+import java.util.function.Supplier;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
-
-import java.util.List;
-import java.util.function.Supplier;
 
 public class TestBucketSupplier implements Supplier<Bucket> {
 	private final ViewName viewName;

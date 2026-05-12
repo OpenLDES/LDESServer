@@ -1,15 +1,18 @@
 package org.openldes.server.fragmentation.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Stream;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.exceptions.DuplicateFragmentPairException;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
 import org.openldes.server.fragmentation.valueobjects.BucketRelation;
 import org.openldes.server.fragmentation.valueobjects.TreeRelation;
-
-import java.util.*;
-import java.util.stream.Stream;
 
 public class Bucket {
 	private long bucketId;

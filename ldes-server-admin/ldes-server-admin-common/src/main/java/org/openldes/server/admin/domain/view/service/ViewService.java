@@ -1,9 +1,8 @@
 package org.openldes.server.admin.domain.view.service;
 
+import java.util.List;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
-
-import java.util.List;
 
 public interface ViewService {
 

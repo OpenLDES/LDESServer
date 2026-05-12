@@ -1,14 +1,13 @@
 package org.openldes.server.ingest.validation.defaultimpl;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.openldes.server.domain.events.admin.ShaclChangedEvent;
 import org.openldes.server.domain.events.admin.ShaclDeletedEvent;
 import org.openldes.server.ingest.entities.IngestedMember;
 import org.openldes.server.ingest.validation.MemberIngestValidator;
 import org.openldes.server.ingest.validation.defaultimpl.modelingestvalidator.ModelIngestValidator;
 import org.springframework.context.event.EventListener;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MemberIngestValidatorImpl implements MemberIngestValidator {
 

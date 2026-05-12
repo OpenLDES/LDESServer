@@ -1,11 +1,10 @@
 package org.openldes.server.admin.domain.view.service;
 
-import org.openldes.server.domain.model.DcatView;
-import org.openldes.server.domain.model.ViewName;
-import org.apache.jena.rdf.model.Model;
-
 import java.util.List;
 import java.util.Optional;
+import org.apache.jena.rdf.model.Model;
+import org.openldes.server.domain.model.DcatView;
+import org.openldes.server.domain.model.ViewName;
 
 public interface DcatViewService {
 

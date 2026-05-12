@@ -1,10 +1,20 @@
 package org.openldes.server.fragmentation;
 
+import static org.openldes.server.domain.constants.ServerConfig.FRAGMENTATION_CRON;
+import static org.openldes.server.fragmentation.batch.BatchConfiguration.ASYNC_JOB_LAUNCHER;
+import static org.openldes.server.fragmentation.batch.FragmentationJobDefinitions.FRAGMENTATION_JOB;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
 import org.openldes.server.fragmentation.entities.UnprocessedView;
 import org.openldes.server.fragmentation.exceptions.FragmentationJobException;
 import org.openldes.server.fragmentation.repository.UnprocessedViewRepository;
 import org.openldes.server.fragmentation.valueobjects.ContinueFragmentationTriggerEvent;
-import org.springframework.batch.core.*;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobExecutionException;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.job.builder.SimpleJobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -13,13 +23,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.Objects;
-
-import static org.openldes.server.domain.constants.ServerConfig.FRAGMENTATION_CRON;
-import static org.openldes.server.fragmentation.batch.BatchConfiguration.ASYNC_JOB_LAUNCHER;
-import static org.openldes.server.fragmentation.batch.FragmentationJobDefinitions.FRAGMENTATION_JOB;
 
 @Service
 @EnableScheduling

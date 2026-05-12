@@ -1,15 +1,14 @@
 package org.openldes.server.rest.treenode.services;
 
-import org.apache.jena.rdf.model.Statement;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_NODE_RESOURCE;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
-import static org.openldes.server.domain.constants.RdfConstants.TREE_NODE_RESOURCE;
-import static org.apache.jena.rdf.model.ResourceFactory.createResource;
-import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import org.apache.jena.rdf.model.Statement;
 
 public class TreeNodeInfoResponse {
 	private final String treeNodeId;

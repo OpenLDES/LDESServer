@@ -1,12 +1,11 @@
 package org.openldes.server.admin.postgres.view.repository;
 
+import java.util.List;
+import java.util.Optional;
 import org.openldes.server.admin.postgres.view.entity.ViewEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
-import java.util.Optional;
 
 public interface ViewEntityRepository  extends JpaRepository<ViewEntity, Integer> {
     @Query("SELECT v FROM ViewEntity v WHERE v.eventStream.name = :collectionName")

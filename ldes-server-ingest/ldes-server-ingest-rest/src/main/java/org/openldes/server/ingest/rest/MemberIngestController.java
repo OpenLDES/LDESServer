@@ -1,9 +1,9 @@
 package org.openldes.server.ingest.rest;
 
-import org.openldes.server.ingest.MemberIngester;
-import org.openldes.server.ingest.validators.IngestValidator;
 import io.micrometer.observation.annotation.Observed;
 import org.apache.jena.rdf.model.Model;
+import org.openldes.server.ingest.MemberIngester;
+import org.openldes.server.ingest.validators.IngestValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

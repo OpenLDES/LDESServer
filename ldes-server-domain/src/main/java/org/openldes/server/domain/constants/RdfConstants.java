@@ -1,8 +1,8 @@
 package org.openldes.server.domain.constants;
 
-import org.apache.jena.rdf.model.Property;
-
 import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+
+import org.apache.jena.rdf.model.Property;
 
 public class RdfConstants {
 	private RdfConstants() {

@@ -1,16 +1,16 @@
 package org.openldes.server.fragmentisers.geospatial;
 
+import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE_ROOT;
+
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
 import org.openldes.server.fragmentation.FragmentationStrategy;
 import org.openldes.server.fragmentation.FragmentationStrategyDecorator;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.entities.FragmentationMember;
 import org.openldes.server.fragmentisers.geospatial.bucketising.GeospatialBucketiser;
 import org.openldes.server.fragmentisers.geospatial.fragments.GeospatialBucketCreator;
-import io.micrometer.observation.Observation;
-import io.micrometer.observation.ObservationRegistry;
-
-import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
-import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE_ROOT;
 
 public class GeospatialFragmentationStrategy extends FragmentationStrategyDecorator {
 	public static final String GEOSPATIAL_FRAGMENTATION = "GeospatialFragmentation";

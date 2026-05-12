@@ -1,6 +1,12 @@
 package org.openldes.server.admin.domain.validation;
 
-import org.openldes.server.domain.exceptions.ShaclValidationException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -9,13 +15,8 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
 import org.springframework.util.ResourceUtils;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-
-import static org.assertj.core.api.Assertions.*;
 
 class ShaclShapeValidatorTest {
 

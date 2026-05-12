@@ -1,5 +1,10 @@
 package org.openldes.server.admin.rest.controllers;
 
+import static org.apache.jena.riot.WebContent.contentTypeJSONLD;
+import static org.apache.jena.riot.WebContent.contentTypeNQuads;
+import static org.apache.jena.riot.WebContent.contentTypeTextPlain;
+import static org.apache.jena.riot.WebContent.contentTypeTurtle;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,8 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.jena.rdf.model.Model;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import static org.apache.jena.riot.WebContent.*;
 
 @SuppressWarnings("java:S2479") // whitespace needed for examples
 @Tag(name = "DCAT")

@@ -1,5 +1,25 @@
 package org.openldes.server.admin.rest.controllers;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+import static org.openldes.server.admin.rest.controllers.DcatViewsRestController.BASE_URL;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFParser;
+import org.apache.jena.riot.RDFWriter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.admin.domain.validation.dcat.DcatViewValidator;
 import org.openldes.server.admin.domain.view.service.DcatViewService;
 import org.openldes.server.admin.rest.IsIsomorphic;
@@ -11,25 +31,12 @@ import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.rest.HostNamePrefixConstructorConfig;
 import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFParser;
-import org.apache.jena.riot.RDFWriter;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.openldes.server.admin.rest.controllers.DcatViewsRestController.BASE_URL;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
 @ActiveProfiles({"test", "rest"})
@@ -41,10 +48,10 @@ class DcatViewsRestControllerTest {
 	private static final String COLLECTION_NAME = "collectionName";
 	private static final String VIEW_NAME = "viewName";
 
-	@MockBean
+	@MockitoBean
 	private DcatViewService dcatViewService;
 
-	@MockBean
+	@MockitoBean
 	private DcatViewValidator validator;
 
 	@Autowired

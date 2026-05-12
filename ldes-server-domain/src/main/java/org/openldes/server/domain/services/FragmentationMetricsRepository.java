@@ -1,8 +1,7 @@
 package org.openldes.server.domain.services;
 
-import org.openldes.server.domain.model.FragmentationMetric;
-
 import java.util.List;
+import org.openldes.server.domain.model.FragmentationMetric;
 
 public interface FragmentationMetricsRepository {
 	List<FragmentationMetric> getBucketisedMemberCounts(String collectionName);

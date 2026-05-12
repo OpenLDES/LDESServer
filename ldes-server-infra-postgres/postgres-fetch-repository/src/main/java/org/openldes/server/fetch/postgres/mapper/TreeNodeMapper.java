@@ -1,10 +1,9 @@
 package org.openldes.server.fetch.postgres.mapper;
 
+import java.util.List;
 import org.openldes.server.fetch.postgres.projection.TreeNodeProjection;
 import org.openldes.server.fetching.entities.Member;
 import org.openldes.server.fetching.entities.TreeNode;
-
-import java.util.List;
 
 public class TreeNodeMapper {
 	private TreeNodeMapper() {

@@ -1,17 +1,16 @@
 package org.openldes.server.admin.domain.eventsource.services;
 
+import java.util.List;
+import java.util.Optional;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.admin.domain.eventsource.repository.EventSourceRepository;
 import org.openldes.server.domain.events.admin.DeletionPolicyChangedEvent;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.EventSource;
-import org.apache.jena.rdf.model.Model;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EventSourceServiceImpl implements EventSourceService {

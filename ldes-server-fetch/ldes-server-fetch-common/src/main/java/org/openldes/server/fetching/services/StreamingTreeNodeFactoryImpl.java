@@ -1,5 +1,6 @@
 package org.openldes.server.fetching.services;
 
+import java.util.stream.Stream;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.fetching.entities.Member;
 import org.openldes.server.fetching.entities.TreeNode;
@@ -7,8 +8,6 @@ import org.openldes.server.fetching.repository.TreeMemberRepository;
 import org.openldes.server.fetching.repository.TreeNodeRepository;
 import org.openldes.server.fetching.valueobjects.LdesFragmentIdentifier;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Stream;
 
 @Component
 public class StreamingTreeNodeFactoryImpl implements StreamingTreeNodeFactory {

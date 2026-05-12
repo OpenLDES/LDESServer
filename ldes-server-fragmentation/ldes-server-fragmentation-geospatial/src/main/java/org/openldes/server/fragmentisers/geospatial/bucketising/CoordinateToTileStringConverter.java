@@ -1,18 +1,17 @@
 package org.openldes.server.fragmentisers.geospatial.bucketising;
 
-import org.openldes.server.fragmentisers.geospatial.model.Tile;
-import org.openldes.server.fragmentisers.geospatial.model.TileGrid;
+import static java.util.Collections.emptySet;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
+import org.openldes.server.fragmentisers.geospatial.model.Tile;
+import org.openldes.server.fragmentisers.geospatial.model.TileGrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptySet;
 
 public class CoordinateToTileStringConverter {
 

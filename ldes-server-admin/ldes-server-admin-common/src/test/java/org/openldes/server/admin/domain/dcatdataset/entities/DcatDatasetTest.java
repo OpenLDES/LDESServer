@@ -1,8 +1,8 @@
 package org.openldes.server.admin.domain.dcatdataset.entities;
 
-import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
 
 class DcatDatasetTest {
 

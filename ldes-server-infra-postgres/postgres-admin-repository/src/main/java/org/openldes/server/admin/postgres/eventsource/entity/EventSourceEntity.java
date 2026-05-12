@@ -1,13 +1,19 @@
 package org.openldes.server.admin.postgres.eventsource.entity;
 
-import org.openldes.server.admin.postgres.ModelListConverter;
-import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import java.util.List;
+import org.openldes.server.admin.postgres.ModelListConverter;
+import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
 
 @Entity
 @Table(name = "eventsources")

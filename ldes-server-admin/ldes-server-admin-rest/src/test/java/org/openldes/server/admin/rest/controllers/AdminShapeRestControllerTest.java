@@ -1,42 +1,5 @@
 package org.openldes.server.admin.rest.controllers;
 
-import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
-import org.openldes.server.admin.domain.shacl.services.ShaclShapeService;
-import org.openldes.server.admin.domain.validation.ModelValidator;
-import org.openldes.server.admin.domain.validation.ValidatorsConfig;
-import org.openldes.server.admin.rest.IsIsomorphic;
-import org.openldes.server.admin.rest.exceptionhandling.AdminRestResponseEntityExceptionHandler;
-import org.openldes.server.domain.converter.HttpModelConverter;
-import org.openldes.server.domain.converter.PrefixAdderImpl;
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.domain.encodig.CharsetEncodingConfig;
-import org.openldes.server.domain.exceptions.MissingResourceException;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.RDFDataMgr;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import static org.apache.jena.riot.WebContent.contentTypeTurtle;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.inOrder;
@@ -48,16 +11,52 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.RDFDataMgr;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
+import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
+import org.openldes.server.admin.domain.shacl.services.ShaclShapeService;
+import org.openldes.server.admin.domain.validation.ModelValidator;
+import org.openldes.server.admin.domain.validation.ValidatorsConfig;
+import org.openldes.server.admin.rest.IsIsomorphic;
+import org.openldes.server.admin.rest.exceptionhandling.AdminRestResponseEntityExceptionHandler;
+import org.openldes.server.domain.converter.HttpModelConverter;
+import org.openldes.server.domain.converter.PrefixAdderImpl;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.domain.encodig.CharsetEncodingConfig;
+import org.openldes.server.domain.exceptions.MissingResourceException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
+import org.springframework.test.web.servlet.MockMvc;
+
 @WebMvcTest
 @ActiveProfiles({"test", "rest"})
 @ContextConfiguration(classes = {AdminShapeRestController.class, HttpModelConverter.class,
         PrefixAdderImpl.class, AdminRestResponseEntityExceptionHandler.class, ValidatorsConfig.class,
         RdfModelConverter.class, CharsetEncodingConfig.class})
 class AdminShapeRestControllerTest {
-    @MockBean
+    @MockitoBean
     private ShaclShapeService shaclShapeService;
 
-    @SpyBean(name = "shaclShapeShaclValidator")
+    @MockitoSpyBean(name = "shaclShapeShaclValidator")
     private ModelValidator shaclShapeValidator;
 
     @Autowired

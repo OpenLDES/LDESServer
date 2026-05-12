@@ -1,10 +1,10 @@
 package org.openldes.server.ingest.skolemization;
 
+import static org.openldes.server.ingest.skolemization.SkolemizedModelAssert.assertThatSkolemizedModel;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.Test;
-
-import static org.openldes.server.ingest.skolemization.SkolemizedModelAssert.assertThatSkolemizedModel;
 
 class SkolemizedModelTest {
 	private static final String SKOLEM_URI_TEMPLATE = "http://example.org" + SkolemizedMemberExtractor.SKOLEM_URI + "%s";

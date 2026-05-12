@@ -1,11 +1,10 @@
 package org.openldes.server.ingest.skolemization;
 
+import java.util.List;
+import org.apache.jena.rdf.model.Model;
 import org.openldes.server.ingest.entities.IngestedMember;
 import org.openldes.server.ingest.extractor.BaseMemberExtractor;
 import org.openldes.server.ingest.extractor.MemberExtractor;
-import org.apache.jena.rdf.model.Model;
-
-import java.util.List;
 
 public class SkolemizedMemberExtractor extends BaseMemberExtractor {
 	public static final String SKOLEM_URI = "/.well-known/genid/";

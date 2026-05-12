@@ -1,16 +1,18 @@
 package org.openldes.server.fragmentisers.reference;
 
-import org.openldes.server.domain.model.ConfigProperties;
-import org.openldes.server.fragmentation.FragmentationStrategy;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-
-import java.util.Map;
-
-import static org.openldes.server.fragmentisers.reference.ReferenceFragmentationStrategyWrapper.*;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.mockito.Mockito.mock;
+import static org.openldes.server.fragmentisers.reference.ReferenceFragmentationStrategyWrapper.DEFAULT_FRAGMENTATION_KEY;
+import static org.openldes.server.fragmentisers.reference.ReferenceFragmentationStrategyWrapper.DEFAULT_FRAGMENTATION_PATH;
+import static org.openldes.server.fragmentisers.reference.ReferenceFragmentationStrategyWrapper.FRAGMENTATION_KEY;
+import static org.openldes.server.fragmentisers.reference.ReferenceFragmentationStrategyWrapper.FRAGMENTATION_PATH;
+
+import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.domain.model.ConfigProperties;
+import org.openldes.server.fragmentation.FragmentationStrategy;
+import org.springframework.context.ApplicationContext;
 
 class ReferenceFragmentationStrategyWrapperTest {
 

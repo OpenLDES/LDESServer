@@ -1,14 +1,13 @@
 package org.openldes.server.domain.converter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDateTime;
+import java.util.TimeZone;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-import java.util.TimeZone;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class VersionObjectModelBuilderTest {
 	private static final String MEMBER_ID = "http://example.org/measurement/1/2024-03-14T18:00:15";

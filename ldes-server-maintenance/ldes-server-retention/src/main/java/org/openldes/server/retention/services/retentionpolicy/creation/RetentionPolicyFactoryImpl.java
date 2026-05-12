@@ -1,24 +1,23 @@
 package org.openldes.server.retention.services.retentionpolicy.creation;
 
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyConstants.TIME_BASED_RETENTION_POLICY;
+import static org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyConstants.VERSION_BASED_RETENTION_POLICY;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.riot.Lang;
 import org.openldes.server.domain.converter.RdfModelConverter;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.openldes.server.retention.services.retentionpolicy.creation.timebased.TimeBasedRetentionPolicyCreator;
 import org.openldes.server.retention.services.retentionpolicy.creation.versionbased.VersionBasedRetentionPolicyCreator;
 import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
 import org.openldes.server.retention.services.retentionpolicy.definition.timeandversionbased.TimeAndVersionBasedRetentionPolicy;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.riot.Lang;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
-import static org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyConstants.TIME_BASED_RETENTION_POLICY;
-import static org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyConstants.VERSION_BASED_RETENTION_POLICY;
 
 @Component
 public class RetentionPolicyFactoryImpl implements RetentionPolicyFactory {

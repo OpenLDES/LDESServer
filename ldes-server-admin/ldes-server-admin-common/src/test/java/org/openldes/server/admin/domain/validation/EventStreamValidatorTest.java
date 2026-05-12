@@ -1,16 +1,17 @@
 package org.openldes.server.admin.domain.validation;
 
-import org.openldes.server.domain.exceptions.ShaclValidationException;
-import org.openldes.server.domain.model.EventStream;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.net.URISyntaxException;
+import java.util.Objects;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFDataMgr;
 import org.junit.jupiter.api.Test;
-
-import java.net.URISyntaxException;
-import java.util.Objects;
-
-import static org.assertj.core.api.Assertions.*;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
+import org.openldes.server.domain.model.EventStream;
 
 class EventStreamValidatorTest {
 

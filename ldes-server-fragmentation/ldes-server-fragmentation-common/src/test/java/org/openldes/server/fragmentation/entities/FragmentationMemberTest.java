@@ -1,14 +1,13 @@
 package org.openldes.server.fragmentation.entities;
 
-import org.openldes.server.fragmentation.valueobjects.EventStreamProperties;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDateTime;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.openldes.server.fragmentation.valueobjects.EventStreamProperties;
 
 class FragmentationMemberTest {
 	private static final String DC_TERMS = "http://purl.org/dc/terms/";

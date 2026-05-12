@@ -1,18 +1,17 @@
 package org.openldes.server.fragmentation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import io.micrometer.observation.Observation;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.entities.BucketisedMember;
 import org.openldes.server.fragmentation.entities.FragmentationMember;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
-import io.micrometer.observation.Observation;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class FragmentationStrategyImplTest {
 	private static final long BUCKET_ID = 2L;

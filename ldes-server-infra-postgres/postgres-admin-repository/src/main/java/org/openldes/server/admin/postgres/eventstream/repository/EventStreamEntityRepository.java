@@ -1,14 +1,13 @@
 package org.openldes.server.admin.postgres.eventstream.repository;
 
+import java.util.List;
+import java.util.Optional;
 import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
 import org.openldes.server.admin.postgres.eventstream.projection.EventStreamProperties;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface EventStreamEntityRepository extends JpaRepository<EventStreamEntity, Integer> {

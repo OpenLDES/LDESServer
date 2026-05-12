@@ -1,23 +1,27 @@
 package org.openldes.server.ingest.kafka.controller;
 
-import org.openldes.server.domain.events.admin.KafkaSourceDeletedEvent;
-import org.openldes.server.ingest.kafka.KafkaListenerContainerManager;
-import org.openldes.server.ingest.kafka.model.KafkaConsumerRequest;
-import org.openldes.server.ingest.kafka.model.KafkaConsumerResponse;
-import org.apache.kafka.common.TopicPartition;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.kafka.listener.MessageListenerContainer;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
+import org.apache.kafka.common.TopicPartition;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.domain.events.admin.KafkaSourceDeletedEvent;
+import org.openldes.server.ingest.kafka.KafkaListenerContainerManager;
+import org.openldes.server.ingest.kafka.model.KafkaConsumerRequest;
+import org.openldes.server.ingest.kafka.model.KafkaConsumerResponse;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.kafka.listener.MessageListenerContainer;
 
 class KafkaConsumerControllerTest {
 

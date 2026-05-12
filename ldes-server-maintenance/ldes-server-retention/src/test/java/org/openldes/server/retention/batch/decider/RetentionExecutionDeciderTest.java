@@ -1,17 +1,16 @@
 package org.openldes.server.retention.batch.decider;
 
-import org.openldes.server.maintenance.services.RetentionPolicyEmptinessChecker;
-import org.openldes.server.maintenance.valueobjects.DecidedFlowExecutionStatus;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.batch.core.job.flow.FlowExecutionStatus;
-import org.springframework.batch.core.job.flow.JobExecutionDecider;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.openldes.server.maintenance.services.RetentionPolicyEmptinessChecker;
+import org.openldes.server.maintenance.valueobjects.DecidedFlowExecutionStatus;
+import org.springframework.batch.core.job.flow.FlowExecutionStatus;
+import org.springframework.batch.core.job.flow.JobExecutionDecider;
 
 class RetentionExecutionDeciderTest {
 	private static final FlowExecutionStatus SKIP_STATUS = DecidedFlowExecutionStatus.SKIP.status();

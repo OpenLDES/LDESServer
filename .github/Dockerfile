@@ -28,4 +28,4 @@ RUN apk --no-cache add libstdc++
 RUN adduser -D -u 2000 ldes
 USER ldes
 
-CMD ["java", "-cp", "ldes-server-application.jar", "-Dloader.path=lib/", "org.springframework.boot.loader.PropertiesLauncher"]
+CMD ["java", "-cp", "ldes-server-application.jar", "-Dloader.path=lib/", "org.springframework.boot.loader.launch.PropertiesLauncher"]

@@ -1,16 +1,23 @@
 package org.openldes.server.fragmentation;
 
-import org.openldes.server.domain.events.admin.*;
+import io.micrometer.observation.ObservationRegistry;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Predicate;
+import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
+import org.openldes.server.domain.events.admin.ViewAddedEvent;
+import org.openldes.server.domain.events.admin.ViewDeletedEvent;
+import org.openldes.server.domain.events.admin.ViewInitializationEvent;
+import org.openldes.server.domain.events.admin.ViewSupplier;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.model.ViewSpecification;
 import org.openldes.server.fragmentation.factory.FragmentationStrategyCreator;
-import io.micrometer.observation.ObservationRegistry;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.util.*;
-import java.util.function.Predicate;
 
 @Component
 public class FragmentationStrategyBatchCollection implements FragmentationStrategyCollection {

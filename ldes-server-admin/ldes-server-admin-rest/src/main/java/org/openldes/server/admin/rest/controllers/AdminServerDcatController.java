@@ -1,22 +1,32 @@
 package org.openldes.server.admin.rest.controllers;
 
-import org.openldes.server.admin.domain.dcat.dcatserver.services.DcatServerService;
-import org.openldes.server.admin.domain.validation.dcat.DcatCatalogValidator;
-import org.openldes.server.domain.exceptions.ShaclValidationException;
+import static org.apache.jena.riot.WebContent.contentTypeTurtle;
+import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
+
 import io.micrometer.observation.annotation.Observed;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
+import org.openldes.server.admin.domain.dcat.dcatserver.services.DcatServerService;
+import org.openldes.server.admin.domain.validation.dcat.DcatCatalogValidator;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-
-import static org.apache.jena.riot.WebContent.contentTypeTurtle;
-import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @Observed
 @RestController

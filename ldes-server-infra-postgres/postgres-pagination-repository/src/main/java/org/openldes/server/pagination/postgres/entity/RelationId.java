@@ -1,7 +1,7 @@
 package org.openldes.server.pagination.postgres.entity;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable

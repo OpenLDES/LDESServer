@@ -71,7 +71,6 @@
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <version>${jakarta.persistence.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

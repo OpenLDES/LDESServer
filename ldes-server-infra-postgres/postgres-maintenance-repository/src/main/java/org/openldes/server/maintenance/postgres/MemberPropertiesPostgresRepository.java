@@ -1,5 +1,12 @@
 package org.openldes.server.maintenance.postgres;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.maintenance.postgres.entity.RetentionMemberEntity;
 import org.openldes.server.maintenance.postgres.mapper.MemberPropertiesEntityMapper;
@@ -10,16 +17,8 @@ import org.openldes.server.retention.repositories.MemberPropertiesRepository;
 import org.openldes.server.retention.services.retentionpolicy.definition.timeandversionbased.TimeAndVersionBasedRetentionPolicy;
 import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
 import org.openldes.server.retention.services.retentionpolicy.definition.versionbased.VersionBasedRetentionPolicy;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Component
 public class MemberPropertiesPostgresRepository implements MemberPropertiesRepository {

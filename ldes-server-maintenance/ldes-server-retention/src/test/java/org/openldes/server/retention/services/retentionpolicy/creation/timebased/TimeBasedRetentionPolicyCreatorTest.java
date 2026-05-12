@@ -1,16 +1,15 @@
 package org.openldes.server.retention.services.retentionpolicy.creation.timebased;
 
-import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
-import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.RDFDataMgr;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.net.URISyntaxException;
 import java.util.Objects;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.RDFDataMgr;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
+import org.openldes.server.retention.services.retentionpolicy.definition.timebased.TimeBasedRetentionPolicy;
 
 class TimeBasedRetentionPolicyCreatorTest {
 

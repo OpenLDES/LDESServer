@@ -2,14 +2,13 @@ package org.openldes.server.maintenance.postgres.mapper;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.apache.jena.riot.RDFWriter;
 import org.springframework.stereotype.Component;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 
 @Converter
 @Component

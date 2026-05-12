@@ -1,11 +1,10 @@
 package org.openldes.server.ingest.extractor;
 
-import org.openldes.server.ingest.entities.IngestedMember;
-import org.apache.jena.rdf.model.Model;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import org.apache.jena.rdf.model.Model;
+import org.openldes.server.ingest.entities.IngestedMember;
 
 public class StateObjectMemberExtractor implements MemberExtractor {
     private final String collectionName;

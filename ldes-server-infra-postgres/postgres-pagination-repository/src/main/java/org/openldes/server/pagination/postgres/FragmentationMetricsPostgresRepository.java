@@ -1,12 +1,11 @@
 package org.openldes.server.pagination.postgres;
 
+import java.util.List;
 import org.openldes.server.domain.model.FragmentationMetric;
 import org.openldes.server.domain.services.FragmentationMetricsRepository;
 import org.openldes.server.pagination.postgres.repository.PageMemberEntityRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Repository
 public class FragmentationMetricsPostgresRepository implements FragmentationMetricsRepository {

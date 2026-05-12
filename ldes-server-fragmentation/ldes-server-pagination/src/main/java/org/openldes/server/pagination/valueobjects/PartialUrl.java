@@ -1,10 +1,10 @@
 package org.openldes.server.pagination.valueobjects;
 
+import static org.openldes.server.pagination.valueobjects.pagenumber.PageNumber.PAGE_NUMBER_KEY;
+
 import org.openldes.server.pagination.services.PageNumberParser;
 import org.openldes.server.pagination.valueobjects.pagenumber.NumericPageNumber;
 import org.openldes.server.pagination.valueobjects.pagenumber.PageNumber;
-
-import static org.openldes.server.pagination.valueobjects.pagenumber.PageNumber.PAGE_NUMBER_KEY;
 
 public class PartialUrl {
 	private final String viewName;

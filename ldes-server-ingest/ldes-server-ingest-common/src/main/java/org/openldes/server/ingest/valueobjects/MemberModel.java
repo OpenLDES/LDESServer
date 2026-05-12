@@ -1,9 +1,8 @@
 package org.openldes.server.ingest.valueobjects;
 
-import org.openldes.server.ingest.entities.IngestedMember;
-import org.apache.jena.rdf.model.Model;
-
 import java.time.LocalDateTime;
+import org.apache.jena.rdf.model.Model;
+import org.openldes.server.ingest.entities.IngestedMember;
 
 public class MemberModel {
     private final String subjectUri;

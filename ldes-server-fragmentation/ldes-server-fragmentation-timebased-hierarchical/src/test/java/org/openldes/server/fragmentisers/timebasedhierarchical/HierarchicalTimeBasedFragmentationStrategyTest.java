@@ -1,5 +1,22 @@
 package org.openldes.server.fragmentisers.timebasedhierarchical;
 
+import static org.apache.jena.riot.RDFDataMgr.loadModel;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
+import java.time.LocalDateTime;
+import java.util.List;
+import org.apache.jena.rdf.model.Model;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.fragmentation.FragmentationStrategy;
 import org.openldes.server.fragmentation.entities.Bucket;
@@ -11,24 +28,6 @@ import org.openldes.server.fragmentisers.timebasedhierarchical.config.TimeBasedC
 import org.openldes.server.fragmentisers.timebasedhierarchical.constants.Granularity;
 import org.openldes.server.fragmentisers.timebasedhierarchical.model.FragmentationTimestamp;
 import org.openldes.server.fragmentisers.timebasedhierarchical.services.TimeBasedBucketFinder;
-import io.micrometer.observation.Observation;
-import io.micrometer.observation.ObservationRegistry;
-import org.apache.jena.rdf.model.Model;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.InOrder;
-import org.mockito.Mockito;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static org.apache.jena.riot.RDFDataMgr.loadModel;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class HierarchicalTimeBasedFragmentationStrategyTest {
 

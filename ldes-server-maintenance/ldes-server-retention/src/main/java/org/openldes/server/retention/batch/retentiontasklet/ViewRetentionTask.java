@@ -1,5 +1,6 @@
 package org.openldes.server.retention.batch.retentiontasklet;
 
+import java.util.List;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.maintenance.repository.PageMemberRepository;
 import org.openldes.server.retention.repositories.MemberPropertiesRepository;
@@ -10,8 +11,6 @@ import org.openldes.server.retention.services.retentionpolicy.definition.version
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class ViewRetentionTask extends RetentionTask {

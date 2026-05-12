@@ -1,22 +1,35 @@
 package org.openldes.server.admin.spi;
 
-import org.openldes.server.domain.converter.PrefixAdder;
-import org.openldes.server.domain.model.ViewSpecification;
-import org.openldes.server.domain.rest.HostNamePrefixConstructor;
-import org.openldes.server.domain.rest.UriPrefixConstructor;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.Statement;
-import org.springframework.stereotype.Component;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.jena.rdf.model.ModelFactory.createDefaultModel;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import static org.apache.jena.rdf.model.ResourceFactory.createTypedLiteral;
+import static org.openldes.server.domain.constants.RdfConstants.EVENT_STREAM_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_CREATE_VERSIONS;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_EVENT_SOURCE;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_EVENT_SOURCE_URI;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_TIMESTAMP_PATH;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_VERSION_OF;
+import static org.openldes.server.domain.constants.RdfConstants.NODE_SHAPE_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.RETENTION_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_MEMBER;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_SHAPE;
+import static org.openldes.server.domain.constants.RdfConstants.VIEW;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.jena.rdf.model.ModelFactory.createDefaultModel;
-import static org.apache.jena.rdf.model.ResourceFactory.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.openldes.server.domain.converter.PrefixAdder;
+import org.openldes.server.domain.model.ViewSpecification;
+import org.openldes.server.domain.rest.HostNamePrefixConstructor;
+import org.openldes.server.domain.rest.UriPrefixConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 public class EventStreamWriter {

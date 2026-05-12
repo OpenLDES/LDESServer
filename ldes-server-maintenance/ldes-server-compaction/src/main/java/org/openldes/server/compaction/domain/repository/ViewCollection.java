@@ -1,9 +1,8 @@
 package org.openldes.server.compaction.domain.repository;
 
+import java.util.Collection;
 import org.openldes.server.compaction.domain.entities.ViewCapacity;
 import org.openldes.server.domain.model.ViewName;
-
-import java.util.Collection;
 
 public interface ViewCollection {
 	void saveViewCapacity(ViewCapacity viewCapacity);

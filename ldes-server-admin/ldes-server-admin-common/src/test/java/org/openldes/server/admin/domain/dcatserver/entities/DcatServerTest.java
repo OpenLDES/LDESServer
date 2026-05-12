@@ -1,11 +1,16 @@
 package org.openldes.server.admin.domain.dcatserver.entities;
 
-import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
-import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
-import org.openldes.server.domain.constants.RdfConstants;
-import org.openldes.server.domain.model.DcatView;
-import org.openldes.server.domain.model.ViewName;
-import org.apache.jena.rdf.model.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer.DCAT_CATALOG;
+
+import java.util.List;
+import java.util.stream.Stream;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.apache.jena.vocabulary.RDF;
@@ -16,12 +21,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer.DCAT_CATALOG;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
+import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
+import org.openldes.server.domain.constants.RdfConstants;
+import org.openldes.server.domain.model.DcatView;
+import org.openldes.server.domain.model.ViewName;
 
 class DcatServerTest {
 	private static final String ID = "id";

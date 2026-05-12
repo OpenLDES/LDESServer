@@ -1,5 +1,9 @@
 package org.openldes.server.retention.batch.retentiontasklet;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.openldes.server.retention.entities.MemberProperties;
 import org.openldes.server.retention.repositories.MemberPropertiesRepository;
 import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
@@ -10,11 +14,6 @@ import org.openldes.server.retention.services.retentionpolicy.execution.MemberRe
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Component
 public class EventSourceRetentionTask extends RetentionTask {

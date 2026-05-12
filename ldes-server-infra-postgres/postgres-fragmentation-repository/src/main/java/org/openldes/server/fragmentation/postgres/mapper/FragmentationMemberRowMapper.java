@@ -1,17 +1,16 @@
 package org.openldes.server.fragmentation.postgres.mapper;
 
-import org.openldes.server.fragmentation.entities.FragmentationMember;
-import org.openldes.server.fragmentation.valueobjects.EventStreamProperties;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.RDFParser;
-import org.springframework.jdbc.core.RowMapper;
+import static org.openldes.server.domain.constants.ServerConstants.SERIALISATION_LANG;
 
 import java.io.ByteArrayInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-
-import static org.openldes.server.domain.constants.ServerConstants.SERIALISATION_LANG;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.RDFParser;
+import org.openldes.server.fragmentation.entities.FragmentationMember;
+import org.openldes.server.fragmentation.valueobjects.EventStreamProperties;
+import org.springframework.jdbc.core.RowMapper;
 
 public class FragmentationMemberRowMapper implements RowMapper<FragmentationMember> {
 

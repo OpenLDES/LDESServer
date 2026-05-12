@@ -1,5 +1,12 @@
 package org.openldes.server.admin.domain.validation.dcat;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
@@ -12,12 +19,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.springframework.util.ResourceUtils;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.*;
 
 class DcatDatasetValidatorTest {
 	private DcatDatasetValidator validator;

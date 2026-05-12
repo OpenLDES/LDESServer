@@ -1,13 +1,22 @@
 package org.openldes.server.maintenance.postgres.entity;
 
-import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
-import org.openldes.server.maintenance.postgres.mapper.RetentionDatabaseColumnModelConverter;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import org.apache.jena.rdf.model.Model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import java.time.LocalDateTime;
+import org.openldes.server.admin.postgres.eventstream.entity.EventStreamEntity;
+import org.openldes.server.maintenance.postgres.mapper.RetentionDatabaseColumnModelConverter;
 
 @Entity
 @Table(name = "members", indexes = {

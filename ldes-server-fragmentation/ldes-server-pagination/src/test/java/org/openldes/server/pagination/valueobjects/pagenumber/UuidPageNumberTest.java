@@ -1,12 +1,11 @@
 package org.openldes.server.pagination.valueobjects.pagenumber;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class UuidPageNumberTest {
 	private static final String UUID = "26929514-237c-11ed-861d-0242ac120002";

@@ -1,14 +1,13 @@
 package org.openldes.server.compaction.application.services;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import org.openldes.server.compaction.application.valueobjects.CompactedPages;
 import org.openldes.server.compaction.application.valueobjects.CompactionCandidates;
 import org.openldes.server.compaction.application.valueobjects.CompactionPageCapacity;
 import org.openldes.server.compaction.domain.entities.CompactionCandidate;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Component
 public class CompactionCandidateSorter {

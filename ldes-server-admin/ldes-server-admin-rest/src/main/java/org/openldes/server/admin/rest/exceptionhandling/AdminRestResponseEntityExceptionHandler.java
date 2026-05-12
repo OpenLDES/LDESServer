@@ -1,11 +1,15 @@
 package org.openldes.server.admin.rest.exceptionhandling;
 
-import org.openldes.server.admin.domain.eventstream.exceptions.MissingStatementException;
-import org.openldes.server.admin.domain.view.exception.DuplicateRetentionException;
-import org.openldes.server.domain.exceptions.*;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFWriter;
 import org.apache.jena.riot.RiotException;
+import org.openldes.server.admin.domain.eventstream.exceptions.MissingStatementException;
+import org.openldes.server.admin.domain.view.exception.DuplicateRetentionException;
+import org.openldes.server.domain.exceptions.ExistingResourceException;
+import org.openldes.server.domain.exceptions.MissingResourceException;
+import org.openldes.server.domain.exceptions.RdfFormatException;
+import org.openldes.server.domain.exceptions.RelativeUrlException;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

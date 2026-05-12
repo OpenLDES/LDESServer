@@ -1,14 +1,13 @@
 package org.openldes.server.admin.domain.view.service;
 
-import org.openldes.server.admin.domain.view.exception.DuplicateRetentionException;
-import org.openldes.server.admin.domain.view.repository.ViewRepository;
-import org.openldes.server.domain.events.admin.*;
-import org.openldes.server.domain.exceptions.ExistingResourceException;
-import org.openldes.server.domain.exceptions.MissingResourceException;
-import org.openldes.server.domain.model.EventStream;
-import org.openldes.server.domain.model.VersionCreationProperties;
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.domain.model.ViewSpecification;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.awaitility.Awaitility.await;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
@@ -16,18 +15,26 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InOrder;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.openldes.server.admin.domain.view.exception.DuplicateRetentionException;
+import org.openldes.server.admin.domain.view.repository.ViewRepository;
+import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
+import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
+import org.openldes.server.domain.events.admin.ViewAddedEvent;
+import org.openldes.server.domain.events.admin.ViewDeletedEvent;
+import org.openldes.server.domain.events.admin.ViewInitializationEvent;
+import org.openldes.server.domain.exceptions.ExistingResourceException;
+import org.openldes.server.domain.exceptions.MissingResourceException;
+import org.openldes.server.domain.model.EventStream;
+import org.openldes.server.domain.model.VersionCreationProperties;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.model.ViewSpecification;
 import org.springframework.context.ApplicationEventPublisher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.awaitility.Awaitility.await;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class ViewServiceImplTest {

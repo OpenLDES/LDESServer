@@ -1,9 +1,15 @@
 package org.openldes.server.pagination.postgres.entity;
 
-import org.openldes.server.fragmentation.postgres.entity.BucketEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.openldes.server.fragmentation.postgres.entity.BucketEntity;
 
 @Entity
 @Table(name = "page_members")

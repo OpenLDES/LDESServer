@@ -1,41 +1,20 @@
 package org.openldes.server.admin.rest.controllers;
 
-import org.openldes.server.admin.domain.eventstream.services.EventStreamService;
-import org.openldes.server.admin.domain.validation.ValidatorsConfig;
-import org.openldes.server.admin.rest.IsIsomorphic;
-import org.openldes.server.admin.rest.converters.EventStreamHttpConverter;
-import org.openldes.server.admin.rest.converters.EventStreamListHttpConverter;
-import org.openldes.server.admin.rest.exceptionhandling.AdminRestResponseEntityExceptionHandler;
-import org.openldes.server.admin.spi.*;
-import org.openldes.server.domain.converter.HttpModelConverter;
-import org.openldes.server.domain.converter.PrefixAdderImpl;
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.domain.encodig.CharsetEncodingConfig;
-import org.openldes.server.domain.exceptions.MissingResourceException;
-import org.openldes.server.domain.model.FragmentationConfig;
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.domain.model.ViewSpecification;
-import org.openldes.server.domain.rest.HostNamePrefixConstructorConfig;
-import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
-import org.openldes.server.domain.versioning.VersionHeaderFilterConfig;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.RDFDataMgr;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.info.BuildProperties;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
+import static org.apache.jena.riot.WebContent.contentTypeNQuads;
+import static org.apache.jena.riot.WebContent.contentTypeTurtle;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.assertArg;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -48,14 +27,48 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Collectors;
-
-import static org.apache.jena.riot.WebContent.contentTypeNQuads;
-import static org.apache.jena.riot.WebContent.contentTypeTurtle;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.RDFDataMgr;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.openldes.server.admin.domain.eventstream.services.EventStreamService;
+import org.openldes.server.admin.domain.validation.ValidatorsConfig;
+import org.openldes.server.admin.rest.IsIsomorphic;
+import org.openldes.server.admin.rest.converters.EventStreamHttpConverter;
+import org.openldes.server.admin.rest.converters.EventStreamListHttpConverter;
+import org.openldes.server.admin.rest.exceptionhandling.AdminRestResponseEntityExceptionHandler;
+import org.openldes.server.admin.spi.EventStreamReader;
+import org.openldes.server.admin.spi.EventStreamTO;
+import org.openldes.server.admin.spi.EventStreamWriter;
+import org.openldes.server.admin.spi.FragmentationConfigExtractor;
+import org.openldes.server.admin.spi.KafkaSourceReader;
+import org.openldes.server.admin.spi.RetentionModelExtractor;
+import org.openldes.server.admin.spi.ViewSpecificationConverter;
+import org.openldes.server.domain.converter.HttpModelConverter;
+import org.openldes.server.domain.converter.PrefixAdderImpl;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.domain.encodig.CharsetEncodingConfig;
+import org.openldes.server.domain.exceptions.MissingResourceException;
+import org.openldes.server.domain.model.FragmentationConfig;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.model.ViewSpecification;
+import org.openldes.server.domain.rest.HostNamePrefixConstructorConfig;
+import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
+import org.openldes.server.domain.versioning.VersionHeaderFilterConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest
 @ActiveProfiles({"test", "rest"})
@@ -70,7 +83,7 @@ class AdminEventStreamsRestControllerTest {
 	private static final String COLLECTION = "name1";
 	public static final String TIMESTAMP_PATH = "http://purl.org/dc/terms/created";
 	public static final String VERSION_OF_PATH = "http://purl.org/dc/terms/isVersionOf";
-	@MockBean
+	@MockitoBean
 	private EventStreamService eventStreamService;
 
 	@Autowired

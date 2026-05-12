@@ -1,10 +1,10 @@
 package org.openldes.server.admin.domain.dcatdataset.services;
 
-import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
-import org.openldes.server.admin.domain.dcat.dcatdataset.repository.DcatDatasetRepository;
-import org.openldes.server.admin.domain.dcat.dcatdataset.services.DcatDatasetServiceImpl;
-import org.openldes.server.domain.exceptions.ExistingResourceException;
-import org.openldes.server.domain.exceptions.MissingResourceException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 import org.junit.jupiter.api.Assertions;
@@ -15,12 +15,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
+import org.openldes.server.admin.domain.dcat.dcatdataset.repository.DcatDatasetRepository;
+import org.openldes.server.admin.domain.dcat.dcatdataset.services.DcatDatasetServiceImpl;
+import org.openldes.server.domain.exceptions.ExistingResourceException;
+import org.openldes.server.domain.exceptions.MissingResourceException;
 
 @ExtendWith(MockitoExtension.class)
 class DcatDatasetServiceImplTest {

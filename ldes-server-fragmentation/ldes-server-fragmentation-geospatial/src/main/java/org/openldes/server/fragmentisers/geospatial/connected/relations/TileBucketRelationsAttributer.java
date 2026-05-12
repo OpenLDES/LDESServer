@@ -1,5 +1,12 @@
 package org.openldes.server.fragmentisers.geospatial.connected.relations;
 
+import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.GEOSPARQL_AS_WKT;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.TREE_GEOSPATIALLY_CONTAINS_RELATION;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.WGS_84;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.WKT_DATA_TYPE;
+
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.exceptions.MissingFragmentValueException;
 import org.openldes.server.fragmentation.relations.RelationsAttributer;
@@ -8,9 +15,6 @@ import org.openldes.server.fragmentisers.geospatial.connected.BoundingBox;
 import org.openldes.server.fragmentisers.geospatial.converter.BoundingBoxConverter;
 import org.openldes.server.fragmentisers.geospatial.converter.TileConverter;
 import org.openldes.server.fragmentisers.geospatial.model.Tile;
-
-import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
-import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.*;
 
 public class TileBucketRelationsAttributer implements RelationsAttributer {
 

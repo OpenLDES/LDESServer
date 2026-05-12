@@ -1,5 +1,7 @@
 package org.openldes.server.admin.rest;
 
+import java.io.ByteArrayInputStream;
+import java.util.Optional;
 import org.apache.jena.atlas.web.ContentType;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
@@ -10,9 +12,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.util.AssertionErrors;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
-
-import java.io.ByteArrayInputStream;
-import java.util.Optional;
 
 public class IsIsomorphic implements ResultMatcher, ArgumentMatcher<Model> {
 	private final Model model;

@@ -1,10 +1,9 @@
 package org.openldes.server.pagination.postgres.batch;
 
-import org.openldes.server.pagination.entities.Page;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.openldes.server.pagination.entities.Page;
+import org.springframework.jdbc.core.RowMapper;
 
 public class PaginationRowMapper implements RowMapper<Page> {
 	@Override

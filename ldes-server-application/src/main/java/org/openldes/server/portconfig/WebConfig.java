@@ -1,5 +1,7 @@
 package org.openldes.server.portconfig;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.openldes.server.domain.converter.RdfMediaType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -8,9 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings("java:S6857")
 @Configuration

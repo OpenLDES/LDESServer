@@ -1,8 +1,12 @@
 package org.openldes.server.domain.converter;
 
-import org.openldes.server.domain.exceptions.RelativeUrlException;
+import static com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
+import java.util.stream.Stream;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,13 +16,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.openldes.server.domain.exceptions.RelativeUrlException;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import java.util.stream.Stream;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @WireMockTest(httpPort = 10101)
 class RdfModelConverterTest {

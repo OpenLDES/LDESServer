@@ -1,11 +1,10 @@
 package org.openldes.server.rest.config;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
 
 @Configuration
 @ConfigurationProperties(prefix = "rest")

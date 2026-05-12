@@ -1,15 +1,14 @@
 package org.openldes.server.ingest.entities;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.Statement;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
-
-import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
 
 public class IngestedMember {
 

@@ -1,14 +1,16 @@
 package org.openldes.server.admin.domain.validation;
 
-import org.openldes.server.domain.exceptions.ShaclValidationException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.*;
+import org.openldes.server.domain.exceptions.ShaclValidationException;
 
 class DcatShaclValidatorTest {
 	private final DcatShaclValidator dcatShaclValidator = new DcatShaclValidator("dcat/dcat-ap_2.0.1_shacl_shapes.ttl");

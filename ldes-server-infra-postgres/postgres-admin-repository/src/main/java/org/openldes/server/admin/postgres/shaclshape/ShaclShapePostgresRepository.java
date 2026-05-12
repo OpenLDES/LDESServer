@@ -1,5 +1,7 @@
 package org.openldes.server.admin.postgres.shaclshape;
 
+import java.util.List;
+import java.util.Optional;
 import org.openldes.server.admin.domain.shacl.entities.ShaclShape;
 import org.openldes.server.admin.domain.shacl.repository.ShaclShapeRepository;
 import org.openldes.server.admin.postgres.eventstream.repository.EventStreamEntityRepository;
@@ -8,9 +10,6 @@ import org.openldes.server.admin.postgres.shaclshape.mapper.ShaclShapeMapper;
 import org.openldes.server.admin.postgres.shaclshape.repository.ShaclShapeEntityRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class ShaclShapePostgresRepository implements ShaclShapeRepository {

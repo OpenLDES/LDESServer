@@ -1,9 +1,8 @@
 package org.openldes.server.admin.domain.dcat.dcatdataset.services;
 
-import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
-
 import java.util.List;
 import java.util.Optional;
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
 
 public interface DcatDatasetService {
 

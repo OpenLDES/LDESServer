@@ -1,18 +1,23 @@
 package org.openldes.server.rest.treenode.services;
 
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_EVENT_STREAM_URI;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_TIMESTAMP_PATH;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_VERSION_OF;
+import static org.openldes.server.domain.constants.RdfConstants.NODE_SHAPE_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_SHAPE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_VIEW;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.vocabulary.RDF;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.apache.jena.rdf.model.ResourceFactory.createResource;
-import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
 
 public class EventStreamInfoResponse {
 

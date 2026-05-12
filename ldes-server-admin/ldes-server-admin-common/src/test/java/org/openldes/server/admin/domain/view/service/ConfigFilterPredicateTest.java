@@ -1,14 +1,13 @@
 package org.openldes.server.admin.domain.view.service;
 
-import org.openldes.server.domain.constants.RdfConstants;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.RDFDataMgr;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URISyntaxException;
 import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.RDFDataMgr;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.domain.constants.RdfConstants;
 
 class ConfigFilterPredicateTest {
 

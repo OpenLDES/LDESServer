@@ -1,5 +1,6 @@
 package org.openldes.server.pagination.batch;
 
+import java.util.List;
 import org.openldes.server.pagination.entities.Page;
 import org.openldes.server.pagination.repositories.MemberRepository;
 import org.openldes.server.pagination.repositories.PageMemberRepository;
@@ -10,8 +11,6 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class Paginator implements Tasklet {

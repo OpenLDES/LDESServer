@@ -1,9 +1,8 @@
 package org.openldes.server.admin.domain.dcat.dcatserver.repository;
 
-import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
-
 import java.util.List;
 import java.util.Optional;
+import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
 
 public interface DcatServerRepository {
 	List<DcatServer> getServerDcat();

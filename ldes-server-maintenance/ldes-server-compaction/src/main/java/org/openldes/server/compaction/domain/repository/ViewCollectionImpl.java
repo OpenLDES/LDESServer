@@ -1,12 +1,11 @@
 package org.openldes.server.compaction.domain.repository;
 
-import org.openldes.server.compaction.domain.entities.ViewCapacity;
-import org.openldes.server.domain.model.ViewName;
-import org.springframework.stereotype.Component;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.openldes.server.compaction.domain.entities.ViewCapacity;
+import org.openldes.server.domain.model.ViewName;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ViewCollectionImpl implements ViewCollection {

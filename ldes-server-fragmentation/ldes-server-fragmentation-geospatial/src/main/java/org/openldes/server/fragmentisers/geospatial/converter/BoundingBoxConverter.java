@@ -1,9 +1,9 @@
 package org.openldes.server.fragmentisers.geospatial.converter;
 
-import org.openldes.server.fragmentisers.geospatial.connected.BoundingBox;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
+import org.openldes.server.fragmentisers.geospatial.connected.BoundingBox;
 
 public class BoundingBoxConverter {
 

@@ -1,20 +1,19 @@
 package org.openldes.server.fragmentation.metrics;
 
+import io.micrometer.core.instrument.Metrics;
+import io.micrometer.core.instrument.Tags;
+import io.micrometer.core.instrument.config.MeterFilter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.openldes.server.domain.events.admin.ViewDeletedEvent;
 import org.openldes.server.domain.events.admin.ViewInitializationEvent;
 import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.domain.services.FragmentationMetricsRepository;
-import io.micrometer.core.instrument.Metrics;
-import io.micrometer.core.instrument.Tags;
-import io.micrometer.core.instrument.config.MeterFilter;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class FragmentationMetricsService {

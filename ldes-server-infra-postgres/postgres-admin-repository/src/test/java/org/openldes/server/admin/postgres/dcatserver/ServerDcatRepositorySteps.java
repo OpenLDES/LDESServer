@@ -1,18 +1,17 @@
 package org.openldes.server.admin.postgres.dcatserver;
 
-import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
-import org.openldes.server.admin.postgres.SpringIntegrationTest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
-
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
+import org.openldes.server.admin.postgres.SpringIntegrationTest;
 
 public class ServerDcatRepositorySteps extends SpringIntegrationTest {
 	private static final String ID = "55bda29b-65b5-4c49-88db-b592d08ec9ff";

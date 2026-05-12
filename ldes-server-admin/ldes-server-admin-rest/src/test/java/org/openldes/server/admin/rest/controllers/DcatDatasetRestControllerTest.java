@@ -1,5 +1,26 @@
 package org.openldes.server.admin.rest.controllers;
 
+import static org.apache.jena.riot.WebContent.contentTypeTurtle;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import org.apache.jena.riot.Lang;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
 import org.openldes.server.admin.domain.dcat.dcatdataset.services.DcatDatasetService;
 import org.openldes.server.admin.domain.validation.dcat.DcatDatasetValidator;
@@ -11,30 +32,12 @@ import org.openldes.server.domain.exceptions.ExistingResourceException;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.rest.HostNamePrefixConstructorConfig;
 import org.openldes.server.domain.rest.RelativeUriPrefixConstructor;
-import org.apache.jena.riot.Lang;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-import static org.apache.jena.riot.WebContent.contentTypeTurtle;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
 @ActiveProfiles({ "test", "rest" })
@@ -45,9 +48,9 @@ class DcatDatasetRestControllerTest {
 	private static final String COLLECTION_NAME = "collection";
 	@Autowired
 	private MockMvc mockMvc;
-	@MockBean
+	@MockitoBean
 	private DcatDatasetService dcatDatasetService;
-	@MockBean
+	@MockitoBean
 	private DcatDatasetValidator validator;
 
 	@BeforeEach

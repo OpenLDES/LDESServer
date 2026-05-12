@@ -1,25 +1,28 @@
 package org.openldes.server.compaction.batch;
 
-import org.openldes.server.compaction.application.services.CompactionCandidateSorter;
-import org.openldes.server.compaction.domain.entities.CompactionCandidate;
-import org.openldes.server.compaction.domain.repository.CompactionPageRepository;
-import org.openldes.server.domain.model.ViewName;
+import static org.mockito.Mockito.anySet;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.openldes.server.compaction.application.services.CompactionCandidateSorter;
+import org.openldes.server.compaction.domain.entities.CompactionCandidate;
+import org.openldes.server.compaction.domain.repository.CompactionPageRepository;
+import org.openldes.server.domain.model.ViewName;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.scope.context.StepContext;
 import org.springframework.batch.item.ExecutionContext;
-
-import java.util.List;
-import java.util.Set;
-import java.util.stream.IntStream;
-
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CompactionTaskTest {

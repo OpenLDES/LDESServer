@@ -1,9 +1,8 @@
 package org.openldes.server.compaction.application.valueobjects;
 
-import org.openldes.server.compaction.domain.entities.CompactionCandidate;
-
 import java.util.List;
 import java.util.Optional;
+import org.openldes.server.compaction.domain.entities.CompactionCandidate;
 
 public class CompactionCandidates {
 	private final List<CompactionCandidate> candidates;

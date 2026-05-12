@@ -1,11 +1,10 @@
 package org.openldes.server.compaction.application.valueobjects;
 
-import org.openldes.server.compaction.domain.entities.CompactionCandidate;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.openldes.server.compaction.domain.entities.CompactionCandidate;
 
 public class CompactedPages {
 	private final List<Set<CompactionCandidate>> pages;

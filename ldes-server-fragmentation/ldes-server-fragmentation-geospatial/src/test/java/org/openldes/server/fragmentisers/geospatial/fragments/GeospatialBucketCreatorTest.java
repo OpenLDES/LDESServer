@@ -1,22 +1,24 @@
 package org.openldes.server.fragmentisers.geospatial.fragments;
 
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.fragmentation.entities.Bucket;
-import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
-import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
-import org.openldes.server.fragmentisers.geospatial.connected.relations.TileBucketRelationsAttributer;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE;
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE_ROOT;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
-import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE;
-import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE_ROOT;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.fragmentation.entities.Bucket;
+import org.openldes.server.fragmentation.valueobjects.BucketDescriptor;
+import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
+import org.openldes.server.fragmentisers.geospatial.connected.relations.TileBucketRelationsAttributer;
 
 @ExtendWith(MockitoExtension.class)
 class GeospatialBucketCreatorTest {

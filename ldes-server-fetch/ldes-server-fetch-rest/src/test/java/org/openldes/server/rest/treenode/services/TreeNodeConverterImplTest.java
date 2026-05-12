@@ -1,8 +1,45 @@
 package org.openldes.server.rest.treenode.services;
 
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.assertj.core.api.Assertions.allOf;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.not;
+import static org.openldes.server.domain.constants.RdfConstants.IS_PART_OF_PROPERTY;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_EVENT_STREAM_URI;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_TIMESTAMP_PATH;
+import static org.openldes.server.domain.constants.RdfConstants.LDES_VERSION_OF;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_MEMBER;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_NODE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_NODE_RESOURCE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_PATH;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_RELATION;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_REMAINING_ITEMS;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_VALUE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_VIEW;
+
+import java.util.List;
+import org.apache.jena.datatypes.xsd.XSDDatatype;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFParser;
+import org.apache.jena.riot.RDFParserBuilder;
+import org.apache.jena.vocabulary.RDF;
+import org.assertj.core.api.Condition;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.converter.PrefixAdder;
 import org.openldes.server.domain.converter.PrefixAdderImpl;
-import org.openldes.server.domain.events.admin.*;
+import org.openldes.server.domain.events.admin.DcatViewDeletedEvent;
+import org.openldes.server.domain.events.admin.DcatViewSavedEvent;
+import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
+import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
+import org.openldes.server.domain.events.admin.ShaclChangedEvent;
 import org.openldes.server.domain.exceptions.MissingResourceException;
 import org.openldes.server.domain.model.DcatView;
 import org.openldes.server.domain.model.EventStream;
@@ -13,22 +50,6 @@ import org.openldes.server.fetching.entities.Member;
 import org.openldes.server.fetching.entities.TreeNode;
 import org.openldes.server.fetching.valueobjects.LdesFragmentIdentifier;
 import org.openldes.server.fetching.valueobjects.TreeRelation;
-import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.rdf.model.*;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFParser;
-import org.apache.jena.riot.RDFParserBuilder;
-import org.apache.jena.vocabulary.RDF;
-import org.assertj.core.api.Condition;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
-import static org.apache.jena.rdf.model.ResourceFactory.createResource;
-import static org.assertj.core.api.Assertions.*;
 
 class TreeNodeConverterImplTest {
 

@@ -1,10 +1,10 @@
 package org.openldes.server.fragmentisers.geospatial.fragments;
 
+import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE;
+
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.valueobjects.BucketDescriptorPair;
 import org.openldes.server.fragmentisers.geospatial.connected.relations.TileBucketRelationsAttributer;
-
-import static org.openldes.server.fragmentisers.geospatial.constants.GeospatialConstants.FRAGMENT_KEY_TILE;
 
 public class GeospatialBucketCreator {
 

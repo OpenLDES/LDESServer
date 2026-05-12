@@ -1,18 +1,17 @@
 package org.openldes.server.fragmentisers.reference.bucketising;
 
-import org.openldes.server.fragmentisers.reference.config.ReferenceConfig;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
+
+import java.util.Set;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.jetbrains.annotations.NotNull;
+import org.openldes.server.fragmentisers.reference.config.ReferenceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Set;
-
-import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
-import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
-import static org.apache.jena.rdf.model.ResourceFactory.createResource;
 
 /**
  * Creates reference buckets based on the property path for the member to be added to.

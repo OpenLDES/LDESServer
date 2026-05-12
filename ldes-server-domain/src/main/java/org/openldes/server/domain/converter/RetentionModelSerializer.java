@@ -1,10 +1,9 @@
 package org.openldes.server.domain.converter;
 
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
-
-import java.util.List;
 
 public class RetentionModelSerializer {
 	private static final Lang dbSavedLang = Lang.NQUADS;

@@ -1,18 +1,17 @@
 package org.openldes.server.rest.treenode.services;
 
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_MEMBER;
+
+import java.util.Map;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.openldes.server.domain.converter.PrefixAdder;
 import org.openldes.server.domain.rest.HostNamePrefixConstructor;
 import org.openldes.server.domain.rest.UriPrefixConstructor;
 import org.openldes.server.fetching.entities.TreeNode;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
-
-import static org.openldes.server.domain.constants.RdfConstants.TREE_MEMBER;
-import static org.apache.jena.rdf.model.ResourceFactory.createResource;
-import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
 
 @Component
 public class TreeNodeConverterImpl implements TreeNodeConverter {

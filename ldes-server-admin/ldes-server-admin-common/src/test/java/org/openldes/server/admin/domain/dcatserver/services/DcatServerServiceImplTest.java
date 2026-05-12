@@ -1,18 +1,8 @@
 package org.openldes.server.admin.domain.dcatserver.services;
 
-import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
-import org.openldes.server.admin.domain.dcat.dcatdataset.services.DcatDatasetService;
-import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
-import org.openldes.server.admin.domain.dcat.dcatserver.repository.DcatServerRepository;
-import org.openldes.server.admin.domain.dcat.dcatserver.services.DcatServerService;
-import org.openldes.server.admin.domain.dcat.dcatserver.services.DcatServerServiceImpl;
-import org.openldes.server.admin.domain.validation.DcatShaclValidator;
-import org.openldes.server.admin.domain.view.service.DcatViewService;
-import org.openldes.server.domain.exceptions.ExistingResourceException;
-import org.openldes.server.domain.exceptions.MissingResourceException;
-import org.openldes.server.domain.model.DcatView;
-import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.domain.rest.HostNamePrefixConstructor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
@@ -27,10 +17,19 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
+import org.openldes.server.admin.domain.dcat.dcatdataset.services.DcatDatasetService;
+import org.openldes.server.admin.domain.dcat.dcatserver.entities.DcatServer;
+import org.openldes.server.admin.domain.dcat.dcatserver.repository.DcatServerRepository;
+import org.openldes.server.admin.domain.dcat.dcatserver.services.DcatServerService;
+import org.openldes.server.admin.domain.dcat.dcatserver.services.DcatServerServiceImpl;
+import org.openldes.server.admin.domain.validation.DcatShaclValidator;
+import org.openldes.server.admin.domain.view.service.DcatViewService;
+import org.openldes.server.domain.exceptions.ExistingResourceException;
+import org.openldes.server.domain.exceptions.MissingResourceException;
+import org.openldes.server.domain.model.DcatView;
+import org.openldes.server.domain.model.ViewName;
+import org.openldes.server.domain.rest.HostNamePrefixConstructor;
 
 @ExtendWith(MockitoExtension.class)
 class DcatServerServiceImplTest {

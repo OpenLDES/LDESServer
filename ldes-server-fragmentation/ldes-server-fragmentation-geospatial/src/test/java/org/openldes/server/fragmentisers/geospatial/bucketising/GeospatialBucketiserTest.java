@@ -1,13 +1,7 @@
 package org.openldes.server.fragmentisers.geospatial.bucketising;
 
-import org.openldes.server.fragmentation.entities.FragmentationMember;
-import org.openldes.server.fragmentation.valueobjects.EventStreamProperties;
-import org.openldes.server.fragmentisers.geospatial.config.GeospatialConfig;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFParserBuilder;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +12,14 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static org.openldes.server.domain.constants.ServerConstants.DEFAULT_BUCKET_STRING;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFParserBuilder;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.fragmentation.entities.FragmentationMember;
+import org.openldes.server.fragmentation.valueobjects.EventStreamProperties;
+import org.openldes.server.fragmentisers.geospatial.config.GeospatialConfig;
 
 class GeospatialBucketiserTest {
 

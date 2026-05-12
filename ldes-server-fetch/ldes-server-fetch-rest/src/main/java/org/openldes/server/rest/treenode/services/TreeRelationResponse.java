@@ -1,17 +1,22 @@
 package org.openldes.server.rest.treenode.services;
 
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
+import static org.apache.jena.rdf.model.ResourceFactory.createStatement;
+import static org.apache.jena.rdf.model.ResourceFactory.createTypedLiteral;
+import static org.openldes.server.domain.constants.RdfConstants.RDF_SYNTAX_TYPE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_NODE;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_PATH;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_RELATION;
+import static org.openldes.server.domain.constants.RdfConstants.TREE_VALUE;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.apache.jena.datatypes.TypeMapper;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.*;
-import static org.apache.jena.rdf.model.ResourceFactory.*;
 
 public class TreeRelationResponse {
 	private final String treePath;

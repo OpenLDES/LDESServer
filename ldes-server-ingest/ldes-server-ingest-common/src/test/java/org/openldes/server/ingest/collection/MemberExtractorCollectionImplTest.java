@@ -1,5 +1,11 @@
 package org.openldes.server.ingest.collection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.lang.reflect.Field;
+import java.util.Optional;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.openldes.server.domain.model.EventStream;
@@ -8,13 +14,6 @@ import org.openldes.server.ingest.extractor.MemberExtractor;
 import org.openldes.server.ingest.extractor.StateObjectMemberExtractor;
 import org.openldes.server.ingest.extractor.VersionObjectMemberExtractor;
 import org.openldes.server.ingest.skolemization.SkolemizedMemberExtractor;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.Field;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class MemberExtractorCollectionImplTest {
     private static final String COLLECTION_NAME = "collection";

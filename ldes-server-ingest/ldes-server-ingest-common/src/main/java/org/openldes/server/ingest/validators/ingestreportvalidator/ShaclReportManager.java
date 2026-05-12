@@ -1,16 +1,15 @@
 package org.openldes.server.ingest.validators.ingestreportvalidator;
 
+import static org.openldes.server.domain.constants.RdfConstants.SHACL_SOURCE_CONSTRAINT_COMPONENT;
+
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.shacl.ValidationReport;
 import org.apache.jena.shacl.validation.ReportEntry;
 import org.apache.jena.shacl.validation.Severity;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.SHACL_SOURCE_CONSTRAINT_COMPONENT;
 
 public class ShaclReportManager {
     private final List<ReportEntry> reportEntries = new ArrayList<>();
@@ -28,7 +27,7 @@ public class ShaclReportManager {
 
     public void addEntry(Resource focusNode, List<Statement> offendingStatements, String message) {
         ReportEntry entry = createEntry(focusNode, message);
-        entry.value(NodeFactory.createLiteral(offendingStatements.toString()));
+        entry.value(NodeFactory.createLiteralString(offendingStatements.toString()));
         reportEntries.add(entry);
     }
 

@@ -1,14 +1,13 @@
 package org.openldes.server.domain.converter;
 
-import org.openldes.server.domain.collections.Prefixes;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.junit.jupiter.api.Test;
+import org.openldes.server.domain.collections.Prefixes;
 
 class PrefixAdderImplTest {
 	private final Prefixes gipodPrefixes = () -> Map.of("gipod", "http://data.vlaanderen.be/ns/gipod#");

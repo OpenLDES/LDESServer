@@ -1,18 +1,17 @@
 package org.openldes.server.retention.services.retentionpolicy.creation.versionbased;
 
-import org.openldes.server.domain.converter.RdfModelConverter;
-import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyCreator;
-import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
-import org.openldes.server.retention.services.retentionpolicy.definition.versionbased.VersionBasedRetentionPolicy;
+import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import static org.openldes.server.domain.constants.RdfConstants.LDES;
+
+import java.util.List;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.riot.Lang;
-
-import java.util.List;
-
-import static org.openldes.server.domain.constants.RdfConstants.LDES;
-import static org.apache.jena.rdf.model.ResourceFactory.createProperty;
+import org.openldes.server.domain.converter.RdfModelConverter;
+import org.openldes.server.retention.services.retentionpolicy.creation.RetentionPolicyCreator;
+import org.openldes.server.retention.services.retentionpolicy.definition.RetentionPolicy;
+import org.openldes.server.retention.services.retentionpolicy.definition.versionbased.VersionBasedRetentionPolicy;
 
 public class VersionBasedRetentionPolicyCreator implements RetentionPolicyCreator {
 	public static final Property LDES_AMOUNT = createProperty(LDES, "amount");

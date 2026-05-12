@@ -1,11 +1,10 @@
 package org.openldes.server.domain.converter;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
 
 class RdfMediaTypeTest {
 

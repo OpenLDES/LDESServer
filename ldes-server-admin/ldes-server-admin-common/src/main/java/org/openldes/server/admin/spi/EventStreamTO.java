@@ -1,19 +1,18 @@
 package org.openldes.server.admin.spi;
 
-import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
-import org.openldes.server.admin.domain.eventstream.exceptions.InvalidSkolemisationDomainException;
-import org.openldes.server.domain.model.EventStream;
-import org.openldes.server.domain.model.KafkaSourceProperties;
-import org.openldes.server.domain.model.VersionCreationProperties;
-import org.openldes.server.domain.model.ViewSpecification;
-import org.apache.jena.rdf.model.Model;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.jena.rdf.model.Model;
+import org.openldes.server.admin.domain.dcat.dcatdataset.entities.DcatDataset;
+import org.openldes.server.admin.domain.eventstream.exceptions.InvalidSkolemisationDomainException;
+import org.openldes.server.domain.model.EventStream;
+import org.openldes.server.domain.model.KafkaSourceProperties;
+import org.openldes.server.domain.model.VersionCreationProperties;
+import org.openldes.server.domain.model.ViewSpecification;
 
 public class EventStreamTO {
 	private final String collection;

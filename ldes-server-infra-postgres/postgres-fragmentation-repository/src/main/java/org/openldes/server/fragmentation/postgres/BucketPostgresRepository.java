@@ -1,5 +1,9 @@
 package org.openldes.server.fragmentation.postgres;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import org.openldes.server.admin.postgres.view.entity.ViewEntity;
 import org.openldes.server.admin.postgres.view.repository.ViewEntityRepository;
 import org.openldes.server.domain.model.ViewName;
@@ -11,11 +15,6 @@ import org.openldes.server.fragmentation.repository.BucketRepository;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 
 @Repository
 public class BucketPostgresRepository implements BucketRepository {
