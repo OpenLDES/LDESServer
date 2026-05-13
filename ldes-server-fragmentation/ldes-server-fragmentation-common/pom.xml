@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ldes-server-fragmentation</artifactId>
         <groupId>org.openldes</groupId>
-        <version>4.1.1-SNAPSHOT</version>
+        <version>4.1.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
