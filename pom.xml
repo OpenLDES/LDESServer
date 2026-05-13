@@ -74,7 +74,7 @@
     <unittestskip>false</unittestskip>
     <integrationtestskip>false</integrationtestskip>
     <skipdeploy>false</skipdeploy>
-    <spatial-information-system.version>1.4</spatial-information-system.version>
+    <spatial-information-system.version>1.6</spatial-information-system.version>
     <zonky.embbeded-db.version>2.8.0</zonky.embbeded-db.version>
 
     <!-- OpenLDES -->
