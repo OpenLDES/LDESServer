@@ -119,7 +119,7 @@
     <spring-boot.actuator.version>3.5.14</spring-boot.actuator.version>
     <micrometer-prometheus.version>1.16.5</micrometer-prometheus.version>
     <micrometer-tracing.version>1.6.5</micrometer-tracing.version>
-    <zipkin-reporter.version>3.3.0</zipkin-reporter.version>
+    <zipkin-reporter.version>3.5.3</zipkin-reporter.version>
     <loki.version>2.0.3</loki.version>
 
     <!-- JACOCO -->
