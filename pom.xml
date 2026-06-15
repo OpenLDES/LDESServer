@@ -123,7 +123,7 @@
     <loki.version>2.0.3</loki.version>
 
     <!-- JACOCO -->
-    <jacoco.version>0.8.14</jacoco.version>
+    <jacoco.version>0.8.15</jacoco.version>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.language>java</sonar.language>
@@ -132,8 +132,7 @@
     </sonar.coverage.jacoco.xmlReportPaths>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.organization>openldes</sonar.organization>
-    <sonar.projectKey>OpenLDES_LDESServer-${project.groupId}:${project.artifactId}
-    </sonar.projectKey>
+    <sonar.projectKey>OpenLDES_LDESServer</sonar.projectKey>
 
     <!-- HASHING -->
     <commons-codec.version>1.19.0</commons-codec.version>

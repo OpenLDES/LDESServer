@@ -39,13 +39,13 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
-        if: ${{ github.actor != 'dependabot[bot]' && !github.event.pull_request.head.repo.fork && env.ANALYSE_PACKAGE == true }}
+        if: ${{ github.actor != 'dependabot[bot]' && !github.event.pull_request.head.repo.fork && fromJSON(env.ANALYSE_PACKAGE || 'false') == true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} -Pcoverage
       - name: Build and verify # https://portal.productboard.com/sonarsource/1-sonarcloud/c/50-sonarcloud-analyzes-external-pull-request
-        if: ${{ github.actor == 'dependabot[bot]' || github.event.pull_request.head.repo.fork || env.ANALYSE_PACKAGE != true }}
+        if: ${{ github.actor == 'dependabot[bot]' || github.event.pull_request.head.repo.fork || fromJSON(env.ANALYSE_PACKAGE || 'false') != true }}
         run: mvn -B verify
       - name: Upload JARs
         uses: actions/upload-artifact@v6
