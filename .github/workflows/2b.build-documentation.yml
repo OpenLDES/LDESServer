@@ -48,7 +48,8 @@ jobs:
           cache-version: 0 # Increment this number if you need to re-download cached gems
       - name: Build with Jekyll
         run: |
-          cd docs 
+          cd docs
+          bundle config set --local deployment 'true'
           bundle install
           bundle exec jekyll build --baseurl "${{env.BASE_URL}}/${{steps.version.outputs.version}}" -s "./" -d "./_site"
         env:
@@ -58,7 +59,7 @@ jobs:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
       - name: Install gh-pages-multi
-        run: npm i -g @yalz/gh-pages-multi
+        run: npm install --ignore-scripts --global @yalz/gh-pages-multi@0.7.6
       - name: Set git user details
         run: |
           git config --global user.name "${{ env.GIT_CONFIG_USERNAME }}"
