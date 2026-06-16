@@ -259,5 +259,6 @@ Databases
 
 .sass-cache
 /docs/_site/
+/docs/vendor/bundle/ruby
 /.jpb/
 .README.md
