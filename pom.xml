@@ -17,7 +17,7 @@
 
   <groupId>org.openldes</groupId>
   <artifactId>ldes-server</artifactId>
-  <version>4.1.1</version>
+  <version>4.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
@@ -96,7 +96,7 @@
     <libthrift.version>0.23.0</libthrift.version>
     <json-simple.version>1.1.1</json-simple.version>
     <jackson-core.version>3.1.1</jackson-core.version>
-    <google-guava.version>33.5.0-jre</google-guava.version>
+    <google-guava.version>33.6.0-jre</google-guava.version>
 
     <!-- TESTING -->
     <junit-platform-suite.version>1.10.2</junit-platform-suite.version>
@@ -123,7 +123,7 @@
     <loki.version>2.0.3</loki.version>
 
     <!-- JACOCO -->
-    <jacoco.version>0.8.14</jacoco.version>
+    <jacoco.version>0.8.15</jacoco.version>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.language>java</sonar.language>
@@ -132,8 +132,7 @@
     </sonar.coverage.jacoco.xmlReportPaths>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.organization>openldes</sonar.organization>
-    <sonar.projectKey>OpenLDES_LDESServer-${project.groupId}:${project.artifactId}
-    </sonar.projectKey>
+    <sonar.projectKey>OpenLDES_LDESServer</sonar.projectKey>
 
     <!-- HASHING -->
     <commons-codec.version>1.19.0</commons-codec.version>
@@ -141,6 +140,7 @@
 
     <!-- NULL ANNOTATIONS -->
     <jetbrains-annotations.version>26.1.0</jetbrains-annotations.version>
+    <central-publishing-maven-plugin.version>0.10.0</central-publishing-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -576,17 +576,19 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven-javadoc-plugin.version}</version>
         <configuration>
-          <doclint>all,-missing</doclint>
+          <doclint>none</doclint>
+          <quiet>true</quiet>
         </configuration>
         <executions>
           <execution>
-            <id>attach-javadoc</id>
+            <id>attach-javadocs</id>
             <goals>
               <goal>jar</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -595,14 +597,17 @@
           <execution>
             <id>attach-source</id>
             <goals>
-              <goal>jar</goal>
+              <goal>jar-no-fork</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
+
+      <!-- GPG Signing Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
+        <version>${maven-gpg-plugin.version}</version>
         <executions>
           <execution>
             <id>sign-artifacts</id>
@@ -610,14 +615,19 @@
             <goals>
               <goal>sign</goal>
             </goals>
-            <configuration>
-              <gpgArguments>
-                <arg>--pinentry-mode</arg>
-                <arg>loopback</arg>
-              </gpgArguments>
-            </configuration>
           </execution>
         </executions>
+        <configuration>
+          <!-- Retrieves passphrase from settings.xml -->
+          <passphraseServerId>gpg.passphrase</passphraseServerId>
+          <!-- Required for gpg2 to avoid GUI prompts -->
+          <gpgArguments>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
+          </gpgArguments>
+          <!-- Ensure correct GPG binary is used -->
+          <executable>gpg</executable>
+        </configuration>
       </plugin>
 
       <!-- RELEASE -->
@@ -625,16 +635,16 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
       </plugin>
+
       <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>${nexus-staging-maven-plugin.version}</version>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>${central-publishing-maven-plugin.version}</version>
         <extensions>true</extensions>
         <configuration>
-          <skipNexusStagingDeployMojo>${skipdeploy}</skipNexusStagingDeployMojo>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          <publishingServerId>central</publishingServerId>
+          <autoPublish>true</autoPublish>
+          <waitUntil>published</waitUntil>
         </configuration>
       </plugin>
     </plugins>
@@ -677,7 +687,6 @@
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacoco.version}</version>
             <executions>
               <execution>
                 <id>prepare-agent</id>
@@ -703,22 +712,9 @@
     </profile>
   </profiles>
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
-
-
   <scm>
-    <connection>scm:git:${project.scm.url}</connection>
-    <developerConnection>scm:git:${project.scm.url}</developerConnection>
-    <url>git@github.com:openldes/LDESServer.git</url>
-    <tag>HEAD</tag>
+    <connection>scm:git:git://github.com/OpenLDES/LDESServer.git</connection>
+    <developerConnection>scm:git:git@github.com:OpenLDES/LDESServer.git</developerConnection>
+    <url>https://github.com/OpenLDES/LDESServer/tree/main</url>
   </scm>
 </project>

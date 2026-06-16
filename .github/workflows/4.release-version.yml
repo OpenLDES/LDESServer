@@ -15,9 +15,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: Release
-        uses: qcastel/github-actions-maven-release@master
+        uses: qcastel/github-actions-maven-release@f0dbe4b1c14ba8df1dd07d471e4abcec2cb94399 # v1.12.44
         with:
           git-release-bot-name: "Maven Release"
           git-release-bot-email: "maven@release.io"

@@ -18,37 +18,37 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Set up Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - name: Cache SonarCloud packages
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: Cache Maven packages
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
-        if: ${{ github.actor != 'dependabot[bot]' && !github.event.pull_request.head.repo.fork && env.ANALYSE_PACKAGE == true }}
+        if: ${{ github.actor != 'dependabot[bot]' && !github.event.pull_request.head.repo.fork && fromJSON(env.ANALYSE_PACKAGE || 'false') == true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} -Pcoverage
       - name: Build and verify # https://portal.productboard.com/sonarsource/1-sonarcloud/c/50-sonarcloud-analyzes-external-pull-request
-        if: ${{ github.actor == 'dependabot[bot]' || github.event.pull_request.head.repo.fork || env.ANALYSE_PACKAGE != true }}
+        if: ${{ github.actor == 'dependabot[bot]' || github.event.pull_request.head.repo.fork || fromJSON(env.ANALYSE_PACKAGE || 'false') != true }}
         run: mvn -B verify
       - name: Upload JARs
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: artifacts
           path: |
@@ -62,13 +62,13 @@ jobs:
       security-events: write  # Required to upload SARIF files to Security tab
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4
+        uses: docker/setup-qemu-action@06116385d9baf250c9f4dcb4858b16962ea869c3 # v4.1.0
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
+        uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4.1.0
       - name: Download JARs
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: artifacts
           path: .github
@@ -78,7 +78,7 @@ jobs:
           echo "IMAGE_TAG=${VERSION}-$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
           echo "IMAGE=${{ env.GHCR_REGISTRY }}/${{ github.repository }}" >> $GITHUB_ENV
       - name: Build and push Docker image
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0
         with:
           context: .github
           push: false
@@ -86,14 +86,14 @@ jobs:
           outputs: type=docker,dest=./ldesserver-${{ env.IMAGE_TAG }}.tar
           tags: '${{ env.GHCR_REGISTRY }}/${{ env.DOCKER_REPOSITORY }}:${{ env.IMAGE_TAG }}'
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@v0.36.0
+        uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8 # v0.36.0
         with:
           input: ./ldesserver-${{ env.IMAGE_TAG }}.tar
           format: 'sarif'
           output: 'trivy-results.sarif'
 
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@1a818fd5f97ed0ee9a823421bd5b171add01227f # v4.36.2
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
