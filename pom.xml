@@ -81,7 +81,7 @@
     <project.base.groupId>org.openldes</project.base.groupId>
 
     <!-- SPRING BOOT -->
-    <spring-boot.version>3.5.14</spring-boot.version>
+    <spring-boot.version>4.0.6</spring-boot.version>
 
     <!-- DATABASE -->
     <hibernate-extensions.version>3.9.0</hibernate-extensions.version>
