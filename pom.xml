@@ -85,7 +85,7 @@
 
     <!-- DATABASE -->
     <hibernate-extensions.version>3.9.0</hibernate-extensions.version>
-    <postgresql.version>42.7.11</postgresql.version>
+    <postgresql.version>42.7.12</postgresql.version>
     <derby.version>10.17.1.0</derby.version>
 
     <!-- SPRING DATA -->
