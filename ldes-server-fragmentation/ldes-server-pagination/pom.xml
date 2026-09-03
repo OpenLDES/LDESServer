@@ -6,7 +6,7 @@
     <parent>
         <artifactId>ldes-server-fragmentation</artifactId>
         <groupId>org.openldes</groupId>
-        <version>4.1.1</version>
+        <version>4.1.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>ldes-server-pagination</artifactId>
