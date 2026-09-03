@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.openldes</groupId>
         <artifactId>ldes-server-maintenance</artifactId>
-        <version>4.1.1</version>
+        <version>4.1.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>ldes-server-maintenance-common</artifactId>
