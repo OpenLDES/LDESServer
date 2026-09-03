@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.openldes.server.domain.model.ViewName;
-import org.openldes.server.maintenance.postgres.entity.RetentionMemberEntity;
 import org.openldes.server.maintenance.postgres.mapper.MemberPropertiesEntityMapper;
 import org.openldes.server.maintenance.postgres.projection.RetentionMemberProjection;
 import org.openldes.server.maintenance.postgres.repository.RetentionMemberEntityRepository;
@@ -55,8 +54,9 @@ public class MemberPropertiesPostgresRepository implements MemberPropertiesRepos
 	public List<Long> findExpiredMembers(ViewName viewName,
 	                                     TimeBasedRetentionPolicy policy) {
 		return memberEntityRepository.findAllByViewNameAndTimestampBefore(viewName.getViewName(), viewName.getCollectionName(), LocalDateTime.now().minus(policy.duration()))
-				.sorted(Comparator.comparing(RetentionMemberEntity::getId).reversed())
-				.map(RetentionMemberEntity::getId)
+				.stream()
+				.sorted(Comparator.comparing(RetentionMemberProjection::getId).reversed())
+				.map(RetentionMemberProjection::getId)
 				.toList();
 	}
 
@@ -66,13 +66,14 @@ public class MemberPropertiesPostgresRepository implements MemberPropertiesRepos
 	                                     VersionBasedRetentionPolicy policy) {
 
 		return memberEntityRepository.findAllByViewName(viewName.getViewName(), viewName.getCollectionName())
-				.collect(Collectors.groupingBy(RetentionMemberEntity::getVersionOf))
+				.stream()
+				.collect(Collectors.groupingBy(RetentionMemberProjection::getVersionOf))
 				.values()
 				.stream()
 				.flatMap(memberPropertiesGroup -> memberPropertiesGroup.stream()
-						.sorted(Comparator.comparing(RetentionMemberEntity::getId).reversed())
+						.sorted(Comparator.comparing(RetentionMemberProjection::getId).reversed())
 						.skip(policy.numberOfMembersToKeep()))
-				.map(RetentionMemberEntity::getId)
+				.map(RetentionMemberProjection::getId)
 				.toList();
 
 	}
@@ -82,13 +83,14 @@ public class MemberPropertiesPostgresRepository implements MemberPropertiesRepos
 	public List<Long> findExpiredMembers(ViewName viewName,
 	                                     TimeAndVersionBasedRetentionPolicy policy) {
 		return memberEntityRepository.findAllByViewNameAndTimestampBefore(viewName.getViewName(), viewName.getCollectionName(), LocalDateTime.now().minus(policy.duration()))
-				.collect(Collectors.groupingBy(RetentionMemberEntity::getVersionOf))
+				.stream()
+				.collect(Collectors.groupingBy(RetentionMemberProjection::getVersionOf))
 				.values()
 				.stream()
 				.flatMap(memberPropertiesGroup -> memberPropertiesGroup.stream()
-						.sorted(Comparator.comparing(RetentionMemberEntity::getId).reversed())
+						.sorted(Comparator.comparing(RetentionMemberProjection::getId).reversed())
 						.skip(policy.numberOfMembersToKeep()))
-				.map(RetentionMemberEntity::getId)
+				.map(RetentionMemberProjection::getId)
 				.toList();
 	}
 
