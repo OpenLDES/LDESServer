@@ -30,8 +30,8 @@ public class RetentionMemberEntity {
     private long id;
     @Column(name = "subject", nullable = false)
     private String subject;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "collection_id", nullable = false)
     private EventStreamEntity collection;
     @Column(name = "version_of", nullable = false)
@@ -42,19 +42,15 @@ public class RetentionMemberEntity {
     private String transactionId;
     @Column(name = "is_in_event_source", nullable = false)
     private boolean isInEventSource;
-    @Convert(converter = RetentionDatabaseColumnModelConverter.class)
-    @Column(name = "member_model", nullable = false, columnDefinition = "bytea")
-    private Model model;
 
 	@SuppressWarnings("java:S107")
-	public RetentionMemberEntity(String subject, EventStreamEntity collection, String versionOf, LocalDateTime timestamp, String transactionId, boolean isInEventSource, Model model) {
+	public RetentionMemberEntity(String subject, EventStreamEntity collection, String versionOf, LocalDateTime timestamp, String transactionId, boolean isInEventSource) {
 		this.subject = subject;
 		this.collection = collection;
 		this.versionOf = versionOf;
 		this.timestamp = timestamp;
 		this.transactionId = transactionId;
 		this.isInEventSource = isInEventSource;
-		this.model = model;
 	}
 
 	public RetentionMemberEntity(long id) {
@@ -91,9 +87,5 @@ public class RetentionMemberEntity {
 
 	public boolean isInEventSource() {
 		return isInEventSource;
-	}
-
-	public Model getModel() {
-		return model;
 	}
 }
