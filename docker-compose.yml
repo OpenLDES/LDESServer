@@ -6,6 +6,7 @@ services:
     environment:
       - SPRING_CONFIG_LOCATION=/config/
       - PYROSCOPE_CONFIGURATION_FILE=/config/pyroscope.properties
+      - MANAGEMENT_TRACING_ENABLED=false
     volumes:
       - ./docker-compose/server.config.yml:/config/application.yml:ro
       - ./docker-compose/pyroscope.properties:/config/pyroscope.properties:ro
