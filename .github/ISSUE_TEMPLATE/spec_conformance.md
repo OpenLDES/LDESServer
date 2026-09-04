@@ -4,8 +4,7 @@ about: Report an issue related to spec conformance
 title: "[Spec]: "
 labels: ['bug', 'spec conformity', 'needs triage']
 assignees: 
-  - rorlic
-  - sandervd
+  - Summm1t
 ---
 
 **Describe how the server does not comply to a specification rule**
