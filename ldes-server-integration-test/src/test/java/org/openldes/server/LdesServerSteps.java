@@ -322,6 +322,61 @@ public class LdesServerSteps extends LdesServerIntegrationTest {
                         == expectedMemberCount);
     }
 
+    @Then("every member of the collection {string} has a version_of that is the versionOf of its own subject")
+    public void everyMemberHasVersionOfOfItsOwnSubject(String collection) {
+        log.atDebug().log("Then every member of the collection {} has a version_of that is the versionOf of its own subject", collection);
+        final var membersWithForeignVersionOf = jdbcTemplate.queryForList(
+                "SELECT m.subject, m.version_of FROM members m JOIN collections c ON m.collection_id = c.collection_id " +
+                        "WHERE c.name = ? AND m.subject NOT LIKE m.version_of || '/%'",
+                collection);
+
+        assertThat(membersWithForeignVersionOf)
+                .as("members whose version_of does not correspond to their subject's versionOf statement")
+                .isEmpty();
+    }
+
+    @And("every member of the collection {string} has a timestamp after {string}")
+    public void everyMemberHasATimestampAfter(String collection, String timestamp) {
+        log.atDebug().log("And every member of the collection {} has a timestamp after {}", collection, timestamp);
+        final Integer memberCountBeforeTimestamp = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM members m JOIN collections c ON m.collection_id = c.collection_id " +
+                        "WHERE c.name = ? AND m.timestamp <= CAST(? AS TIMESTAMP)",
+                Integer.class, collection, timestamp);
+
+        assertThat(memberCountBeforeTimestamp)
+                .as("members whose timestamp was not taken from their own subject")
+                .isZero();
+    }
+
+    @And("the members of the collection {string} have {int} distinct version_of values")
+    public void theMembersHaveDistinctVersionOfValues(String collection, int expectedDistinctVersionOfCount) {
+        log.atDebug().log("And the members of the collection {} have {} distinct version_of values", collection, expectedDistinctVersionOfCount);
+        final Integer distinctVersionOfCount = jdbcTemplate.queryForObject(
+                "SELECT COUNT(DISTINCT m.version_of) FROM members m JOIN collections c ON m.collection_id = c.collection_id " +
+                        "WHERE c.name = ?",
+                Integer.class, collection);
+
+        assertThat(distinctVersionOfCount).isEqualTo(expectedDistinctVersionOfCount);
+    }
+
+    @When("the maintenance job has run")
+    public void theMaintenanceJobHasRun() {
+        log.atDebug().log("When the maintenance job has run");
+        final LocalDateTime startedWaitingAt = LocalDateTime.now();
+        await().atMost(120, SECONDS)
+                .pollInterval(Duration.ofSeconds(1))
+                .untilAsserted(() -> {
+                    final JobInstance lastJobInstance = jobExplorer.getLastJobInstance(MAINTENANCE_JOB);
+                    assertThat(lastJobInstance).isNotNull();
+                    assertThat(jobExplorer.getLastJobExecution(lastJobInstance))
+                            .isNotNull()
+                            .satisfies(execution -> {
+                                assertThat(execution.getStartTime()).isAfter(startedWaitingAt);
+                                assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+                            });
+                });
+    }
+
     @After
     public void cleanup() {
         interactedStreams.forEach(eventStream -> {

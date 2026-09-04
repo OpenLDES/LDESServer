@@ -26,23 +26,23 @@ public class VersionObjectMemberExtractor implements MemberExtractor {
     public List<IngestedMember> extractMembers(Model ingestedModel) {
         final String memberSubject = extractMemberSubject(ingestedModel);
         final String transactionId = UUID.randomUUID().toString();
-        final String versionOf = extractVersionOf(ingestedModel);
-        final LocalDateTime timestamp = extractTimestamp(ingestedModel);
+        final String versionOf = extractVersionOf(ingestedModel, memberSubject);
+        final LocalDateTime timestamp = extractTimestamp(ingestedModel, memberSubject);
         final IngestedMember member = new IngestedMember(memberSubject, collectionName, versionOf, timestamp, true, transactionId, ingestedModel);
         return List.of(member);
     }
 
-    private String extractVersionOf(Model model) {
+    private String extractVersionOf(Model model, String memberSubject) {
         return model
-                .listObjectsOfProperty(ResourceFactory.createProperty(versionOfPath))
+                .listObjectsOfProperty(ResourceFactory.createResource(memberSubject), ResourceFactory.createProperty(versionOfPath))
                 .nextOptional()
                 .map(RDFNode::toString)
                 .orElseThrow(() -> new IllegalStateException("Ingested model does not contain expected %s".formatted(versionOfPath)));
     }
 
-    private LocalDateTime extractTimestamp(Model model) {
+    private LocalDateTime extractTimestamp(Model model, String memberSubject) {
         return model
-                .listObjectsOfProperty(ResourceFactory.createProperty(timestampPath))
+                .listObjectsOfProperty(ResourceFactory.createResource(memberSubject), ResourceFactory.createProperty(timestampPath))
                 .nextOptional()
                 .map(RDFNode::asLiteral)
                 .map(localDateTimeConverter::getLocalDateTime)
