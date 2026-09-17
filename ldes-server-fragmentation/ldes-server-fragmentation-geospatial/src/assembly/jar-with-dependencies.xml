@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The built-in jar-with-dependencies descriptor, plus the service-file handler it lacks.
+
+  jar-with-dependencies unpacks every dependency into one jar, so entries that share a path
+  collide and only one of them survives. Jena splits its subsystem registration over one
+  META-INF/services/org.apache.jena.sys.JenaSubsystemLifecycle file per module, which is exactly
+  such a collision: without the handler below this plugin jar keeps a single arbitrary entry and
+  jena-geosparql's InitGeoSPARQL is never discovered. Its datatypes then stay out of Jena's type
+  mapper, geo:wktLiteral parses into a plain literal value instead of a GeometryWrapper, and every
+  member ends up in the default bucket.
+
+  The handler concatenates same-named files under META-INF/services instead of dropping them.
+-->
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.2.0 http://maven.apache.org/xsd/assembly-2.2.0.xsd">
+  <id>jar-with-dependencies</id>
+
+  <formats>
+    <format>jar</format>
+  </formats>
+
+  <includeBaseDirectory>false</includeBaseDirectory>
+
+  <containerDescriptorHandlers>
+    <containerDescriptorHandler>
+      <handlerName>metaInf-services</handlerName>
+    </containerDescriptorHandler>
+  </containerDescriptorHandlers>
+
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>/</outputDirectory>
+      <useProjectArtifact>true</useProjectArtifact>
+      <unpack>true</unpack>
+      <scope>runtime</scope>
+    </dependencySet>
+  </dependencySets>
+</assembly>
