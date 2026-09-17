@@ -72,6 +72,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <!-- Replaces the built-in jar-with-dependencies descriptor, which drops all
+                         but one of Jena's META-INF/services registrations. See the descriptor. -->
+                    <descriptorRefs combine.self="override"/>
+                    <descriptors>
+                        <descriptor>src/assembly/jar-with-dependencies.xml</descriptor>
+                    </descriptors>
+                </configuration>
             </plugin>
         </plugins>
     </build>
