@@ -1,0 +1,28 @@
+@prefix ldes: <https://w3id.org/ldes#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix tree: <https://w3id.org/tree#>.
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix server: <http://localhost:8080/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix products: <http://localhost:8080/products/> .
+
+server:products a ldes:EventStream ;
+	ldes:timestampPath prov:generatedAtTime ;
+	ldes:versionOfPath dc:isVersionOf ;
+	tree:view products:paged ;
+	tree:shape products:shape .
+
+products:paged
+    a tree:Node ;
+    tree:viewDescription [
+		tree:fragmentationStrategy  () ;
+		ldes:retentionPolicy [
+          a ldes:LatestVersionSubset ;
+          ldes:amount 1 ;
+        ] ;
+	    tree:pageSize "1500"^^xsd:int ;
+	] .
+
+products:shape a sh:NodeShape ;
+	sh:targetClass <https://example.org/ns#Product> .

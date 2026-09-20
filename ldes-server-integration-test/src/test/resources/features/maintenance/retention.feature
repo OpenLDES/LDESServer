@@ -26,6 +26,20 @@ Feature: LDES Server Retention
       | "data/input/eventstreams/retention/mobility-hindrances_versionbased.ttl" | "data/input/members/mob-hind.template.ttl"         | "mobility-hindrances" | 10                  |
       | "data/input/eventstreams/retention/observations/versionbased.ttl"        | "data/input/members/two-observations.template.ttl" | "observations"        | 20                  |
 
+  # https://github.com/OpenLDES/LDESServer/issues/43
+  @version-based @nested-versioned-resources
+  Scenario: Server does not apply version retention on nested versioned resources
+    Given I create the eventstream "data/input/eventstreams/retention/products_nested_versioned.ttl"
+    When I ingest 30 members of template "data/input/members/product-nested-versioned.template.ttl" to the collection "products"
+    Then every member of the collection "products" has a version_of that is the versionOf of its own subject
+    And every member of the collection "products" has a timestamp after "2000-01-01T00:00:00"
+    And the members of the collection "products" have 30 distinct version_of values
+    And the first fragment of the "paged" view in collection "products" contains 30 members
+    When the maintenance job has run
+    Then the first fragment of the "paged" view in collection "products" contains 30 members
+    And the background processes did not fail
+    And the batch tables has been cleaned
+
   @combined @version-based-and-time-based
   Scenario Outline: Server combines multiple retention policies
     Given I create the eventstream <eventStreamDescriptionFile>

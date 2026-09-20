@@ -1,0 +1,34 @@
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ex: <https://example.org/ns#> .
+
+<https://example.org/id/product/PID/version>
+  rdf:type ex:Product ;
+  dc:isVersionOf <https://example.org/id/product/PID> ;
+  prov:generatedAtTime "DATETIME"^^xsd:dateTime ;
+  ex:status [
+    dc:isVersionOf <https://example.org/id/concepts/APPROVED> ;
+    prov:generatedAtTime "1970-01-01T00:00:00.000Z"^^xsd:dateTime ;
+  ] ;
+  ex:region [
+    dc:isVersionOf <https://example.org/id/region/R1> ;
+    prov:generatedAtTime "1970-01-01T00:00:00.000Z"^^xsd:dateTime ;
+  ] ;
+  ex:productType [
+    dc:isVersionOf <https://example.org/id/concept/producttype/T1> ;
+    prov:generatedAtTime "1970-01-01T00:00:00.000Z"^^xsd:dateTime ;
+  ] ;
+  ex:feature [
+    dc:isVersionOf <https://example.org/id/concept/feature/F1> ;
+    prov:generatedAtTime "1970-01-01T00:00:00.000Z"^^xsd:dateTime ;
+  ] ;
+  ex:feature [
+    dc:isVersionOf <https://example.org/id/concept/feature/F2> ;
+    prov:generatedAtTime "1970-01-01T00:00:00.000Z"^^xsd:dateTime ;
+  ] ;
+  ex:feature [
+    dc:isVersionOf <https://example.org/id/concept/feature/F3> ;
+    prov:generatedAtTime "1970-01-01T00:00:00.000Z"^^xsd:dateTime ;
+  ] .
