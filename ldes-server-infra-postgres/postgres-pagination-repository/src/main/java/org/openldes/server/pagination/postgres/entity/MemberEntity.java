@@ -45,8 +45,6 @@ public class MemberEntity {
 	@Convert(converter = MemberModelConverter.class)
 	@Column(name = "member_model", nullable = false, columnDefinition = "bytea")
 	private Model model;
-    @Column(name = "is_fragmented", nullable = false)
-    private boolean isFragmented;
 
 	public MemberEntity(long id) {
 		this.id = id;
@@ -58,12 +56,4 @@ public class MemberEntity {
 	public long getId() {
 		return id;
 	}
-
-    public boolean isFragmented() {
-        return isFragmented;
-    }
-
-    public void setFragmented(boolean fragmented) {
-        isFragmented = fragmented;
-    }
 }

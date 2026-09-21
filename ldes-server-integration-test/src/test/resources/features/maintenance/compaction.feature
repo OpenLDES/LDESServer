@@ -30,7 +30,7 @@ Feature: LDES Server Compaction
     And I ingest 3 members of version 3 of template <template> for collection <collection>
     And I ingest 3 members of version 4 of template <template> for collection <collection>
     Then I wait until all members are fragmented
-    Then all members of "mobility-hindrances" are marked as fragmented
+    Then all members of <collection> are marked as fragmented
     Then wait until no fragments can be compacted
     And verify the following pages have no members
         | 1 |
