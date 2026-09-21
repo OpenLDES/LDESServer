@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+  <changeSet id="add-processable-members-table" author="vsds">
+    <comment>
+      Fix for https://github.com/OpenLDES/LDESServer/issues/48: "Ingested members are not found in
+      views".
+
+      Until now a member was offered to the bucketization step for as long as members.is_fragmented
+      was false.
+      That flag is kept per member, so the first view that fragmented a member hid it from every
+      other view of
+      the same collection, and a view that was added afterwards never saw the already fragmented
+      members at all.
+
+      The processable_members database view is therefore replaced by a table that links every member
+      to every
+      view of its collection and that tracks the "is fragmented" state per (member, view) pair.
+    </comment>
+
+    <dropView viewName="unprocessed_views"/>
+    <dropView viewName="needs_bucketization"/>
+    <dropView viewName="unprocessed_members"/>
+    <dropView viewName="processable_members"/>
+
+    <createTable tableName="processable_members">
+      <column name="member_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="view_id" type="int">
+        <constraints nullable="false"/>
+      </column>
+      <column name="collection_id" type="int">
+        <constraints nullable="false"/>
+      </column>
+      <column name="is_fragmented" type="boolean" defaultValueBoolean="false">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    <addPrimaryKey tableName="processable_members" columnNames="member_id,view_id"/>
+    <addForeignKeyConstraint baseTableName="processable_members" baseColumnNames="member_id"
+      constraintName="fk_processable_members_member_id"
+      referencedTableName="members"
+      referencedColumnNames="member_id"
+      onDelete="CASCADE"/>
+    <addForeignKeyConstraint baseTableName="processable_members" baseColumnNames="view_id"
+      constraintName="fk_processable_members_view_id"
+      referencedTableName="views"
+      referencedColumnNames="view_id"
+      onDelete="CASCADE"/>
+    <addForeignKeyConstraint baseTableName="processable_members" baseColumnNames="collection_id"
+      constraintName="fk_processable_members_collection_id"
+      referencedTableName="collections"
+      referencedColumnNames="collection_id"
+      onDelete="CASCADE"/>
+
+    <sql>
+      -- the bucketisation step only reads the members that still have to be fragmented for a single view
+      create index processable_members_unfragmented_idx on processable_members (view_id, member_id) where is_fragmented = false
+    </sql>
+
+    <sql>
+      -- a member has been fragmented for a view as soon as it has been bucketised into that view
+      insert into processable_members (member_id, view_id, collection_id, is_fragmented)
+      select m.member_id,
+             v.view_id,
+             m.collection_id,
+             exists (select 1
+                     from page_members pm
+                     where pm.member_id = m.member_id and pm.view_id = v.view_id)
+      from members m
+             join views v on v.collection_id = m.collection_id
+    </sql>
+
+    <!-- create function to make every ingested member processable for all views of its collection -->
+    <sql splitStatements="false" stripComments="false"><![CDATA[
+      create function on_members_inserted() returns trigger
+        language plpgsql as $$
+      begin
+      insert into processable_members (member_id, view_id, collection_id)
+      select nm.member_id, v.view_id, nm.collection_id
+      from new_members nm
+             join views v on v.collection_id = nm.collection_id on conflict do nothing;
+      return null;
+      end
+$$;
+      ]]></sql>
+
+    <sql splitStatements="false">
+      -- add processable members after members inserted
+      create trigger members_ai
+        after insert
+        on members
+        referencing new table as
+                        new_members
+            for each statement execute procedure on_members_inserted();
+    </sql>
+
+    <!-- create function to make every member of a collection processable for a newly added view -->
+    <sql splitStatements="false" stripComments="false"><![CDATA[
+      create function on_view_inserted_add_processable_members() returns trigger
+        language plpgsql as $$
+      begin
+  -- ingestion locks the collection row before it inserts its members, so taking that same lock here makes
+  -- sure that a concurrently ingested member is picked up either by this statement or by the members_ai trigger
+  perform
+      1 from collections where collection_id = NEW.collection_id for
+      update;
+
+      insert into processable_members (member_id, view_id, collection_id)
+      select m.member_id, NEW.view_id, NEW.collection_id
+      from members m
+      where m.collection_id = NEW.collection_id on conflict do nothing;
+      return null;
+      end
+$$;
+      ]]></sql>
+
+    <sql splitStatements="false">
+      -- add processable members after view inserted
+      create trigger views_ai_processable_members
+        after insert
+        on views
+        for each row execute procedure on_view_inserted_add_processable_members();
+    </sql>
+
+    <!-- superseded by processable_members.is_fragmented -->
+    <dropColumn tableName="members" columnName="is_fragmented"/>
+
+    <createView viewName="unprocessed_members">
+      select pm.member_id,
+             pm.collection_id,
+             pm.view_id
+      from processable_members pm
+      where pm.is_fragmented = false
+    </createView>
+
+    <createView viewName="needs_bucketization">
+      select v.collection_id,
+             v.view_id,
+             (exists (select um.member_id
+                      from unprocessed_members um
+                      where v.view_id = um.view_id)) as should_bucketize
+      from views v
+      group by v.collection_id, v.view_id
+    </createView>
+
+    <createView viewName="unprocessed_views">
+      select c.collection_id,
+             c.name as collection_name,
+             v.view_id,
+             v.name as view_name
+      from collections c
+             join views v on c.collection_id = v.collection_id
+             join needs_bucketization nb
+                  on nb.collection_id = c.collection_id and nb.view_id = v.view_id
+             join needs_pagination np
+                  on np.collection_id = c.collection_id and np.view_id = v.view_id
+      where nb.should_bucketize
+         or np.should_paginate
+    </createView>
+  </changeSet>
+</databaseChangeLog>
