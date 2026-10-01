@@ -23,10 +23,10 @@ class CompactedPagesTest {
 	}
 
 	/**
-	 * Reproduction of part of <a href="https://github.com/OpenLDES/LDESServer/issues/52">issue 52</a>: closing a page
-	 * that only holds a single candidate leaves that candidate open, so it is joined by the next candidate that fits.
-	 * By then that candidate is no longer its neighbour in the chain, which is how the sorter ends up grouping pages
-	 * 1 and 3 while leaving page 2 behind.
+	 * Regression test for part of <a href="https://github.com/OpenLDES/LDESServer/issues/52">issue 52</a>: closing a
+	 * page that only holds a single candidate used to leave that candidate open, so it was joined by the next
+	 * candidate that fits. By then that candidate is no longer its neighbour in the chain, which is how the sorter
+	 * ended up grouping pages 1 and 3 while leaving page 2 behind.
 	 */
 	@Test
 	void given_ASingleOpenCandidate_when_ClosingThePage_then_TheCandidateIsNotCarriedOverToTheNextPage() {

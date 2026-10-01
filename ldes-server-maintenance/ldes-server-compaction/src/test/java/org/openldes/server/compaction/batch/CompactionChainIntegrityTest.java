@@ -1,6 +1,7 @@
 package org.openldes.server.compaction.batch;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -26,16 +27,17 @@ import org.openldes.server.compaction.application.services.PageDeletionTimeSette
 import org.openldes.server.compaction.domain.entities.CompactedFragmentCreator;
 import org.openldes.server.compaction.domain.entities.CompactionCandidate;
 import org.openldes.server.compaction.domain.repository.CompactionPageRelationRepository;
+import org.openldes.server.domain.exceptions.PageListSortException;
 import org.openldes.server.maintenance.repository.PageMemberRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.KeyHolder;
 
 /**
- * Reproduction of <a href="https://github.com/OpenLDES/LDESServer/issues/52">issue 52</a> at the level of a complete
- * compaction run: it replays what {@link CompactionTask} does - sort the candidates, then write every compacted page -
- * against an in memory copy of the {@code pages}, {@code page_members} and {@code page_relations} tables, and
- * afterwards walks the resulting chain the way a client does.
+ * Regression test for <a href="https://github.com/OpenLDES/LDESServer/issues/52">issue 52</a> at the level of a
+ * complete compaction run: it replays what {@link CompactionTask} does - sort the candidates, then write every
+ * compacted page - against an in memory copy of the {@code pages}, {@code page_members} and {@code page_relations}
+ * tables, and afterwards walks the resulting chain the way a client does.
  * <p>
  * The starting point is the shape a view has after a version based retention policy has run: the pages are below
  * capacity but each of them is still more than half full, so no two neighbours fit into a single compacted page.
@@ -81,16 +83,25 @@ class CompactionChainIntegrityTest {
 	}
 
 	/**
-	 * Writing a group of pages that are not adjacent rewires the relations into a cycle: page 2 is rewritten to point
-	 * at the compacted page because its successor was absorbed, while the compacted page keeps pointing at page 2
-	 * because page 1 was taken as the last page of the group.
+	 * Writing a group of pages that are not adjacent would rewire the relations into a cycle: page 2 is rewritten to
+	 * point at the compacted page because its successor was absorbed, while the compacted page keeps pointing at page 2
+	 * because page 1 was taken as the last page of the group. The writer therefore refuses such a group and leaves the
+	 * chain untouched.
 	 */
 	@Test
-	void given_ANonAdjacentGroupOfPages_when_Writing_then_TheChainDoesNotLoopBackOnItself() {
+	void given_ANonAdjacentGroupOfPages_when_Writing_then_TheGroupIsRefusedAndTheChainIsLeftUntouched() {
 		final List<CompactionCandidate> candidates = pageChain.getCompactionCandidates(CAPACITY_PER_PAGE);
+		final Set<CompactionCandidate> nonAdjacentPages =
+				new LinkedHashSet<>(List.of(candidates.get(0), candidates.get(2)));
+		final String chainBeforeTheWrite = pageChain.describe();
 
-		compactionWriter.write(new LinkedHashSet<>(List.of(candidates.get(0), candidates.get(2))));
+		assertThatThrownBy(() -> compactionWriter.write(nonAdjacentPages))
+				.as("pages 1 and 3 do not follow each other in the chain, so they may not become one page")
+				.isInstanceOf(PageListSortException.class);
 
+		assertThat(pageChain.describe())
+				.as("a refused group may not have changed the pages, the members or the relations")
+				.isEqualTo(chainBeforeTheWrite);
 		assertThat(pageChain.pageThatIsVisitedTwiceWhenWalkingFromTheRoot())
 				.as("the page that is reached a second time while walking the chain from the root. %s",
 						pageChain.describe())

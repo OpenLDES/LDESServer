@@ -34,10 +34,10 @@ class CompactionCandidateSorterTest {
 	}
 
 	/**
-	 * Reproduction of <a href="https://github.com/OpenLDES/LDESServer/issues/52">issue 52</a>: after a version based
-	 * retention policy has run, the pages of a view are below capacity but still more than half full. The sorter then
-	 * groups pages that are not adjacent in the chain, which the writer later turns into a chain with orphans and a
-	 * cycle.
+	 * Regression tests for <a href="https://github.com/OpenLDES/LDESServer/issues/52">issue 52</a>: after a version
+	 * based retention policy has run, the pages of a view are below capacity but still more than half full. The sorter
+	 * used to group pages that are not adjacent in the chain, which the writer later turned into a chain with orphans
+	 * and a cycle.
 	 */
 	@Nested
 	class Issue52 {

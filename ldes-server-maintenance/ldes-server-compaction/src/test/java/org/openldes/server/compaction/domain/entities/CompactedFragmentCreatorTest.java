@@ -50,11 +50,11 @@ class CompactedFragmentCreatorTest {
 	}
 
 	/**
-	 * Reproduction of part of <a href="https://github.com/OpenLDES/LDESServer/issues/52">issue 52</a>: when the pages
-	 * that are merged are not adjacent, both of them qualify as "the page whose successor is not in the set" and the
-	 * creator picks an arbitrary one. The relation it then inserts points back into the range that is being compacted
-	 * ({@code compacted -> 2} while page 2 is rewritten to {@code 2 -> compacted}), which closes the chain into a
-	 * cycle and leaves everything behind it unreachable. Compaction has to refuse such a set instead.
+	 * Regression test for part of <a href="https://github.com/OpenLDES/LDESServer/issues/52">issue 52</a>: when the
+	 * pages that are merged are not adjacent, both of them qualify as "the page whose successor is not in the set" and
+	 * the creator used to pick an arbitrary one. The relation it then inserted pointed back into the range that was
+	 * being compacted ({@code compacted -> 2} while page 2 is rewritten to {@code 2 -> compacted}), which closed the
+	 * chain into a cycle and left everything behind it unreachable. Compaction has to refuse such a set instead.
 	 */
 	@Test
 	void given_NonAdjacentPages_when_CreatingACompactedPage_then_ItIsRefused() {

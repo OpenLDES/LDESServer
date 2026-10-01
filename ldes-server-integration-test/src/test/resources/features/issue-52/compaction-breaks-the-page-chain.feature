@@ -1,15 +1,15 @@
 Feature: Compaction keeps every page of a view reachable from its root
 
-  # Reproduction of https://github.com/OpenLDES/LDESServer/issues/52
+  # Regression test for https://github.com/OpenLDES/LDESServer/issues/52
   # "Compaction groups non-adjacent pages and rewires the relations into a cycle".
   #
   # A version based retention policy thins out every page of a view: the pages end up below the
   # page size, but each of them still holds more than half of it, so no two neighbouring pages fit
-  # into a single compacted page. The sorter however drops a page that does not fit instead of
-  # starting a new run with it, and it never closes a page that holds a single candidate, so it
-  # ends up handing pages 1 and 3 to the writer as if they were adjacent. The writer then points
-  # the compacted page at the successor of an arbitrary one of them, which leaves the pages in
-  # between either orphaned or in a cycle: the members behind them can no longer be reached by a
+  # into a single compacted page. The sorter used to drop a page that does not fit instead of
+  # starting a new run with it, and it never closed a page that holds a single candidate, so it
+  # ended up handing pages 1 and 3 to the writer as if they were adjacent. The writer then pointed
+  # the compacted page at the successor of an arbitrary one of them, which left the pages in
+  # between either orphaned or in a cycle: the members behind them could no longer be reached by a
   # client that follows the relations from the root page.
 
   @issue-52
