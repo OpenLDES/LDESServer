@@ -11,6 +11,7 @@ import static org.mockito.Mockito.mock;
 import io.micrometer.observation.ObservationRegistry;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -40,8 +41,11 @@ import org.springframework.jdbc.support.KeyHolder;
  * capacity but each of them is still more than half full, so no two neighbours fit into a single compacted page.
  */
 class CompactionChainIntegrityTest {
-	private static final int CAPACITY_PER_PAGE = 10;
-	private static final int MEMBERS_PER_PAGE = 6;
+	/** The {@code tree:pageSize} of the view: a page holds fewer members than this to be a compaction candidate. */
+	private static final int CAPACITY_PER_PAGE = 8;
+	private static final int QUARTER_OF_A_PAGE = CAPACITY_PER_PAGE / 4;
+	/** What a version based retention policy left on every page: below capacity, but still three quarters full. */
+	private static final int MEMBERS_PER_PAGE = 3 * QUARTER_OF_A_PAGE;
 	private static final int NUMBER_OF_IMMUTABLE_PAGES = 6;
 	private static final long ROOT_PAGE_ID = 100L;
 	private static final long BUCKET_ID = 1L;
@@ -52,8 +56,7 @@ class CompactionChainIntegrityTest {
 	@BeforeEach
 	void setUp() {
 		pageChain = PageChain.ofPagesWithEqualSize(NUMBER_OF_IMMUTABLE_PAGES, MEMBERS_PER_PAGE);
-		compactionWriter = new CompactionWriter(pageChain.relationRepository(), pageChain.memberRepository(),
-				new CompactedFragmentCreator(pageChainJdbcTemplate()), pageDeletionTimeSetter(), ObservationRegistry.NOOP);
+		compactionWriter = compactionWriterFor(pageChain);
 	}
 
 	@Test
@@ -95,6 +98,37 @@ class CompactionChainIntegrityTest {
 	}
 
 	/**
+	 * The example from the <a href="https://openldes.github.io/LDESServer/4.1.4/features/compaction">compaction
+	 * documentation</a>: fragments 1 and 2 are full and are therefore not underutilised, fragments 3, 4 and 5 each
+	 * hold a quarter of a page and are merged into the single fragment "3/5" that holds three quarters of a page and
+	 * that takes their place between fragment 2 and the open fragment 6.
+	 */
+	@Test
+	void given_TheExampleFromTheDocumentation_when_Compacting_then_TheRunOfSmallFragmentsBecomesOneFragment() {
+		pageChain = PageChain.ofPagesWithSizes(
+				List.of(CAPACITY_PER_PAGE, CAPACITY_PER_PAGE, QUARTER_OF_A_PAGE, QUARTER_OF_A_PAGE, QUARTER_OF_A_PAGE),
+				3 * QUARTER_OF_A_PAGE);
+		compactionWriter = compactionWriterFor(pageChain);
+		final long memberCountBeforeCompaction = pageChain.totalMemberCount();
+
+		compact();
+
+		assertThat(pageChain.pagesMarkedForDeletion())
+				.as("only the three underutilised fragments are merged away. %s", pageChain.describe())
+				.containsExactlyInAnyOrder(3L, 4L, 5L);
+		assertThat(pageChain.pagesWithMembersThatAreUnreachableFromTheRoot())
+				.as("the compacted fragment takes the place of fragments 3, 4 and 5 in the chain. %s",
+						pageChain.describe())
+				.isEmpty();
+		assertThat(pageChain.pageThatIsVisitedTwiceWhenWalkingFromTheRoot())
+				.as("the chain stays a path. %s", pageChain.describe())
+				.isEmpty();
+		assertThat(pageChain.reachableMemberCount())
+				.as("no member is lost along the way. %s", pageChain.describe())
+				.isEqualTo(memberCountBeforeCompaction);
+	}
+
+	/**
 	 * Replays {@link CompactionTask#execute} without the Spring Batch plumbing around it.
 	 */
 	private void compact() {
@@ -103,29 +137,35 @@ class CompactionChainIntegrityTest {
 				.forEach(compactionWriter::write);
 	}
 
+	private CompactionWriter compactionWriterFor(PageChain chain) {
+		return new CompactionWriter(chain.relationRepository(), chain.memberRepository(),
+				new CompactedFragmentCreator(jdbcTemplateFor(chain)), pageDeletionTimeSetterFor(chain),
+				ObservationRegistry.NOOP);
+	}
+
 	/**
 	 * A {@link JdbcTemplate} that applies the two statements of {@link CompactedFragmentCreator} to the in memory
 	 * chain: the insert of the compacted page and the insert of its outgoing relation.
 	 */
-	private JdbcTemplate pageChainJdbcTemplate() {
+	private JdbcTemplate jdbcTemplateFor(PageChain chain) {
 		final JdbcTemplate jdbcTemplate = mock();
 		doAnswer(invocation -> {
-			final long compactedPageId = pageChain.addCompactedPage();
+			final long compactedPageId = chain.addCompactedPage();
 			invocation.getArgument(1, KeyHolder.class).getKeyList().add(Map.of("page_id", compactedPageId));
 			return 1;
 		}).when(jdbcTemplate).update(any(PreparedStatementCreator.class), any(KeyHolder.class));
 		doAnswer(invocation -> {
-			pageChain.addRelation(((Number) invocation.getArgument(1)).longValue(),
+			chain.addRelation(((Number) invocation.getArgument(1)).longValue(),
 					((Number) invocation.getArgument(2)).longValue());
 			return 1;
 		}).when(jdbcTemplate).update(eq(CompactedFragmentCreator.INSERT_PAGE_RELATION_SQL), any(), any(), anyString());
 		return jdbcTemplate;
 	}
 
-	private PageDeletionTimeSetter pageDeletionTimeSetter() {
+	private PageDeletionTimeSetter pageDeletionTimeSetterFor(PageChain chain) {
 		final PageDeletionTimeSetter pageDeletionTimeSetter = mock();
 		doAnswer(invocation -> {
-			pageChain.markForDeletion(invocation.getArgument(0));
+			chain.markForDeletion(invocation.getArgument(0));
 			return null;
 		}).when(pageDeletionTimeSetter).setDeleteTimeOfFragment(any());
 		return pageDeletionTimeSetter;
@@ -147,16 +187,24 @@ class CompactionChainIntegrityTest {
 		 * members and the open page is the one that is still being filled by fragmentation.
 		 */
 		static PageChain ofPagesWithEqualSize(int numberOfPages, int membersPerPage) {
+			return ofPagesWithSizes(Collections.nCopies(numberOfPages, membersPerPage), membersPerPage);
+		}
+
+		/**
+		 * Builds {@code root -> 1 -> 2 -> ... -> n -> open page}, where every immutable page holds the number of
+		 * members at its position in {@code membersPerImmutablePage}.
+		 */
+		static PageChain ofPagesWithSizes(List<Integer> membersPerImmutablePage, int membersOnTheOpenPage) {
 			final PageChain pageChain = new PageChain();
 			pageChain.memberCountPerPage.put(ROOT_PAGE_ID, 0);
-			for (long pageId = 1; pageId <= numberOfPages; pageId++) {
-				pageChain.memberCountPerPage.put(pageId, membersPerPage);
+			for (long pageId = 1; pageId <= membersPerImmutablePage.size(); pageId++) {
+				pageChain.memberCountPerPage.put(pageId, membersPerImmutablePage.get((int) pageId - 1));
 				pageChain.nextPageIdPerPage.put(pageId, pageId + 1);
 				pageChain.relations.add(new long[] {pageId == 1 ? ROOT_PAGE_ID : pageId - 1, pageId});
 			}
-			final long openPageId = numberOfPages + 1L;
-			pageChain.memberCountPerPage.put(openPageId, membersPerPage);
-			pageChain.relations.add(new long[] {numberOfPages, openPageId});
+			final long openPageId = membersPerImmutablePage.size() + 1L;
+			pageChain.memberCountPerPage.put(openPageId, membersOnTheOpenPage);
+			pageChain.relations.add(new long[] {membersPerImmutablePage.size(), openPageId});
 			return pageChain;
 		}
 
@@ -184,6 +232,10 @@ class CompactionChainIntegrityTest {
 
 		void markForDeletion(List<Long> pageIds) {
 			pagesMarkedForDeletion.addAll(pageIds);
+		}
+
+		Set<Long> pagesMarkedForDeletion() {
+			return pagesMarkedForDeletion;
 		}
 
 		/**
