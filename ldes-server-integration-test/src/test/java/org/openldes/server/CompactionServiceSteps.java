@@ -32,16 +32,24 @@ import java.util.stream.Collectors;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.vocabulary.RDF;
+import org.openldes.server.compaction.application.services.CompactionCandidateSorter;
+import org.openldes.server.compaction.domain.repository.CompactionPageRepository;
+import org.openldes.server.domain.model.ViewName;
 import org.openldes.server.pagination.postgres.entity.PageEntity;
 import org.openldes.server.pagination.postgres.entity.PageMemberEntity;
 import org.openldes.server.pagination.postgres.entity.PageRelationEntity;
 import org.openldes.server.resultactionsextensions.ResponseToModelConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @SuppressWarnings("java:S3415")
 public class CompactionServiceSteps extends LdesServerIntegrationTest {
     private static final Logger log = LoggerFactory.getLogger(CompactionServiceSteps.class);
+    @Autowired
+    private CompactionPageRepository compactionPageRepository;
+    @Autowired
+    private CompactionCandidateSorter compactionCandidateSorter;
     private int versionIncremeter = 1;
     private ScheduledExecutorService executorService;
     private Future<?> seedingTask;
@@ -163,12 +171,23 @@ public class CompactionServiceSteps extends LdesServerIntegrationTest {
         });
     }
 
+    /**
+     * Waits until compaction has nothing left to merge in the given view.
+     * <p>
+     * That is not the same as waiting until the view has no compaction candidates left: a compacted page that is
+     * still below capacity remains a candidate for as long as it exists, because the only page behind it is the open
+     * page, which is never merged. What has to become empty is the list of groups of neighbouring pages that
+     * compaction would still turn into a single page.
+     */
     @Then("I wait until no fragments can be compacted for collection {string} and view {string} and capacity per page {int}")
     public void waitUntilNoFragmentsCanBeCompacted(String collection, String view, int capacity) {
         log.atDebug().log("Then I wait until no fragments can be compacted for collection {} and view {} and capacity per page {}", collection, view, capacity);
+        var viewName = new ViewName(collection.replace("\"", ""), view.replace("\"", ""));
         await().atMost(90, SECONDS).untilAsserted(() -> {
-            var count = compactionPageEntityRepository.findCompactionCandidates(collection.replace("\"", ""), view.replace("\"", ""), 5).size();
-            assertThat(count).isEqualTo(0L);
+            var candidates = compactionPageRepository.getPossibleCompactionCandidates(viewName, capacity);
+            assertThat(compactionCandidateSorter.getSortedCompactionCandidates(candidates, capacity))
+                    .as("groups of pages that still have to be merged, out of the candidates %s", candidates)
+                    .isEmpty();
         });
     }
 

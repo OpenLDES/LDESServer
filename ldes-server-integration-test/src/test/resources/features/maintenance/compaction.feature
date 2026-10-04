@@ -30,7 +30,7 @@ Feature: LDES Server Compaction
     And I ingest 3 members of version 3 of template <template> for collection <collection>
     And I ingest 3 members of version 4 of template <template> for collection <collection>
     Then I wait until all members are fragmented
-    Then all members of "mobility-hindrances" are marked as fragmented
+    Then all members of <collection> are marked as fragmented
     Then wait until no fragments can be compacted
     And verify the following pages have no members
         | 1 |
@@ -39,7 +39,9 @@ Feature: LDES Server Compaction
         | 4 |
         | 5 |
         | 6 |
-    And verify 3 members are connected to a compacted page
+    # Retention leaves one member on each of the pages 1, 2, 4 and 5, and all four of them are
+    # merged away: pages 1 to 3 become one compacted page and pages 4 to 6 become another one.
+    And verify 4 members are connected to a compacted page
     Examples:
       | template                                       | collection     |
       | "data/input/members/person-state.template.ttl" | "observations" |

@@ -12,8 +12,11 @@ public class CompactionPageCapacity {
 		currentCapacity = 0;
 	}
 
-	public boolean exceedsMaxCapacity() {
-		return currentCapacity > maxCapacity;
+	/**
+	 * Whether a candidate of the given size still fits into the page that is being filled.
+	 */
+	public boolean hasRoomFor(int size) {
+		return currentCapacity + size <= maxCapacity;
 	}
 
 	public void increase(int delta) {

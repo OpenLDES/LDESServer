@@ -16,11 +16,17 @@ public class CompactedPages {
 		compactedCandidatesToAdd = new HashSet<>();
 	}
 
+	/**
+	 * Ends the page that is being filled: it only becomes a compacted page when it holds more than one candidate,
+	 * since merging a single page into a page of its own has no effect. Either way the candidates are let go of: a
+	 * candidate that stays behind is no longer the neighbour of the candidate that is added next, so keeping it would
+	 * merge pages that do not follow each other in the chain.
+	 */
 	public void closeCompactedPage() {
 		if (compactedCandidatesToAdd.size() > 1) {
 			pages.add(Set.copyOf(compactedCandidatesToAdd));
-			compactedCandidatesToAdd.clear();
 		}
+		compactedCandidatesToAdd.clear();
 	}
 
 	public void addCompactionCandidate(CompactionCandidate candidate) {

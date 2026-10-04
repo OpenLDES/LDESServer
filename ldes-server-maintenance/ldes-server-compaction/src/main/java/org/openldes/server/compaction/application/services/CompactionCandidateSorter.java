@@ -15,17 +15,22 @@ public class CompactionCandidateSorter {
 	public List<Set<CompactionCandidate>> getSortedCompactionCandidates(List<CompactionCandidate> candidates,
 	                                                                    int capacityPerPage) {
 		final CompactionCandidates compactionCandidates = new CompactionCandidates(candidates);
-		final CompactionPageCapacity compactionPageCapacity = new CompactionPageCapacity(capacityPerPage);
 		return compactionCandidates
 				.getLeadingPages().stream()
-				.flatMap(leadingPage -> getCompactedCandidatesForLeadingPage(leadingPage, compactionCandidates, compactionPageCapacity).stream())
+				.flatMap(leadingPage -> getCompactedCandidatesForLeadingPage(leadingPage, compactionCandidates, capacityPerPage).stream())
 				.toList();
 	}
 
+	/**
+	 * Walks the chain that starts at the given leading page and cuts it into runs of pages that follow each other and
+	 * that together fit into a single page. Every chain starts from an empty page: the capacity that was used while
+	 * walking one chain may not count towards the capacity of the next one.
+	 */
 	private List<Set<CompactionCandidate>> getCompactedCandidatesForLeadingPage(CompactionCandidate leadingPage,
 	                                                                            CompactionCandidates candidates,
-	                                                                            CompactionPageCapacity capacity) {
+	                                                                            int capacityPerPage) {
 		CompactedPages compactedPages = new CompactedPages();
+		CompactionPageCapacity capacity = new CompactionPageCapacity(capacityPerPage);
 		Optional<CompactionCandidate> currentCandidate = Optional.of(leadingPage);
 
 		while (currentCandidate.isPresent()) {
@@ -38,16 +43,20 @@ public class CompactionCandidateSorter {
 		return compactedPages.getPages();
 	}
 
+	/**
+	 * A candidate that no longer fits into the page that is being filled starts the next page instead of being
+	 * skipped: skipping it would hand the page after it to the same compacted page, which merges pages that are not
+	 * adjacent in the chain and leaves the skipped page without an incoming relation.
+	 */
 	private void addCandidateToCompactedPage(CompactionPageCapacity compactionPageCapacity,
 	                                         CompactionCandidate candidate,
 	                                         CompactedPages compactedPages) {
-		compactionPageCapacity.increase(candidate.getSize());
-		if (compactionPageCapacity.exceedsMaxCapacity()) {
-			compactionPageCapacity.reset();
+		if (!compactionPageCapacity.hasRoomFor(candidate.getSize())) {
 			compactedPages.closeCompactedPage();
-		} else {
-			compactedPages.addCompactionCandidate(candidate);
+			compactionPageCapacity.reset();
 		}
+		compactionPageCapacity.increase(candidate.getSize());
+		compactedPages.addCompactionCandidate(candidate);
 	}
 
 }

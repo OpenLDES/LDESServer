@@ -46,12 +46,12 @@ public class MemberItemReader {
 				""");
 		queryProvider.setFromClause("""
 				collections c
-				join processable_members m on m.collection_id = c.collection_id
+				join processable_members pm on pm.collection_id = c.collection_id
+				join members m using (member_id)
 				""");
 		queryProvider.setWhereClause("""
-				 m.member_id > (
-				    select vs.bucketized_last_id from view_stats vs where vs.view_id = :viewId
-				   )
+				 pm.view_id = :viewId
+				   AND pm.is_fragmented = false
 				   AND c.collection_id = :collectionId
 				""");
 		queryProvider.setSortKeys(sortKeys);

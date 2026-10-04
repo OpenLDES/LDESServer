@@ -31,7 +31,6 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDF;
 import org.awaitility.core.ConditionTimeoutException;
-import org.openldes.server.pagination.postgres.entity.MemberEntity;
 import org.openldes.server.resultactionsextensions.MemberCounter;
 import org.openldes.server.resultactionsextensions.ResponseToModelConverter;
 import org.slf4j.Logger;
@@ -309,17 +308,18 @@ public class FragmentationSteps extends LdesServerIntegrationTest {
     @Then("all members of {string} are marked as fragmented")
     public void allMembersAreMarkedAsFragmented(String collection) {
         log.atDebug().log("Then all members of {} are marked as fragmented", collection);
-        allMembersAreMarkedFragmented(true);
-    }
-
-    private void allMembersAreMarkedFragmented(boolean isFragmented) {
-        assertThat(fragmentationMemberEntityRepository.findAll().stream().map(MemberEntity::isFragmented)).containsOnly(isFragmented);
+        assertThat(fragmentationFlagsOf(collection)).isNotEmpty().containsOnly(true);
     }
 
     @Then("all members of {string} are marked as unfragmented")
     public void allMembersAreMarkedAsUnFragmented(String collection) {
         log.atDebug().log("Then all members of {} are marked as unfragmented", collection);
-        allMembersAreMarkedFragmented(false);
+        // a member is only processable per view, so as long as the collection has no views there is nothing to assert on
+        assertThat(fragmentationFlagsOf(collection)).doesNotContain(true);
+    }
+
+    private List<Boolean> fragmentationFlagsOf(String collection) {
+        return processableMemberEntityRepository.findFragmentationStatesByCollectionName(collection);
     }
 
 

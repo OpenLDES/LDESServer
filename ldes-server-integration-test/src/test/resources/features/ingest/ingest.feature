@@ -59,7 +59,7 @@ Feature: LDES Server basic Ingest functionality
     When I ingest 2 files of state objects from folder "data/input/members/simpsons" to the collection "simpsons"
     Then the LDES "simpsons" contains 7 members
     And I wait until all members are fragmented
-    Then all members of "mobility-hindrances" are marked as fragmented
+    Then all members of "simpsons" are marked as fragmented
     When I fetch the root "paged" fragment of "simpsons"
     And I fetch the next fragment through the first "Relation"
     Then this fragment contains 7 members
