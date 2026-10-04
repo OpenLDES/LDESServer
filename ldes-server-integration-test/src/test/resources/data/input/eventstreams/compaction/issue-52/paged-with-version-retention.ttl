@@ -1,0 +1,27 @@
+@prefix ldes:    <https://w3id.org/ldes#> .
+@prefix tree:    <https://w3id.org/tree#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+</chained-observations> a ldes:EventStream ;
+	ldes:timestampPath dcterms:created ;
+	ldes:versionOfPath dcterms:isVersionOf ;
+	ldes:createVersions true ;
+	tree:view </chained-observations/paged> ;
+	tree:shape [ a sh:NodeShape ] .
+
+# Pages of four members combined with a retention policy that only keeps the latest version of every
+# state object: ingesting a second version of one state object per page leaves every page with three
+# members, which is below the page size but still more than half of it.
+</chained-observations/paged> a tree:Node ;
+	tree:viewDescription [
+		a tree:ViewDescription ;
+		tree:fragmentationStrategy () ;
+		tree:pageSize "4"^^xsd:int ;
+		ldes:retentionPolicy [
+			a ldes:LatestVersionSubset ;
+			ldes:amount 1 ;
+		] ;
+	]
+.

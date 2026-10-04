@@ -4,6 +4,7 @@ import io.cucumber.spring.CucumberContextConfiguration;
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import jakarta.persistence.EntityManager;
 import javax.sql.DataSource;
+import org.openldes.server.fragmentation.postgres.repository.ProcessableMemberEntityRepository;
 import org.openldes.server.fragmentation.repository.UnprocessedViewRepository;
 import org.openldes.server.maintenance.postgres.repository.CompactionPageEntityRepository;
 import org.openldes.server.pagination.postgres.PageRelationPostgresRepository;
@@ -62,6 +63,8 @@ public class LdesServerIntegrationTest {
     JdbcTemplate jdbcTemplate;
     @Autowired
     UnprocessedViewRepository unprocessedViewRepository;
+    @Autowired
+    ProcessableMemberEntityRepository processableMemberEntityRepository;
     @Autowired
     PageRelationEntityRepository pageRelationEntityRepository;
     @Autowired

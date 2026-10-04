@@ -1,6 +1,7 @@
 package org.openldes.server.fragmentation.postgres.batch;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import org.openldes.server.fragmentation.entities.Bucket;
 import org.openldes.server.fragmentation.entities.BucketisedMember;
@@ -47,12 +48,27 @@ public class BucketisationItemWriter implements ItemWriter<Bucket> {
 			var members = extractAllMembers(flatBucketChunk);
 			bucketisedMemberItemWriter.write(members);
 
-			var uniqueMemberCount = members.getItems().stream()
+			var uniqueMemberIds = members.getItems().stream()
 					.map(BucketisedMember::memberId)
 					.distinct()
-					.count();
-			updateViewStats(members.getItems().getLast().memberId(), uniqueMemberCount);
+					.toList();
+			markMembersAsFragmented(uniqueMemberIds);
+			updateViewStats(members.getItems().getLast().memberId(), uniqueMemberIds.size());
 		}
+	}
+
+	/**
+	 * Members are fragmented once per view, so only the view that is currently being bucketised may stop
+	 * considering them. See <a href="https://github.com/OpenLDES/LDESServer/issues/48">issue 48</a>.
+	 */
+	private void markMembersAsFragmented(List<Long> memberIds) {
+		String sql = """
+				update processable_members set
+				      is_fragmented = true
+				    where view_id = ? and member_id = ?;
+				""";
+
+		jdbcTemplate.batchUpdate(sql, memberIds.stream().map(memberId -> new Object[]{viewId, memberId}).toList());
 	}
 
 	private void updateViewStats(long lastMemberId, long uniqueMemberCount) {
