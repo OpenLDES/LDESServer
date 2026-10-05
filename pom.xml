@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.14</version>
+    <version>3.5.16</version>
     <relativePath/>
   </parent>
 
@@ -81,11 +81,11 @@
     <project.base.groupId>org.openldes</project.base.groupId>
 
     <!-- SPRING BOOT -->
-    <spring-boot.version>3.5.14</spring-boot.version>
+    <spring-boot.version>3.5.16</spring-boot.version>
 
     <!-- DATABASE -->
-    <hibernate-extensions.version>3.9.0</hibernate-extensions.version>
-    <postgresql.version>42.7.11</postgresql.version>
+    <hibernate-extensions.version>3.15.0</hibernate-extensions.version>
+    <postgresql.version>42.7.12</postgresql.version>
     <derby.version>10.17.1.0</derby.version>
 
     <!-- SPRING DATA -->
@@ -115,8 +115,8 @@
     <depencency-check-maven.version>12.2.2</depencency-check-maven.version>
 
     <!-- Monitoring and Logging -->
-    <spring.aop.version>3.5.14</spring.aop.version>
-    <spring-boot.actuator.version>3.5.14</spring-boot.actuator.version>
+    <spring.aop.version>3.5.16</spring.aop.version>
+    <spring-boot.actuator.version>3.5.16</spring-boot.actuator.version>
     <micrometer-prometheus.version>1.16.5</micrometer-prometheus.version>
     <micrometer-tracing.version>1.6.5</micrometer-tracing.version>
     <zipkin-reporter.version>3.3.0</zipkin-reporter.version>
