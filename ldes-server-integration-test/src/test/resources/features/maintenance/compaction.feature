@@ -39,7 +39,9 @@ Feature: LDES Server Compaction
         | 4 |
         | 5 |
         | 6 |
-    And verify 3 members are connected to a compacted page
+    # Retention leaves one member on each of the pages 1, 2, 4 and 5, and all four of them are
+    # merged away: pages 1 to 3 become one compacted page and pages 4 to 6 become another one.
+    And verify 4 members are connected to a compacted page
     Examples:
       | template                                       | collection     |
       | "data/input/members/person-state.template.ttl" | "observations" |
