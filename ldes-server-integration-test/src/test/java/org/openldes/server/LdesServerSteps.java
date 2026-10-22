@@ -38,7 +38,9 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
 import java.util.stream.Collectors;
@@ -375,6 +377,23 @@ public class LdesServerSteps extends LdesServerIntegrationTest {
                                 assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
                             });
                 });
+    }
+
+    @Then("the {string} view of {string} holds exactly the members {string}")
+    public void theViewHoldsExactlyTheMembers(String view, String collection, String subjects) {
+        log.atDebug().log("Then the {} view of {} holds exactly the members {}", view, collection, subjects);
+        final List<String> expectedSubjects = Arrays.stream(subjects.split(",")).map(String::strip).toList();
+        await().atMost(30, SECONDS)
+                .pollInterval(Duration.ofSeconds(1))
+                .untilAsserted(() -> assertThat(jdbcTemplate.queryForList(
+                        "SELECT DISTINCT m.subject FROM collections c " +
+                                "JOIN views v ON v.collection_id = c.collection_id " +
+                                "JOIN page_members pm ON pm.view_id = v.view_id AND pm.page_id IS NOT NULL " +
+                                "JOIN members m ON m.member_id = pm.member_id " +
+                                "WHERE c.name = ? AND v.name = ?",
+                        String.class, collection, view))
+                        .as("subjects of the members on a page of the %s view of %s", view, collection)
+                        .containsExactlyInAnyOrderElementsOf(expectedSubjects));
     }
 
     @After
