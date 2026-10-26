@@ -17,7 +17,7 @@
 
   <groupId>org.openldes</groupId>
   <artifactId>ldes-server</artifactId>
-  <version>4.2.2-SNAPSHOT</version>
+  <version>4.2.2</version>
   <packaging>pom</packaging>
 
   <modules>
