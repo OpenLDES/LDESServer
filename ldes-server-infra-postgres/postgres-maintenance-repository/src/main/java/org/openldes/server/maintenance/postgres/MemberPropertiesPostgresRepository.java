@@ -21,6 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class MemberPropertiesPostgresRepository implements MemberPropertiesRepository {
+	/**
+	 * Orders the versions of one state object from newest to oldest by their timestamp (the value of
+	 * {@code ldes:timestampPath}), so that version-based retention keeps the most recent versions, as
+	 * described in {@link VersionBasedRetentionPolicy}. The member id is only a tie-breaker: it reflects
+	 * the order of ingestion, which is not necessarily chronological.
+	 */
+	private static final Comparator<RetentionMemberProjection> NEWEST_FIRST =
+			Comparator.comparing(RetentionMemberProjection::getTimestamp)
+					.thenComparingLong(RetentionMemberProjection::getId)
+					.reversed();
+
 	private final EntityManager entityManager;
 	private final MemberPropertiesEntityMapper propertiesMapper;
 	private final RetentionMemberEntityRepository memberEntityRepository;
@@ -71,7 +82,7 @@ public class MemberPropertiesPostgresRepository implements MemberPropertiesRepos
 				.values()
 				.stream()
 				.flatMap(memberPropertiesGroup -> memberPropertiesGroup.stream()
-						.sorted(Comparator.comparing(RetentionMemberProjection::getId).reversed())
+						.sorted(NEWEST_FIRST)
 						.skip(policy.numberOfMembersToKeep()))
 				.map(RetentionMemberProjection::getId)
 				.toList();
@@ -88,7 +99,7 @@ public class MemberPropertiesPostgresRepository implements MemberPropertiesRepos
 				.values()
 				.stream()
 				.flatMap(memberPropertiesGroup -> memberPropertiesGroup.stream()
-						.sorted(Comparator.comparing(RetentionMemberProjection::getId).reversed())
+						.sorted(NEWEST_FIRST)
 						.skip(policy.numberOfMembersToKeep()))
 				.map(RetentionMemberProjection::getId)
 				.toList();
@@ -110,6 +121,7 @@ public class MemberPropertiesPostgresRepository implements MemberPropertiesRepos
 				.values()
 				.stream()
 				.flatMap(memberPropertiesGroup -> memberPropertiesGroup.stream()
+						.sorted(NEWEST_FIRST)
 						.skip(policy.numberOfMembersToKeep()))
 				.map(propertiesMapper::toMemberProperties);
 	}
@@ -122,6 +134,7 @@ public class MemberPropertiesPostgresRepository implements MemberPropertiesRepos
 				.values()
 				.stream()
 				.flatMap(memberPropertiesGroup -> memberPropertiesGroup.stream()
+						.sorted(NEWEST_FIRST)
 						.skip(policy.numberOfMembersToKeep()))
 				.map(propertiesMapper::toMemberProperties);
 	}

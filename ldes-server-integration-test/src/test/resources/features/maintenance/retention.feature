@@ -40,6 +40,22 @@ Feature: LDES Server Retention
     And the background processes did not fail
     And the batch tables has been cleaned
 
+  # https://github.com/OpenLDES/LDESServer/issues/61
+  @version-based @latest-version-order
+  Scenario: Server keeps the latest version by timestamp when versions are ingested out of order
+    Given I create the eventstream "data/input/eventstreams/retention/products_nested_versioned.ttl"
+    When I ingest the data described in "data/input/members/issue-61/a-v2.ttl" the collection "products"
+    And I ingest the data described in "data/input/members/issue-61/a-v1.ttl" the collection "products"
+    And I ingest the data described in "data/input/members/issue-61/b-v1.ttl" the collection "products"
+    And I ingest the data described in "data/input/members/issue-61/b-v2.ttl" the collection "products"
+    And I ingest the data described in "data/input/members/issue-61/c-v2.ttl" the collection "products"
+    And I ingest the data described in "data/input/members/issue-61/c-v3.ttl" the collection "products"
+    And I ingest the data described in "data/input/members/issue-61/c-v1.ttl" the collection "products"
+    And the maintenance job has run
+    Then the "paged" view of "products" holds exactly the members "https://example.org/id/product/A/v2, https://example.org/id/product/B/v2, https://example.org/id/product/C/v3"
+    And the background processes did not fail
+    And the batch tables has been cleaned
+
   @combined @version-based-and-time-based
   Scenario Outline: Server combines multiple retention policies
     Given I create the eventstream <eventStreamDescriptionFile>
