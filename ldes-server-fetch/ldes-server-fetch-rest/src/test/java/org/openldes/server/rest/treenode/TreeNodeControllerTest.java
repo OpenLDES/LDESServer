@@ -3,6 +3,7 @@ package org.openldes.server.rest.treenode;
 import static org.apache.jena.riot.WebContent.contentTypeTurtle;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -315,6 +316,41 @@ class TreeNodeControllerTest {
 				.expectHeader()
 				.valueEquals("Etag", "\"bf61f90ee94d31484e296ffaa887de432976ce27638cfbd35e40f99a0e799554\"")
 				.returnResult(String.class);
+	}
+
+	@Test
+	void when_StreamingAReorderedPage_then_UsePersistedPageUrlForMembers() {
+		List<FragmentPair> originalPairs = List.of(
+				new FragmentPair("year", "2026"),
+				new FragmentPair("month", "03"),
+				new FragmentPair("day", "21"),
+				new FragmentPair("hour", "15"),
+				new FragmentPair("pageNumber", "1"));
+		List<FragmentPair> requestPairs = List.of(
+				new FragmentPair("pageNumber", "1"),
+				new FragmentPair("hour", "15"),
+				new FragmentPair("day", "21"),
+				new FragmentPair("month", "03"),
+				new FragmentPair("year", "2026"));
+		LdesFragmentIdentifier original = new LdesFragmentIdentifier(ViewName.fromString(fullViewName), originalPairs);
+		LdesFragmentIdentifier requested = new LdesFragmentIdentifier(ViewName.fromString(fullViewName), requestPairs);
+		TreeNode persisted = new TreeNode(original.asDecodedFragmentId(), true, false,
+				List.of(), List.of(), COLLECTION_NAME, null);
+
+		when(streamingTreeNodeFactory.getFragmentWithoutMemberData(requested)).thenReturn(persisted);
+		when(streamingTreeNodeFactory.getMembersOfFragment(original)).thenReturn(Stream.empty());
+
+		WebTestClient client = WebTestClient.bindToController(new TreeNodeController(restConfig,
+				treeNodeFetcher, streamingTreeNodeFactory, treeNodeStreamConverter, cachingStrategy)).build();
+
+		client.get()
+				.uri("/ldes-1/view?pageNumber=1&hour=15&day=21&month=03&year=2026")
+				.accept(MediaType.TEXT_EVENT_STREAM)
+				.exchange()
+				.expectStatus().isOk()
+				.returnResult(String.class);
+
+		verify(streamingTreeNodeFactory, timeout(5000)).getMembersOfFragment(original);
 	}
 
 	@TestConfiguration

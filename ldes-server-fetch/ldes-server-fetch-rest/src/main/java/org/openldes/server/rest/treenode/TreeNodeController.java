@@ -63,11 +63,10 @@ public class TreeNodeController implements OpenApiTreeNodeController {
 																			 @RequestParam Map<String, String> requestParameters,
 																			 @PathVariable String collectionName) {
 		final ViewName viewName = new ViewName(collectionName, view);
-		LdesFragmentIdentifier id = new LdesFragmentIdentifier(viewName,
-				requestParameters.entrySet().stream()
-						.map(entry -> new FragmentPair(entry.getKey(), entry.getValue()))
-						.toList());
 		TreeNode treeNode = getFragmentWithoutMembers(viewName, requestParameters);
+		// A request may reorder query parameters. Stream members from the persisted
+		// page URL, which is the same one used to generate the metadata.
+		LdesFragmentIdentifier id = LdesFragmentIdentifier.fromFragmentId(treeNode.getFragmentId());
 
 		SseEmitter emitter = new SseEmitter();
 		new Thread(() -> sendStreamingFragment(emitter, treeNode, id)).start();
