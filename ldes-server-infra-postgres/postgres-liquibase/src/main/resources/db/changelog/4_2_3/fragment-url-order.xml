@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="canonical-fragment-url-function" author="mhatipog">
+        <sql splitStatements="false"><![CDATA[
+            CREATE FUNCTION ldes_canonical_fragment_url(input_url text)
+            RETURNS text
+            LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
+            AS $function$
+                SELECT CASE
+                    WHEN position('?' in input_url) = 0 THEN input_url
+                    ELSE split_part(input_url, '?', 1) || '?' ||
+                         COALESCE((
+                             SELECT string_agg(part, '&' ORDER BY part COLLATE "C")
+                             FROM unnest(string_to_array(split_part(input_url, '?', 2), '&')) AS items(part)
+                         ), '')
+                END
+            $function$;
+        ]]></sql>
+        <rollback>
+            <sql>DROP FUNCTION IF EXISTS ldes_canonical_fragment_url(text)</sql>
+        </rollback>
+    </changeSet>
+
+    <!-- An expression index avoids parsing every stored page for an unmatched URL. -->
+    <changeSet id="index-canonical-fragment-url" author="mhatipog" runInTransaction="false">
+        <sql>CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_pages_canonical_fragment_url ON pages (ldes_canonical_fragment_url(partial_url))</sql>
+        <rollback>
+            <sql>DROP INDEX CONCURRENTLY IF EXISTS idx_pages_canonical_fragment_url</sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

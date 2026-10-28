@@ -8,6 +8,7 @@ import org.openldes.server.domain.events.admin.EventStreamCreatedEvent;
 import org.openldes.server.domain.events.admin.EventStreamDeletedEvent;
 import org.openldes.server.domain.model.EventStream;
 import org.openldes.server.fetch.postgres.mapper.TreeNodeMapper;
+import org.openldes.server.fetch.postgres.projection.TreeNodeProjection;
 import org.openldes.server.fetch.postgres.repository.FetchPageEntityRepository;
 import org.openldes.server.fetch.postgres.repository.FetchPageMemberEntityRepository;
 import org.openldes.server.fetching.entities.Member;
@@ -32,8 +33,7 @@ public class TreeNodePostgresRepository implements TreeNodeRepository {
 
 	@Override
 	public Optional<TreeNode> findByFragmentIdentifier(LdesFragmentIdentifier fragmentIdentifier) {
-		return pageEntityRepository
-				.findTreeNodeProjectionByPartialUrl(fragmentIdentifier.asDecodedFragmentId())
+		return findProjection(fragmentIdentifier)
 				.map(page -> {
 					var versionObjectCreator = versionObjectCreatorMap.get(page.getBucket().getView().getEventStream().getName());
 
@@ -50,9 +50,30 @@ public class TreeNodePostgresRepository implements TreeNodeRepository {
 
 	@Override
 	public Optional<TreeNode> findTreeNodeWithoutMembers(LdesFragmentIdentifier fragmentIdentifier) {
-		return pageEntityRepository
-				.findTreeNodeProjectionByPartialUrl(fragmentIdentifier.asDecodedFragmentId())
+		return findProjection(fragmentIdentifier)
 				.map(projection -> TreeNodeMapper.fromProjection(projection, List.of()));
+	}
+
+	/**
+	 * Keep the unique-index lookup for the usual exact request. On a miss, resolve
+	 * the same query parameters in any order through a second, indexed lookup.
+	 * Return the stored URL so linked-data output retains its original identity.
+	 */
+	Optional<TreeNodeProjection> findProjection(LdesFragmentIdentifier identifier) {
+		final String partialUrl = identifier.asDecodedFragmentId();
+		final Optional<TreeNodeProjection> exact =
+				pageEntityRepository.findTreeNodeProjectionByPartialUrl(partialUrl);
+		if (exact.isPresent() || !partialUrl.contains("?")) {
+			return exact;
+		}
+
+		final List<String> matches =
+				pageEntityRepository.findPartialUrlsWithEquivalentParameters(partialUrl);
+		if (matches.size() > 1) {
+			throw new IllegalStateException("Multiple pages have equivalent fragment parameters: " + partialUrl);
+		}
+		return matches.stream().findFirst()
+				.flatMap(pageEntityRepository::findTreeNodeProjectionByPartialUrl);
 	}
 
 	@EventListener
