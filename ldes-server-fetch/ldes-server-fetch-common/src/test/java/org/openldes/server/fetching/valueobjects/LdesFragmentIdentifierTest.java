@@ -88,4 +88,25 @@ class LdesFragmentIdentifierTest {
 		assertEquals(encodedFragmentIdString, fragmentId.asEncodedFragmentId());
 	}
 
+
+	@Test
+	void when_FragmentPairsAreReordered_Then_EqualIdentifiersHaveEqualHashCodes() {
+		LdesFragmentIdentifier reordered = new LdesFragmentIdentifier(fullViewName,
+				List.of(new FragmentPair(fragmentPairKey2, fragmentPairValue2),
+						new FragmentPair(fragmentPairKey1, fragmentPairValue1)));
+
+		assertEquals(fragmentId, reordered);
+		assertEquals(fragmentId.hashCode(), reordered.hashCode());
+	}
+
+	@Test
+	void when_FragmentPairsAreReordered_Then_HashMapLookupStillFindsTheIdentifier() {
+		LdesFragmentIdentifier reordered = new LdesFragmentIdentifier(fullViewName,
+				List.of(new FragmentPair(fragmentPairKey2, fragmentPairValue2),
+						new FragmentPair(fragmentPairKey1, fragmentPairValue1)));
+		java.util.Map<LdesFragmentIdentifier, String> cache = new java.util.HashMap<>();
+		cache.put(fragmentId, "fragment");
+
+		assertEquals("fragment", cache.get(reordered));
+	}
 }

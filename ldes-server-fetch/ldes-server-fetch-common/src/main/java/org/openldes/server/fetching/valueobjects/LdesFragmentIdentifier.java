@@ -84,7 +84,7 @@ public class LdesFragmentIdentifier {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(viewName, fragmentPairs);
+		return Objects.hash(viewName, new HashSet<>(fragmentPairs));
 	}
 
 	@Override
